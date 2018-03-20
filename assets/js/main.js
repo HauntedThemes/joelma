@@ -201,6 +201,17 @@ jQuery(document).ready(function($) {
 
     });
 
+    $('.content-inner h1, .content-inner h2, .content-inner h3, .content-inner h4, .content-inner h5, .content-inner h6').each(function(index, el) {
+        var id = $(this).attr('id');
+        $(this).prepend('<a href="#'+ id +'" class="chain"><i class="fas fa-link"></i></a>');
+    });
+
+    $('pre code').each(function(i, block) {
+        highlightBlock(block);
+    });
+
+    $('.main-container').css('marginBottom', $('footer').height());
+
     $('.content-inner .share').stick_in_parent({
         offset_top: 100
     });

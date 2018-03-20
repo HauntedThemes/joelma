@@ -102,7 +102,7 @@ body{
     font-family: "sofia-pro", sans-serif;
     font-weight: 300;
     color: #000000;
-    background: #E5E5E5;
+    background: #fff;
     font-size: 16px;
 }
 
@@ -133,6 +133,11 @@ p{
     line-height: 24px;
     font-size: 16px;
     margin-bottom: 30px;
+}
+
+pre code,
+.hljs{
+    padding: 20px;
 }
 
 .hidden{
@@ -296,10 +301,16 @@ p{
     line-height: 20px;
     font-size: 12px;
     color: #A0A8BD;
+    border: 1px solid transparent;
     background: rgba(160, 168, 189, 0.2);
     border-radius: 15px;
     padding: 3px 15px;
     font-weight: normal;
+}
+
+.tags li a:hover{
+    background: transparent;
+    border: 1px solid rgba(160, 168, 189, 0.5);
 }
 
 header{
@@ -309,6 +320,11 @@ header{
     top: 0;
     left: 0;
     padding: 50px 0;
+}
+
+header .blog-logo img{
+    max-width: 150px;
+    height: auto;
 }
 
 header a{
@@ -418,6 +434,10 @@ header .search #results time{
 
 .main-container{
     overflow: hidden;
+    position: relative;
+    z-index: 2;
+    background: #fff;
+    box-shadow: 0px 40px 90px rgba(0, 0, 0, 0.4);
 }
 
 .bs-popover-auto[x-placement^=bottom] .arrow::after, .bs-popover-bottom .arrow::after{
@@ -618,6 +638,51 @@ header .search #results time{
     font-size: 18px;
 }
 
+.content-inner ul,
+.content-inner ol{
+    line-height: 28px;
+    font-size: 18px;
+    padding-left: 16px;
+}
+
+.content-inner ul li{
+    margin-bottom: 10px;
+}
+
+.content-inner h1,
+.content-inner h2,
+.content-inner h3,
+.content-inner h4,
+.content-inner h5,
+.content-inner h6{
+    margin-top: 50px;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.content-inner h1:hover .chain,
+.content-inner h2:hover .chain,
+.content-inner h3:hover .chain,
+.content-inner h4:hover .chain,
+.content-inner h5:hover .chain,
+.content-inner h6:hover .chain{
+    visibility: visible;
+    opacity: 1;
+}
+
+.content-inner .chain{
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    left: -40px;
+    font-size: 16px;
+    top: 9px;
+    width: 40px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+}
+
 .content-inner h1{
     font-size: 72px;
 }
@@ -664,20 +729,34 @@ header .search #results time{
     margin-left: -140px;
     padding: 0px;
     margin-top: 0;
+    display: block;
+    position: absolute;
+    padding-bottom: 30px;
 }
 
 .content-inner .share ul{
-    -webkit-transform: translateY(0) scale(1);
-    transform: translateY(0) scale(1);
+    position: relative;
     visibility: visible;
     opacity: 1;
     pointer-events: auto;
     bottom: auto;
     top: 0;
+    margin: 0;
+    padding: 0;
+    -webkit-transform: translateY(0) scale(1);
+    transform: translateY(0) scale(1);
+}
+
+.content-inner .share ul li{
+    margin: 0;
+    line-height: 1.4;
+    font-size: 18px;
 }
 
 .content-inner .share ul li a{
     padding: 8px 10px;
+    width: 43px;
+    height: 43px;
 }
 
 .tooltip.show {
@@ -708,5 +787,10 @@ header .search #results time{
 }
 
 footer{
-    background: #fff;
+    min-height: 500px;
+    background: #2c2c2c;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: -1;
 }
