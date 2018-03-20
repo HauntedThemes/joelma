@@ -1,0 +1,8 @@
+{{!-- This is the menu container - visible after a user clicks the menu button --}}
+<nav class="nav">
+    <ul>
+        {{#foreach navigation}}
+            <li class="nav-{{slug}}{{#if current}} nav-current{{/if}}"><a href="{{url absolute="true"}}" title="{{label}}">{{label}}</a></li>
+        {{/foreach}}
+    </ul>
+</nav>

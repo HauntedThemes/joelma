@@ -1,0 +1,17 @@
+{{!-- The tag below means - insert everything in this file into the {body} of the default.hbs template --}}
+{{!< default}}
+
+{{#tag}}
+<div class="tag-title">
+    <h1>{{name}}</h1>
+</div>
+{{/tag}}
+
+{{!-- The main content area --}}
+<main id="content" class="container loop" role="main">
+
+    {{> "loop"}}
+
+</main>
+
+{{pagination}}

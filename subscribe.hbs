@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    {{> theme_head}}
+
+    {{!-- Ghost outputs important style and meta data with this tag --}}
+    {{ghost_head}}
+    
+</head>
+<body class="subscribe">
+
+    <header>
+        <div class="container">
+            <a href="{{@blog.url}}" class="back"></a>
+        </div>
+    </header>
+
+    <main id="content" class="container" role="main">
+        <article class="{{post_class}}">
+            <h1 class="post-title">
+                {{^if success}}
+                    Subscribe to {{@blog.title}}
+                {{else}}
+                    Subscribed!
+                {{/if}}
+            </h1>
+            <section class="post-content">
+                {{^if success}}
+                    {{subscribe_form
+                        form_class="gh-signin"
+                        input_class="gh-input"
+                        button_class="btn btn-blue btn-block"
+                        placeholder="Your email address"
+                        autofocus="true"
+                    }}
+                {{else}}
+                    <p>
+                        You've successfully subscribed to <em>{{@blog.title}}</em>
+                        with the email address <em>{{email}}</em>.
+                    </p>
+                {{/if}}
+            </section>
+        </article>
+    </main>
+    <footer>
+        <div class="social">
+            {{#if @blog.facebook}}
+                <a href="{{facebook_url}}" class="facebook" title="{{@blog.facebook}}" target="_blank"></a>
+            {{/if}}
+            {{#if @blog.twitter}}
+                <a href="{{twitter_url}}" class="twitter" title="{{@blog.twitter}}" target="_blank"></a>
+            {{/if}}
+        </div>
+        <div class="copyright">Copyright &copy; {{date format="YYYY"}}, <a href="{{@blog.url}}">{{@blog.title}}</a>. All Right Reserved.</div>
+    </footer>
+
+
+    {{!-- jQuery needs to come before `{{ghost_foot}}` so that jQuery can be used in code injection --}}
+    <script type="text/javascript" src="{{asset "js/jquery-1.12.4.min.js"}}"></script>
+
+    {{!-- 3rd party scripts --}}
+    <script type="text/javascript" src="{{asset "js/libraries.js"}}"></script>
+
+    {{!-- Ghost outputs important scripts and data with this tag --}}
+    {{ghost_foot}}
+    
+    {{!-- The main JavaScript file for Zwei --}}
+    <script type="text/javascript" src="{{asset "js/main.js"}}"></script>
+
+</body>
+</html>

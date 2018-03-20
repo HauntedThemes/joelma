@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    {{> theme_head}}
+
+    {{!-- Ghost outputs important style and meta data with this tag --}}
+    {{ghost_head}}
+
+</head>
+<body class="{{body_class}} nav-closed" {{#author}}data-author="{{slug}}"{{/author}} {{#tag}}data-tag="{{slug}}"{{/tag}}>
+
+    <div class="main-container">
+    
+        {{> theme_header}}
+        {{{body}}}
+
+    </div>
+
+    {{> theme_footer}}
+
+    {{!-- jQuery needs to come before `{{ghost_foot}}` so that jQuery can be used in code injection --}}
+    <script type="text/javascript" src="{{asset "js/jquery-1.12.4.min.js"}}"></script>
+
+    {{!-- 3rd party scripts --}}
+    <script type="text/javascript" src="{{asset "js/libraries.js"}}"></script>
+
+    {{!-- Ghost outputs important scripts and data with this tag --}}
+    {{ghost_foot}}
+    
+    {{!-- The main JavaScript file for Tawau --}}
+    {{#if pagination.pages}}
+    <script>
+        var maxPages = parseInt('{{pagination.pages}}');
+    </script>
+    {{/if}}
+    <script type="text/javascript" src="{{asset "js/main.js"}}"></script>
+
+</body>
+</html>

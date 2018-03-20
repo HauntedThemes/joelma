@@ -1,0 +1,28 @@
+{{!-- This is the post loop - each post will be output using this markup --}}
+<article class="{{post_class}}">
+    <div class="bg" {{#if feature_image}}style="background-image: url({{img_url feature_image}});"{{/if}}></div>
+    <div class="inner">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    {{#if tags}}
+                        <ul class="tags">
+                        {{#foreach tags}}
+                            <li>
+                                <a href="{{url}}" title="{{name}}" class="tag tag-{{id}} {{slug}}">{{name}}</a>
+                            </li>  
+                        {{/foreach}}
+                        </ul>
+                    {{/if}}
+                    <h2 class="post-title" data-title-sep><a href="{{url}}" title="{{title}}">{{title}}</a></h2>
+                    <p class="excerpt">{{excerpt words="28"}} ... <a class="read-more" href="{{url}}" title="{{title}}">Read more</a></p>
+                    <ul class="post-meta">
+                        <li><time class="post-date" datetime="{{date format="YYYY-MM-DD"}}"><i class="fas fa-calendar-alt"></i> {{date format="DD MMM YYYY"}}</time></li>
+                        <li><div class="post-author"><i class="fas fa-user"></i> {{author}}</div></li>
+                        <li><div class="post-reading-time"><i class="fas fa-clock"></i> {{reading_time}}</div></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>

@@ -1,0 +1,21 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-8 ml-auto mr-auto text-center">
+			{{!-- Load more button - Visible only if it's enabled in main.js --}}
+			<a href="#" id="load-posts" data-posts_per_page="{{@config.posts_per_page}}" class="hidden">Load more posts</a>
+
+			{{!-- Pagination --}}
+			<nav class="pagination" role="navigation">
+				<div class="container">
+				    {{#if prev}}
+				        <a class="newer-posts" href="{{page_url prev}}"><i class="fas fa-angle-left"></i> <b>Newer</b></a>
+				    {{/if}}
+				    <span class="page-number">{{page}} of {{pages}}</span>
+				    {{#if next}}
+				        <a class="older-posts" href="{{page_url next}}"><b>Older</b> <i class="fas fa-angle-right"></i></a>
+				    {{/if}}
+				</div>
+			</nav>
+		</div>
+	</div>
+</div>

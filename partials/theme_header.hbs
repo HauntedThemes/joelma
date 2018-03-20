@@ -1,0 +1,28 @@
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-3 ml-auto">
+                <div class="blog-logo">
+                    <a href="{{@blog.url}}" title="{{@blog.title}}">
+                        {{#if @blog.logo}} <img src="{{@blog.logo}}" alt="{{@blog.title}}" /> {{else}}<span>{{@blog.title}}</span>{{/if}} 
+                    </a>
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="inner">
+                    {{navigation}}
+                    <div class="search">
+                        <a href="#" class="search-trigger"><i class="fas fa-search"></i></a>
+                        <div class="search-popover">
+                            <form>
+                                <input id="search-field" placeholder="Search" autocomplete="off"/>
+                            </form>
+                            <div id="results"></div>      
+                        </div>
+                    </div>
+                    <span class="nav-trigger"><i></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

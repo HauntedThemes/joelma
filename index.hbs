@@ -1,0 +1,31 @@
+{{!-- The tag below means - insert everything in this file into the {body} of the default.hbs template --}}
+{{!< default}}
+
+{{^is "paged"}}
+	{{#get "posts" include="tags, author" filter="featured:true" limit="5"}}
+		{{#if posts}}
+			<div class="intro">
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						{{#foreach posts}}
+							<li class="swiper-slide">
+								{{> "loop-featured"}}
+							</li>
+					    {{/foreach}}
+					</div>
+					<div class="swiper-pagination"></div>
+				</div>
+			</div>
+		{{/if}}
+	{{/get}}
+{{/is}}
+
+{{!-- The main content area --}}
+<main id="content" class="container" role="main">
+	<div class="row">
+		<div class="col-md-8 ml-auto mr-auto loop">
+    		{{> "loop"}}
+		</div>
+    </div>
+</main>
+{{pagination}}

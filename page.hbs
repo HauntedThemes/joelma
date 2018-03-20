@@ -1,0 +1,23 @@
+{{!-- The tag below means - insert everything in this file into the {body} of the default.hbs template --}}
+{{!< default}}
+
+{{!-- Everything inside the #post tags pulls data from the post --}}
+{{#post}}
+
+<main id="content" class="container content-inner" role="main">
+    <article class="{{post_class}}">
+        <h1 class="post-title">{{title}}</h1>
+        {{#if feature_image}}
+            <div class="content-holder">
+                <a href="{{img_url feature_image}}" class="zoom">
+                    <img src="{{img_url feature_image}}" alt="{{title}}">
+                </a>
+            </div>
+        {{/if}}
+        <section class="post-content content-holder">
+            {{content}}
+        </section>
+    </article>
+</main>
+
+{{/post}}
