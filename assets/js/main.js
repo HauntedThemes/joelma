@@ -26,7 +26,12 @@ jQuery(document).ready(function($) {
         slidesPerView: 'auto',
         centeredSlides: true,
         loop: true,
-        loopedSlides: 6
+        loopedSlides: 6,
+        roundLengths: true,
+        navigation: {
+            nextEl: '.related-posts .swiper-button-next',
+            prevEl: '.related-posts .swiper-button-prev',
+        },
     });
 
     $('.search-trigger').popover({
@@ -214,10 +219,8 @@ jQuery(document).ready(function($) {
     });
 
     $('pre code').each(function(i, block) {
-        highlightBlock(block);
+        hljs.highlightBlock(block);
     });
-
-    $('.main-container').css('marginBottom', $('footer').height());
 
     $('.content-inner .share').stick_in_parent({
         offset_top: 100

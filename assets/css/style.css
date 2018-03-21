@@ -135,6 +135,16 @@ p{
     margin-bottom: 30px;
 }
 
+code, kbd, pre, samp {
+    font-family: monospace, monospace;
+    font-size: 1em;
+    color: #A0A8BD;
+}
+
+mark{
+    background: rgba(160, 168, 189, 0.2);
+}
+
 pre code,
 .hljs{
     padding: 20px;
@@ -442,7 +452,6 @@ header .search #results time{
     position: relative;
     z-index: 2;
     background: #fff;
-    box-shadow: 0px 40px 90px rgba(0, 0, 0, 0.4);
 }
 
 .bs-popover-auto[x-placement^=bottom] .arrow::after, .bs-popover-bottom .arrow::after{
@@ -538,6 +547,11 @@ header .search #results time{
     padding: 3px 10px;
     cursor: pointer;
     display: block;
+}
+
+.share ul li a:hover{
+    color: #fff;
+    background: rgba(160, 168, 189, 0.2);
 }
 
 .share ul li a i{
@@ -742,11 +756,18 @@ header .search #results time{
     position: absolute;
     top: 0;
     margin-left: -140px;
-    padding: 0px;
     margin-top: 0;
     display: block;
     position: absolute;
     padding-bottom: 30px;
+}
+
+.content-inner .share ul{
+    bottom: auto;
+    top: 40px;
+    margin: 0;
+    padding: 0;
+    left: 0;
 }
 
 /*.content-inner .share ul{
@@ -822,14 +843,15 @@ header .search #results time{
     width: calc(33.33% - 20px);
     width: 750px;
     margin: 0 15px;
-    opacity: .5;
+    opacity: .25;
     -webkit-transition: opacity .3s ease-in-out;
     -moz-transition: opacity .3s ease-in-out;
     -o-transition: opacity .3s ease-in-out;
     transition: opacity .3s ease-in-out;
 }
 
-.related-posts .loop .swiper-slide.swiper-slide-active{
+.related-posts .loop .swiper-slide.swiper-slide-active,
+.related-posts .loop .swiper-slide.swiper-slide-duplicate-active{
     opacity: 1;
 }
 
@@ -843,6 +865,26 @@ header .search #results time{
 
 .related-posts .loop .post .img-holder img{
     object-fit: cover;
+}
+
+.related-posts .swiper-button-next,
+.related-posts .swiper-button-prev{
+    height: 100%;
+    top: 0;
+    right: 0;
+    left: auto;
+    width: calc((100% - 750px)/2 - 30px);
+    background: transparent;
+}
+
+.related-posts .swiper-button-next:hover ~ .loop .swiper-slide-next,
+.related-posts .swiper-button-prev:hover ~ .loop .swiper-slide-prev{
+    opacity: .35;
+}
+
+.related-posts .swiper-button-prev{
+    right: auto;
+    left: 0;
 }
 
 .fixed-post-nav{
@@ -871,10 +913,5 @@ header .search #results time{
 }
 
 footer{
-    min-height: 500px;
     background: #2c2c2c;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    z-index: -1;
 }

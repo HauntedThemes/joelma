@@ -1,36 +1,32 @@
     <footer class="site-footer clearfix">
         <div class="container">
-            <div class="tags">
-                <h3>Tags</h3>
-                {{#get "tags" limit="all"}}
-                    <ul>
-                        {{#foreach tags}}
-                            <li>
-                                <a href="{{url}}">{{name}}</a>
-                            </li>
-                        {{/foreach}}
-                    </ul>
-                {{/get}}
+            <div class="row">
+                <div class="col-md-4">
+                    <h3>Tags</h3>
+                    {{#get "tags" limit="all"}}
+                        <ul>
+                            {{#foreach tags}}
+                                <li>
+                                    <a href="{{url}}">{{name}}</a>
+                                </li>
+                            {{/foreach}}
+                        </ul>
+                    {{/get}}
+                </div>
+                <div class="col-md-4">
+                    <h3>Newsletter</h3>
+                    {{#if @labs.subscribers}}
+                        {{subscribe_form
+                            form_class="gh-signin"
+                            input_class="gh-input"
+                            button_class="btn"
+                            placeholder="Your email address"
+                        }}
+                    {{/if}}
+                </div>
+                <div class="col-md-4">
+                    <!-- <a class="twitter-timeline" href="https://twitter.com/HauntedThemes?ref_src=twsrc%5Etfw">Tweets by HauntedThemes</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> -->
+                </div>
             </div>
-            <div class="newsletter">
-                <h3>Newsletter</h3>
-                {{#if @labs.subscribers}}
-                    {{subscribe_form
-                        form_class="gh-signin"
-                        input_class="gh-input"
-                        button_class="btn"
-                        placeholder="Your email address"
-                    }}
-                {{/if}}
-            </div>
-            <div class="social">
-                {{#if @blog.facebook}}
-                    <a href="{{facebook_url}}" class="facebook" title="{{@blog.facebook}}" target="_blank"></a>
-                {{/if}}
-                {{#if @blog.twitter}}
-                    <a href="{{twitter_url}}" class="twitter" title="{{@blog.twitter}}" target="_blank"></a>
-                {{/if}}
-            </div>
-            <div class="copyright">Copyright &copy; {{date format="YYYY"}}, <a href="{{@blog.url}}">{{@blog.title}}</a>. All Right Reserved.</div>
         </div>
     </footer>
