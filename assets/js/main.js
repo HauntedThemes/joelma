@@ -13,13 +13,20 @@ jQuery(document).ready(function($) {
     };
 
     var swiperIntro = new Swiper('.intro .swiper-container', {
-      	pagination: {
-        	el: '.intro .swiper-pagination',
-        	clickable: true,
-        	renderBullet: function (index, className) {
-        		return '<span class="' + className + '">0' + (index + 1) + '</span>';
-        	},
-      	},
+        pagination: {
+            el: '.intro .swiper-pagination',
+            clickable: true,
+            renderBullet: function (index, className) {
+                return '<span class="' + className + '">0' + (index + 1) + '</span>';
+            },
+        },
+    });
+
+    var swiperRelatedPosts = new Swiper('.related-posts .swiper-container', {
+        slidesPerView: 'auto',
+        centeredSlides: true,
+        loop: true,
+        loopedSlides: 6
     });
 
     $('.search-trigger').popover({
@@ -239,6 +246,16 @@ jQuery(document).ready(function($) {
             $('.content-inner .share').removeClass('fade');
         };
 
+    });
+
+    var imgHeight = 0;
+    $('.related-posts img').each(function(index, el) {
+        if (imgHeight >= $(this).height() || imgHeight == 0) {
+            imgHeight = $(this).height();
+        };
+    });
+    $('.related-posts .img-holder').each(function(index, el) {
+        $(this).height(imgHeight);
     });
 
     // Check if element is into view when scrolling

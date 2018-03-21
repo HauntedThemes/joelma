@@ -42,6 +42,7 @@
                 {{content}}
 
                 <div class="share">
+                    <a href="#"><i class="fas fa-share-alt"></i></a>
                     <ul>
                         <li><a href="https://twitter.com/share?text={{encode title}}&amp;url={{url absolute="true"}}" onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;" data-toggle="tooltip" data-placement="right" title="Share on Twitter"><i class="fab fa-twitter"></i></a></li>
                         <li><a href="https://www.facebook.com/sharer/sharer.php?u={{url absolute="true"}}" onclick="window.open(this.href, 'share-facebook', 'width=580,height=296');return false;" data-toggle="tooltip" data-placement="right" title="Share on Facebook"><i class="fab fa-facebook-f"></i></a></li>
@@ -55,9 +56,35 @@
         </article>
     </main>
 
-    <div class="tooltip tooltip--smaug" data-type="smaug">
-        <div class="tooltip-base"> 
-            <div class="tooltip-content"></div>
+    {{#get "posts" limit="6" include="tags, author" filter="id:-{{id}}+tag:{{primary_tag.slug}}"}}
+        {{#if posts}}
+            <div class="related-posts">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper loop">
+                        {{#foreach posts}}
+                            <div class="swiper-slide">
+                                {{> "loop"}}
+                            </div>
+                        {{/foreach}}
+                    </div>
+                </div>
+            </div>
+        {{/if}}
+    {{/get}}
+
+    <div class="fixed-post-nav">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 ml-auto mr-auto">
+                    {{#prev_post}}
+                        <a href="{{url}}" class="prev"><i class="fas fa-angle-left"></i> Previous post</a>
+                    {{/prev_post}}
+                    <a href="{{@blog.url}}">Back to homepage</a>
+                    {{#next_post}}
+                        <a href="{{url}}" class="next">Next post <i class="fas fa-angle-right"></i></a>
+                    {{/next_post}}
+                </div>
+            </div>
         </div>
     </div>
 
