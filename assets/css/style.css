@@ -98,6 +98,13 @@ td, th{ padding: 0; }
    1. General
    ========================================================================== */
 
+::selection {
+    background: rgba(0, 0, 0, 0.2);
+}
+::-moz-selection {
+    background: rgba(0, 0, 0, 0.2);
+}
+
 body{
     font-family: "sofia-pro", sans-serif;
     font-weight: 300;
@@ -251,7 +258,7 @@ pre code,
 }
 
 .intro .swiper-pagination .swiper-pagination-bullet{
-    font-size: 12px;
+    font-size: 14px;
     text-align: center;
     color: #FFFFFF;
     opacity: .5;
@@ -262,23 +269,45 @@ pre code,
     height: auto;
     font-weight: bold;
     padding: 5px;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    font-size: 24px;
+    transform: scale(.6);
+}
+
+.intro .swiper-pagination .swiper-pagination-bullet:hover{
+    opacity: 1;
 }
 
 .intro .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active{
     opacity: 1;
-    font-size: 14px;
     position: relative;
+    transform: scale(1);
 }
 
 .intro .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active:before{
+    transform: scale3d(1,1,1);
+}
+
+.intro .swiper-pagination .swiper-pagination-bullet:before{
     content: '';
     position: absolute;
-    bottom: 6px;
+    bottom: 10px;
     height: 6px;
-    width: calc(100% - 6px);
+    width: 0;
+    overflow: hidden;
     left: 3px;
     background: #667EEA;
     z-index: -1;
+    width: calc(100% - 6px);
+    transform-origin: 0% 50%;
+    transform: scale3d(0,1,1);
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
 }
 
 .intro .excerpt{
@@ -454,7 +483,8 @@ header .search #results time{
     background: #fff;
 }
 
-.bs-popover-auto[x-placement^=bottom] .arrow::after, .bs-popover-bottom .arrow::after{
+.bs-popover-auto[x-placement^=bottom] .arrow::after, .bs-popover-bottom .arrow::after,
+.bs-tooltip-auto[x-placement^=bottom] .arrow::before, .bs-tooltip-bottom .arrow::before{
     border-bottom-color: #2b2b2b;
 }
 
@@ -547,6 +577,8 @@ header .search #results time{
     padding: 3px 10px;
     cursor: pointer;
     display: block;
+    line-height: 32px;
+    font-size: 14px;
 }
 
 .share ul li a:hover{
@@ -558,7 +590,7 @@ header .search #results time{
     margin: 0;
 }
 
-.share i{
+.post-meta li.share i{
     margin-right: 0;
 }
 
@@ -567,10 +599,18 @@ header .search #results time{
     font-size: 16px;
 }
 
+.intro .post-meta a:hover{
+    color: #667EEA;
+}
+
 .post-meta a{
     line-height: 32px;
     font-size: 14px;
     font-weight: 500;
+}
+
+.loop{
+    margin: 50px 0 0 0;
 }
 
 .loop .post{
@@ -712,6 +752,27 @@ header .search #results time{
     line-height: 30px;
 }
 
+.content-inner h1 .chain{
+    top: 45px;
+}
+
+.content-inner h2 .chain{
+    top: 35px;
+}
+
+.content-inner h3 .chain{
+    top: 25px;
+}
+
+.content-inner h4 .chain{
+    top: 21px;
+}
+
+.content-inner h5 .chain,
+.content-inner h6 .chain{
+    display: none;
+}
+
 .content-inner h1{
     font-size: 72px;
 }
@@ -790,9 +851,8 @@ header .search #results time{
 }
 
 .content-inner .share ul li a{
-    padding: 8px 10px;
-    width: 43px;
-    height: 43px;
+    line-height: 32px;
+    font-size: 14px;
 }
 
 .tooltip.show {
@@ -912,6 +972,77 @@ header .search #results time{
     right: 15px;
 }
 
+.go{
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    z-index: 999;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: -25px;
+    color: #fff;
+    font-size: 24px;
+    opacity: .5;
+    transform: translateY(0);
+    -webkit-animation: go 3s infinite;
+    -moz-animation:    go 1s infinite;
+    -o-animation:      go 1s infinite;
+    animation:         go 2s infinite;
+}
+
+.go:hover{
+    opacity: 1;
+    color: #fff;
+}
+
 footer{
     background: #2c2c2c;
+}
+
+@-webkit-keyframes go {
+    0% { 
+        transform: translateY(0);
+    }
+    75%{
+        transform: translateY(-10px);
+    }
+    100% { 
+        transform: translateY(0);
+    }
+}
+@-moz-keyframes go {
+    0% { 
+        transform: translateY(0);
+    }
+    75%{
+        transform: translateY(-10px);
+    }
+    100% { 
+        transform: translateY(0);
+    }
+}
+@-o-keyframes go {
+    0% { 
+        transform: translateY(0);
+    }
+    75%{
+        transform: translateY(-10px);
+    }
+    100% { 
+        transform: translateY(0);
+    }
+}
+@keyframes go {
+    0% { 
+        transform: translateY(0);
+    }
+    75%{
+        transform: translateY(-10px);
+    }
+    100% { 
+        transform: translateY(0);
+    }
 }

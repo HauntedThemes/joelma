@@ -12,6 +12,12 @@ jQuery(document).ready(function($) {
         'disqus-shortname': 'hauntedthemes-demo'
     };
 
+    $('.go').on('click', function(event) {
+        event.preventDefault();
+        $("html, body").animate({ scrollTop: $('#content').offset().top }, 600);
+        return false;
+    });
+
     var swiperIntro = new Swiper('.intro .swiper-container', {
         pagination: {
             el: '.intro .swiper-pagination',
@@ -20,6 +26,15 @@ jQuery(document).ready(function($) {
                 return '<span class="' + className + '">0' + (index + 1) + '</span>';
             },
         },
+        // navigation: {
+        //     nextEl: '.intro .swiper-button-next',
+        //     prevEl: '.intro .swiper-button-prev',
+        // },
+        simulateTouch: false,
+        // autoplay: {
+        //     delay: 5000,
+        //     disableOnInteraction: false
+        // },
     });
 
     var swiperRelatedPosts = new Swiper('.related-posts .swiper-container', {
@@ -42,8 +57,6 @@ jQuery(document).ready(function($) {
             return $('.search-popover').html();
         }
     });
-
-    $('[data-toggle="tooltip"]').tooltip();
 
     $('.search-trigger').on('shown.bs.popover', function () {
         var id = $('.search-trigger').attr('aria-describedby');
@@ -215,7 +228,8 @@ jQuery(document).ready(function($) {
 
     $('.content-inner h1, .content-inner h2, .content-inner h3, .content-inner h4, .content-inner h5, .content-inner h6').each(function(index, el) {
         var id = $(this).attr('id');
-        $(this).prepend('<a href="#'+ id +'" class="chain"><i class="fas fa-link"></i></a>');
+        var url = window.location.href.split(/[?#]/)[0] + '#' + id;
+        $(this).prepend('<a href="#'+ id +'" class="chain" data-clipboard-text="'+ url +'" data-toggle="tooltip" data-placement="bottom" title="Copy link to clipboard."><i class="fas fa-link"></i></a>');
     });
 
     $('pre code').each(function(i, block) {
@@ -271,5 +285,17 @@ jQuery(document).ready(function($) {
 
         return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
     }
+
+    new ClipboardJS('.chain');
+
+    $('.chain').each(function(index, el) {
+        $(this).on('click', function(event) {
+            event.preventDefault();
+            $('#' + $(this).attr('aria-describedby')).find('.tooltip-inner').text('Copied!');
+            $(this).tooltip('update');
+        });
+    });
+
+    $('[data-toggle="tooltip"]').tooltip();
 
 });
