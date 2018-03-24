@@ -391,9 +391,28 @@ header nav ul li a{
 
 header .search{
     display: inline-block;
+    margin-right: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header .search .search-trigger{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 header .search .search-popover{
+    position: absolute;
+    display: none;
+}
+
+header .search svg{
+    width: 16px;
+}
+
+header .bookmark-content .bookmark-popover{
     position: absolute;
     display: none;
 }
@@ -403,7 +422,13 @@ header .inner{
     justify-content: flex-end;
 }
 
-header .search .popover{
+header .inner nav{
+    border-right: 1px solid rgba(255, 255, 255, 0.25);
+    margin-right: 30px;
+}
+
+header .popover,
+header .popover{
     background: #2b2b2b;
     box-shadow: 0px 40px 90px rgba(0, 0, 0, 0.7);
     border-radius: 3px;
@@ -414,16 +439,16 @@ header .search .popover{
     margin-left: -230px;
 }
 
-header .search .popover .popover-body{
+header .popover .popover-body{
     padding: 0;
 }
 
-header .search form{
+header .popover form{
     width: 100%;
 }
 
-header .search input{
-    background: #1b1b1b;
+header .popover input{
+    background: #36383c;
     border: none;
     outline: 0;
     color: #fff;
@@ -433,9 +458,11 @@ header .search input{
     position: absolute;
     top: 0;
     left: 0;
+    border-bottom: 1px solid #2b2b2b;
+    z-index: 2;
 }
 
-header .search h5{
+header .popover h5{
     padding: 10px 15px;
     line-height: 20px;
     font-size: 12px;
@@ -449,30 +476,100 @@ header .search #results{
     padding-top: 38px;
 }
 
-header .search #results ul{
+header .popover-body ul{
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
-header .search #results ul li{
-    padding: 10px 15px;
+header .popover-body ul li{
+    padding: 10px 35px 10px 15px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    position: relative;
 }
 
-header .search #results ul li:last-child{
+header .popover-body ul li:last-child{
     border-bottom: none;
 }
 
-header .search #results a{
+header .popover-body ul li .read-later{
+    top: 10px;
+    right: 5px;
+}
+
+header .popover-body a{
     display: block;
     font-weight: bold;
 }
 
-header .search #results time{
+header .popover-body time{
     color: #fff;
     font-size: 12px;
     margin-bottom: 5px;
+    display: block;
+}
+
+header .popover-body h3{
+    font-size: 18px;
+    margin: 15px;
+    color: #fff;
+}
+
+header .bookmark{
+    position: relative;
+    display: inline-block;
+}
+
+header .bookmark .counter{
+    font-size: 12px;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    background: #A0A8BD;
+    z-index: 2;
+    border-radius: 50%;
+    text-align: center;
+    top: -8px;
+    right: -10px;
+    color: #eceef2;
+}
+
+header .no-bookmarks{
+    color: #fff;
+    font-size: 14px;
+    margin: 0;
+    padding: 0 15px 15px 15px;
+}
+
+header .no-bookmarks i{
+    margin: 0 5px;
+}
+
+header .blog-logo span{
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 1;
+}
+
+.read-later{
+    font-size: 16px;
+    position: absolute;
+    right: 0;
+    top: 5px;
+    padding: 4px 5px 5px 5px;
+}
+
+.read-later .fas,
+.read-later.active .far,
+.counter.hidden + .far + .fas,
+.counter:not(.hidden) + .far{
+    display: none;
+}
+
+.read-later.active .fas,
+.read-later .far,
+.counter.hidden + .far,
+.counter:not(.hidden) + .far + .fas{
     display: block;
 }
 
@@ -613,6 +710,10 @@ header .search #results time{
     margin: 50px 0 0 0;
 }
 
+.loop .inner{
+    position: relative;
+}
+
 .loop .post{
     margin: 50px 0;
     padding-bottom: 50px;
@@ -705,6 +806,10 @@ header .search #results time{
 }
 
 .content-inner ul li{
+    margin-bottom: 10px;
+}
+
+.content-inner ul li p{
     margin-bottom: 10px;
 }
 
@@ -855,6 +960,15 @@ header .search #results time{
     font-size: 14px;
 }
 
+.content-inner .tags{
+    padding-left: 0;
+}
+
+.content-inner .post-content{
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
 .tooltip.show {
     opacity: 1;
 }
@@ -899,9 +1013,12 @@ header .search #results time{
     margin: 0 0 100px;
 }
 
+.related-posts h3{
+    margin-bottom: 0;
+}
+
 .related-posts .loop .swiper-slide{
-    width: calc(33.33% - 20px);
-    width: 750px;
+    width: 730px;
     margin: 0 15px;
     opacity: .25;
     -webkit-transition: opacity .3s ease-in-out;
@@ -998,8 +1115,48 @@ header .search #results time{
     color: #fff;
 }
 
+.comments{
+    margin-bottom: 100px;
+}
+
+.comments .comments-trigger{
+    position: relative;
+    background: #F0F0F0;
+    color: #212529;
+    outline: 0;
+    display: block;
+    padding: 30px;
+}
+
+.comments .comments-trigger i{
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.social-trigger{
+    display: flex;
+}
+
+.social-trigger a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 30px;
+}
+
+.social-trigger svg{
+    width: 18px;
+}
+
 footer{
-    background: #2c2c2c;
+    color: #fff;
+    background: #000;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding-top: 50px;
+}
+
+.bookmark-content{
+    color: #fff;
 }
 
 @-webkit-keyframes go {

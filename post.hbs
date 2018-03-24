@@ -38,28 +38,61 @@
     </div>
     <main id="content" class="container content-inner" role="main" data-id={{comment_id}}>
         <article class="{{post_class}} row">
-            <section class="post-content content-holder col-md-8 ml-auto mr-auto">
+            <section class="content-holder col-md-8 ml-auto mr-auto">
 
-                {{content}}
+                <div class="post-content">
+                    {{content}}
+                    
+                    {{#if tags}}
+                        <ul class="tags">
+                        {{#foreach tags}}
+                            <li>
+                                <a href="{{url}}" title="{{name}}" class="tag tag-{{id}} {{slug}}">{{name}}</a>
+                            </li>  
+                        {{/foreach}}
+                        </ul>
+                    {{/if}}
 
-                <div class="share">
-                    <a href="#"><i class="fas fa-share-alt"></i></a>
-                    <ul>
-                        <li><a href="https://twitter.com/share?text={{encode title}}&amp;url={{url absolute="true"}}" onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;" data-toggle="tooltip" data-placement="right" title="Share on Twitter"><i class="fab fa-twitter"></i></a></li>
-                        <li><a href="https://www.facebook.com/sharer/sharer.php?u={{url absolute="true"}}" onclick="window.open(this.href, 'share-facebook', 'width=580,height=296');return false;" data-toggle="tooltip" data-placement="right" title="Share on Facebook"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a href="https://plus.google.com/share?url={{url absolute="true"}}" onclick="window.open(this.href, 'share-google-plus', 'width=400,height=466');return false;" data-toggle="tooltip" data-placement="right" title="Share on Google+"><i class="fab fa-google-plus-g"></i></a></li>
-                        <li><a href="https://www.reddit.com/submit?url={{url absolute="true"}}" target="_blank" data-toggle="tooltip" data-placement="right" title="Share on Reddit"><i class="fab fa-reddit-alien"></i></a></li>
-                        <li><a href="mailto:?subject={{@blog.title}} - {{title}}&amp;body={{excerpt words="28"}} ... %0D%0A%0D%0A Read more: {{url absolute="true"}}" data-toggle="tooltip" data-placement="right" title="Share by email"><i class="fas fa-envelope"></i></a></li>
-                    </ul>
+                    <div class="share">
+                        <a href="#"><i class="fas fa-share-alt"></i></a>
+                        <ul>
+                            <li><a href="https://twitter.com/share?text={{encode title}}&amp;url={{url absolute="true"}}" onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;" data-toggle="tooltip" data-placement="right" title="Share on Twitter"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="https://www.facebook.com/sharer/sharer.php?u={{url absolute="true"}}" onclick="window.open(this.href, 'share-facebook', 'width=580,height=296');return false;" data-toggle="tooltip" data-placement="right" title="Share on Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="https://plus.google.com/share?url={{url absolute="true"}}" onclick="window.open(this.href, 'share-google-plus', 'width=400,height=466');return false;" data-toggle="tooltip" data-placement="right" title="Share on Google+"><i class="fab fa-google-plus-g"></i></a></li>
+                            <li><a href="https://www.reddit.com/submit?url={{url absolute="true"}}" target="_blank" data-toggle="tooltip" data-placement="right" title="Share on Reddit"><i class="fab fa-reddit-alien"></i></a></li>
+                            <li><a href="mailto:?subject={{@blog.title}} - {{title}}&amp;body={{excerpt words="28"}} ... %0D%0A%0D%0A Read more: {{url absolute="true"}}" data-toggle="tooltip" data-placement="right" title="Share by email"><i class="fas fa-envelope"></i></a></li>
+                        </ul>
+                    </div>
+                    
                 </div>
+
 
             </section>
         </article>
     </main>
 
+    <div class="comments container">
+        <div class="row">
+            <div class="col-md-8 mr-auto ml-auto">
+                <h3>Comments</h3>
+                <a href="#" class="comments-trigger">
+                    <i class="fas fa-comments"></i> Write a comment ...
+                </a>
+                <div class="comments-inner"></div>
+            </div>
+        </div>
+    </div>
+
     {{#get "posts" limit="6" include="tags, author" filter="id:-{{id}}+tag:{{primary_tag.slug}}"}}
         {{#if posts}}
             <div class="related-posts">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 mr-auto ml-auto">
+                            <h3>Related posts</h3>
+                        </div>
+                    </div>
+                </div>
                 <div class="swiper-container">
                     <div class="swiper-button-prev" title="Previous post"></div>
                     <div class="swiper-button-next" title="Next post"></div>
