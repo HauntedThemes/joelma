@@ -357,13 +357,22 @@ pre code,
     border: 1px solid rgba(160, 168, 189, 0.5);
 }
 
+body.active header{
+    padding: 20px 0;
+    background: #000;
+}
+
 header{
-    position: absolute;
+    position: fixed;
     z-index: 9900;
     width: 100%;
     top: 0;
     left: 0;
     padding: 50px 0;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
 }
 
 header .blog-logo img{
@@ -413,6 +422,11 @@ header .search svg{
 }
 
 header .bookmark-content .bookmark-popover{
+    position: absolute;
+    display: none;
+}
+
+header .social-popover{
     position: absolute;
     display: none;
 }
@@ -556,7 +570,7 @@ header .blog-logo span{
     position: absolute;
     right: 0;
     top: 5px;
-    padding: 4px 5px 5px 5px;
+    padding: 4px 10px 5px 10px;
 }
 
 .read-later .fas,
@@ -620,6 +634,7 @@ header .blog-logo span{
     position: relative;
     perspective: 250px;
     padding: 10px 10px 0 10px;
+    z-index: 10;
 }
 
 .share a{
@@ -1135,6 +1150,7 @@ header .blog-logo span{
 
 .social-trigger{
     display: flex;
+    margin-left: 30px;
 }
 
 .social-trigger a{
@@ -1146,6 +1162,7 @@ header .blog-logo span{
 
 .social-trigger svg{
     width: 18px;
+    height: 24px;
 }
 
 footer{
@@ -1157,6 +1174,28 @@ footer{
 
 .bookmark-content{
     color: #fff;
+}
+
+header .popover-body ul.social-icons{
+    display: flex;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+header .popover-body ul.social-icons li{
+    flex: 1;
+    padding: 0;
+    border: none;
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+header .popover-body ul.social-icons li:last-child{
+    border: none;
+}
+
+header .popover-body ul.social-icons li a{
+    text-align: center;
+    padding: 10px;
 }
 
 @-webkit-keyframes go {

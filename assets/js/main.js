@@ -93,6 +93,21 @@ jQuery(document).ready(function($) {
         readLaterPosts = readLater($('#' + id + " #results"), readLaterPosts);
     })
 
+    $('.social-trigger').popover({
+        container: '.social-content',
+        html: true,
+        placement: 'bottom',
+        content: function() {
+            return $('.social-popover').html();
+        }
+    });
+
+    $('.social-trigger').on('shown.bs.popover', function () {
+        var id = $('.social-trigger').attr('aria-describedby');
+        $('#' + id).find('.social-container').append('<a class="twitter-timeline" data-width="300" data-height="800" data-theme="dark" data-tweet-limit="5" data-chrome="noborders noheader transparent" href="https://twitter.com/HauntedThemes?ref_src=twsrc%5Etfw"></a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>');
+        new SimpleBar($('#' + id)[0]);
+    });
+
     // Initialize Disqus comments
     if ($('#content').attr('data-id') && config['disqus-shortname'] != '') {
 
@@ -447,5 +462,48 @@ jQuery(document).ready(function($) {
     });
 
     $('[data-toggle="tooltip"]').tooltip();
+
+    // $(window).on("scroll", function() {
+    //     var scrollTopDistance = $(window).scrollTop();
+    //     if (scrollTopDistance > 0) {
+    //         $('body').addClass('active');
+    //     }else{
+    //         $('body').removeClass('active');
+    //     };
+    // });
+
+    var didScroll,
+        lastScrollTop = 0,
+        delta = 5;
+
+    // Show/Hide menu on scroll
+    function hasScrolled() {
+        var st = $(this).scrollTop();
+        
+        if(Math.abs(lastScrollTop - st) <= delta)
+            return;
+        
+        if (st > lastScrollTop){
+            $('body').addClass('active');
+        } else {
+            if(st + $(window).height() < $(document).height()) {
+                $('body').removeClass('active');
+            }
+        }
+        
+        lastScrollTop = st;
+    }
+
+    // On scroll check if header should be visible or not
+    $(window).on('scroll', function(event) {
+        didScroll = true;
+    });
+
+    setInterval(function() {
+        if (didScroll) {
+            hasScrolled();
+            didScroll = false;
+        }
+    }, 250);
 
 });
