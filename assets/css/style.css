@@ -357,7 +357,7 @@ pre code,
     border: 1px solid rgba(160, 168, 189, 0.5);
 }
 
-body.active header{
+body.scroll header{
     padding: 20px 0;
     background: #000;
 }
@@ -369,6 +369,7 @@ header{
     top: 0;
     left: 0;
     padding: 50px 0;
+    transform: translateY(0);
     -webkit-transition: all .3s ease-in-out;
     -moz-transition: all .3s ease-in-out;
     -o-transition: all .3s ease-in-out;
@@ -404,6 +405,7 @@ header .search{
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 header .search .search-trigger{
@@ -441,20 +443,37 @@ header .inner nav{
     margin-right: 30px;
 }
 
+.bs-popover-auto[x-placement^=bottom] .arrow::before, .bs-popover-bottom .arrow::before{
+    border-bottom-color: #36383c;
+}
+
+.bs-popover-auto[x-placement^=bottom] .arrow::after, .bs-popover-bottom .arrow::after, .bs-tooltip-auto[x-placement^=bottom] .arrow::before, .bs-tooltip-bottom .arrow::before {
+    border-bottom-color: #36383c;
+}
+
+.bs-popover-auto[x-placement^=bottom] .arrow, .bs-popover-bottom .arrow {
+    top: 7px;
+    right: 10px;
+    left: auto !important;
+}
+
 header .popover,
 header .popover{
-    background: #2b2b2b;
+    background: transparent;
     box-shadow: 0px 40px 90px rgba(0, 0, 0, 0.7);
     border-radius: 3px;
-    margin-top: 15px;
+    margin-top: 0;
     width: 300px;
     border: none;
     max-height: calc(100vh - 200px);
     margin-left: -230px;
+    padding-top: 15px;
 }
 
 header .popover .popover-body{
     padding: 0;
+    background: #36383c;
+    border-radius: 3px;
 }
 
 header .popover form{
@@ -470,7 +489,7 @@ header .popover input{
     width: 100%;
     border-radius: 3px 3px 0 0;
     position: absolute;
-    top: 0;
+    top: 15px;
     left: 0;
     border-bottom: 1px solid #2b2b2b;
     z-index: 2;
@@ -525,8 +544,9 @@ header .popover-body time{
 
 header .popover-body h3{
     font-size: 18px;
-    margin: 15px;
+    padding: 15px;
     color: #fff;
+    margin: 0;
 }
 
 header .bookmark{
@@ -594,7 +614,6 @@ header .blog-logo span{
     background: #fff;
 }
 
-.bs-popover-auto[x-placement^=bottom] .arrow::after, .bs-popover-bottom .arrow::after,
 .bs-tooltip-auto[x-placement^=bottom] .arrow::before, .bs-tooltip-bottom .arrow::before{
     border-bottom-color: #2b2b2b;
 }

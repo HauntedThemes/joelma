@@ -29,6 +29,10 @@ jQuery(document).ready(function($) {
         return false;
     });
 
+    $('.social-trigger, .bookmark, .search-trigger').on('click', function(event) {
+        event.preventDefault();
+    });    
+
     if ($('.intro .swiper-slide').length == 1) {
         $('.intro .swiper-pagination').addClass('hidden');
     };
@@ -463,47 +467,16 @@ jQuery(document).ready(function($) {
 
     $('[data-toggle="tooltip"]').tooltip();
 
-    // $(window).on("scroll", function() {
-    //     var scrollTopDistance = $(window).scrollTop();
-    //     if (scrollTopDistance > 0) {
-    //         $('body').addClass('active');
-    //     }else{
-    //         $('body').removeClass('active');
-    //     };
-    // });
-
-    var didScroll,
-        lastScrollTop = 0,
-        delta = 5;
-
-    // Show/Hide menu on scroll
-    function hasScrolled() {
-        var st = $(this).scrollTop();
-        
-        if(Math.abs(lastScrollTop - st) <= delta)
-            return;
-        
-        if (st > lastScrollTop){
-            $('body').addClass('active');
-        } else {
-            if(st + $(window).height() < $(document).height()) {
-                $('body').removeClass('active');
-            }
-        }
-        
-        lastScrollTop = st;
-    }
-
     // On scroll check if header should be visible or not
+    if ($(this).scrollTop() > 0) {
+        $('body').addClass('scroll');
+    }
     $(window).on('scroll', function(event) {
-        didScroll = true;
+        if ($(this).scrollTop() > 0) {
+            $('body').addClass('scroll');
+        }else{
+            $('body').removeClass('scroll');
+        };
     });
-
-    setInterval(function() {
-        if (didScroll) {
-            hasScrolled();
-            didScroll = false;
-        }
-    }, 250);
 
 });
