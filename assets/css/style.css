@@ -161,6 +161,28 @@ pre code,
     display: none !important;
 }
 
+label.error{
+    font-size: 12px;
+    margin-top: 5px;
+    color: #ea6666;
+}
+
+input, textarea{
+    width: 100%;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #000;
+    background-image: none;
+    background: #202226;
+    border: 1px solid #a0a8bd;
+    box-sizing: border-box;
+    border-radius: 3px;
+    height: 40px;
+    display: block;
+}
+
 .btn{
     padding: 9px 19px;
     border-radius: 30px;
@@ -350,6 +372,7 @@ pre code,
     border-radius: 15px;
     padding: 3px 15px;
     font-weight: normal;
+    display: block;
 }
 
 .tags li a:hover{
@@ -1215,6 +1238,62 @@ header .popover-body ul.social-icons li:last-child{
 header .popover-body ul.social-icons li a{
     text-align: center;
     padding: 10px;
+}
+
+footer .tags li{
+    margin-bottom: 10px;
+}
+
+.gh-signin{
+    position: relative;
+}
+
+.gh-signin button[type="submit"]{
+    border: none;
+    font-size: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 40px;
+    width: 40px;
+    background: #a0a8bd;
+    border-radius: 0 3px 3px 0;
+    color: black;
+}
+
+.gh-signin button[type="submit"]:before{
+    font-size: 16px;
+}
+
+.latest-posts{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    font-weight: 500;
+}
+
+.latest-posts time{
+    font-size: 14px;
+    display: block;
+}
+
+.latest-posts time i{
+    margin-right: 10px;
+}
+
+.latest-posts h5{
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.latest-posts li:not(:last-child){
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(160, 168, 189, 0.25);
+}
+
+.latest-posts a{
+    color: #fff;
 }
 
 @-webkit-keyframes go {

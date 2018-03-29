@@ -479,4 +479,32 @@ jQuery(document).ready(function($) {
         };
     });
 
+    $(".gh-signin").validate({
+        rules: {
+            email: {
+                required: true,
+                email: true
+            },
+        },
+        submitHandler: function (form) {
+            var email = $(form).find('input[name="email"]').val();
+            console.log(email);
+            $.ajax({
+                url: window.location.origin + '/subscribe/',
+                type: 'POST',
+                data: {
+                    confirm: '',
+                    email: email,
+                    location: window.location.origin,
+                    referrer: window.location.origin + '/ghost/'
+                },
+            })
+            .done(function(data) {
+                var response = $(data).find('.post-content p');
+                response.insertAfter('.subscribe-container');
+                $('.subscribe-container').remove();
+            });                
+        }
+    });
+
 });

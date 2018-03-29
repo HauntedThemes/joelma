@@ -1,7 +1,7 @@
     <footer class="site-footer clearfix">
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <h3>Tags</h3>
                     {{#get "tags" limit="all"}}
                         <ul class="tags">
@@ -13,19 +13,41 @@
                         </ul>
                     {{/get}}
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <h3>Newsletter</h3>
-                    {{#if @labs.subscribers}}
-                        {{subscribe_form
-                            form_class="gh-signin"
-                            input_class="gh-input"
-                            button_class="btn"
-                            placeholder="Your email address"
-                        }}
-                    {{/if}}
+                    <div class="subscribe-container">
+                        <p>Subscribe to our newsletter to receive our latest news.</p>
+                        {{#if @labs.subscribers}}
+                            {{subscribe_form
+                                form_class="gh-signin"
+                                input_class="gh-input"
+                                button_class="fas fa-angle-right"
+                                placeholder="Your email address"
+                            }}
+                        {{/if}}
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    
+                <div class="col-md-3">
+                    <h3>About</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed lacus id tortor iaculis iaculis dignissim eget justo. <br><br> Maecenas posuere eros nisl, ut pharetra turpis faucibus a. In imperdiet urna mattis lacus mollis, sit amet pulvinar purus vehicula.</p>
+                </div>
+                <div class="col-md-3">
+                    <h3>Latest posts</h3>
+                    <ul class="latest-posts">
+                    {{#get "posts" include="tags, author" limit="3"}}
+                        {{#foreach posts}}
+                        <li>
+                            <h5><a href="{{url}}" title="{{title}}">{{title}}</a></h5>
+                            <time class="post-date" datetime="{{date format="YYYY-MM-DD"}}"><i class="fas fa-calendar-alt"></i> {{date format="DD MMM YYYY"}}</time>
+                        </li>
+                        {{/foreach}}
+                    {{/get}}
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p class="copyright">&copy; {{date format="YYYY"}}, <a href="{{@blog.url}}">{{@blog.title}}</a>. All Right Reserved.</p>
                 </div>
             </div>
         </div>
