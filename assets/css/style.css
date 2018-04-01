@@ -1244,6 +1244,20 @@ footer .tags li{
     margin-bottom: 10px;
 }
 
+footer .copyright{
+    margin-top: 50px;
+    background: #202226;
+}
+
+footer .copyright p{
+    margin: 20px 0;
+    font-size: 14px;
+}
+
+footer .copyright p a{
+    color: #fff;
+}
+
 .gh-signin{
     position: relative;
 }

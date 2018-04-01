@@ -27,15 +27,6 @@
 		                        <div class="container">
 		                            <div class="row">
 		                                <div class="col-md-9">
-		                                    {{#if tags}}
-		                                        <ul class="tags">
-		                                        {{#foreach tags}}
-		                                            <li>
-		                                                <a href="{{url}}" title="{{name}}" class="tag tag-{{id}} {{slug}}">{{name}}</a>
-		                                            </li>  
-		                                        {{/foreach}}
-		                                        </ul>
-		                                    {{/if}}
 		                                    <h1 class="post-title">{{@blog.title}}</h1>
 		                                    <p class="excerpt">{{@blog.description}}</p>
 		                                </div>

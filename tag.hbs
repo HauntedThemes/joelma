@@ -2,16 +2,39 @@
 {{!< default}}
 
 {{#tag}}
-<div class="tag-title">
-    <h1>{{name}}</h1>
-</div>
+    <div class="intro">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <li class="swiper-slide">
+                    <div class="bg" {{#if feature_image}}style="background-image: url({{img_url feature_image}});"{{/if}}></div>
+                    <div class="inner">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <h1 class="post-title">{{name}}</h1>
+                                    <p class="excerpt">{{description}}</p>
+                                    <ul class="post-meta">
+                                     	<li>A collection of {{plural ../pagination.total empty='posts' singular='% post' plural='% posts'}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </div>
+            <a href="#" class="go"><i class="fas fa-angle-down"></i></a>
+        </div>
+    </div>
 {{/tag}}
 
 {{!-- The main content area --}}
-<main id="content" class="container loop" role="main">
-
-    {{> "loop"}}
-
+<main id="content" class="container" role="main">
+	<div class="row">
+		<div class="col-md-8 ml-auto mr-auto loop">
+			{{#foreach posts}}
+    			{{> "loop"}}
+    		{{/foreach}}
+		</div>
+    </div>
 </main>
-
 {{pagination}}

@@ -3,38 +3,44 @@
 
 {{!-- Everything inside the #author tags pulls data from the author --}}
 {{#author}}
-
-    <section class="author container">
-        {{#if profile_image}}
-        <figure class="author-image">
-            <a class="img" href="{{url}}" title="{{name}}"><img src="{{img_url profile_image}}" alt="{{name}}"></a>
-        </figure>
-        {{/if}}
-
-        <h4><a href="{{url}}">{{name}}</a></h4>
-
-        {{#if bio}}
-            <p>{{bio}}</p>
-        {{else}}
-            <p>Read <a href="{{url}}">more posts</a> by this author.</p>
-        {{/if}}
-        <div class="author-meta">
-            {{#if location}}<span class="author-location">{{location}}</span>{{/if}}
-            {{#if website}}<span class="author-link"><a href="{{website}}" target="_blank" rel="noopener noreferrer">{{website}}</a></span>{{/if}}
+    <div class="intro">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <li class="swiper-slide">
+                    <div class="bg" {{#if cover_image}}style="background-image: url({{img_url cover_image}});"{{/if}}></div>
+                    <div class="inner">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <h1 class="post-title">{{name}}</h1>
+                                    {{#if bio}}
+                                        <p>{{bio}}</p>
+                                    {{/if}}
+                                    <ul class="post-meta">
+                                        {{#if location}}<li><i class="fa fa-map-marker" aria-hidden="true"></i> {{location}}</li>{{/if}}
+                                        {{#if website}}<li><a href="{{website}}" target="_blank" rel="noopener noreferrer" title="{{website}}"><i class="fa fa-link" aria-hidden="true"></i></a></li>{{/if}}
+                                        {{#if twitter}}<li><a href="{{twitter_url}}" class="twitter" title="{{twitter}}" target="_blank"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>{{/if}}
+                                        {{#if facebook}}<li><a href="{{facebook_url}}" class="facebook" title="{{facebook}}" target="_blank"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>{{/if}}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </div>
+            <a href="#" class="go"><i class="fas fa-angle-down"></i></a>
         </div>
-        <div class="social">
-            {{#if twitter}}<a href="{{twitter_url}}" class="twitter" title="{{twitter}}" target="_blank"></a>{{/if}}
-            {{#if facebook}}<a href="{{facebook_url}}" class="facebook" title="{{facebook}}" target="_blank"></a>{{/if}}
-        </div>
-    </section>
-
+    </div>
 {{/author}}
 
 {{!-- The main content area --}}
-<main id="content" class="container loop" role="main">
-
-    {{> "loop"}}
-
+<main id="content" class="container" role="main">
+    <div class="row">
+        <div class="col-md-8 ml-auto mr-auto loop">
+            {{#foreach posts}}
+                {{> "loop"}}
+            {{/foreach}}
+        </div>
+    </div>
 </main>
-
 {{pagination}}
