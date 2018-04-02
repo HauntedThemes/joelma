@@ -3,21 +3,39 @@
 
 {{!-- Everything inside the #post tags pulls data from the post --}}
 {{#post}}
-
-<main id="content" class="container content-inner" role="main">
-    <article class="{{post_class}}">
-        <h1 class="post-title">{{title}}</h1>
-        {{#if feature_image}}
-            <div class="content-holder">
-                <a href="{{img_url feature_image}}" class="zoom">
-                    <img src="{{img_url feature_image}}" alt="{{title}}">
-                </a>
+    <div class="intro">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <li class="swiper-slide">
+                    <div class="bg" {{#if feature_image}}style="background-image: url({{img_url feature_image}});"{{/if}}></div>
+                    <div class="inner">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <h1 class="post-title"><a href="{{url}}" title="{{title}}">{{title}}</a></h1>
+                                    <ul class="post-meta">
+                                        <li><time class="post-date" datetime="{{date format="YYYY-MM-DD"}}"><i class="fas fa-calendar-alt"></i> {{date format="DD MMM YYYY"}}</time></li>
+                                        <li><div class="post-reading-time"><i class="fas fa-clock"></i> {{reading_time}}</div></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
             </div>
-        {{/if}}
-        <section class="post-content content-holder">
-            {{content}}
-        </section>
-    </article>
-</main>
+            <a href="#" class="go"><i class="fas fa-angle-down"></i></a>
+        </div>
+    </div>
+    <main id="content" class="container content-inner" role="main" data-id={{comment_id}}>
+        <article class="{{post_class}} row">
+            <section class="content-holder col-md-8 ml-auto mr-auto">
+
+                <div class="post-content">
+                    {{content}}
+                </div>
+
+            </section>
+        </article>
+    </main>
 
 {{/post}}

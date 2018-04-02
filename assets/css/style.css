@@ -210,10 +210,12 @@ input, textarea{
 }
 
 .intro .swiper-slide{
-    height: 100vh;
+    min-height: 100vh;
     background: grey;
     display: flex;
     position: relative;
+    padding: 150px 0;
+    align-items: center;
 }
 
 .intro .swiper-slide .post{
@@ -862,10 +864,6 @@ header .blog-logo span{
     padding-left: 16px;
 }
 
-.content-inner ul li{
-    margin-bottom: 10px;
-}
-
 .content-inner ul li p{
     margin-bottom: 10px;
 }
@@ -1185,6 +1183,10 @@ header .blog-logo span{
     padding: 30px;
 }
 
+.comments .comments-trigger:hover{
+    opacity: .75;
+}
+
 .comments .comments-trigger i{
     font-size: 24px;
     margin-right: 10px;
@@ -1308,6 +1310,22 @@ footer .copyright p a{
 
 .latest-posts a{
     color: #fff;
+}
+
+.profile-image{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    object-fit: cover;
+}
+
+.profile-image + h1{
+    margin-top: 0;
+}
+
+.post-template footer .copyright p{
+    padding-bottom: 30px;
 }
 
 @-webkit-keyframes go {

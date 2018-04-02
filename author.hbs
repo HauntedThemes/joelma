@@ -12,6 +12,9 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-9">
+                                    {{#if profile_image}}
+                                        <img src="{{img_url profile_image}}" alt="{{name}}" class="profile-image">
+                                    {{/if}}
                                     <h1 class="post-title">{{name}}</h1>
                                     {{#if bio}}
                                         <p>{{bio}}</p>
