@@ -42,18 +42,24 @@ jQuery(document).ready(function($) {
             el: '.intro .swiper-pagination',
             clickable: true,
             renderBullet: function (index, className) {
-                return '<span class="' + className + '">0' + (index + 1) + '</span>';
+                return '<span class="' + className + '"><i></i><b>0' + (index + 1) + '</b></span>';
             },
         },
-        // navigation: {
-        //     nextEl: '.intro .swiper-button-next',
-        //     prevEl: '.intro .swiper-button-prev',
-        // },
         simulateTouch: false,
-        // autoplay: {
-        //     delay: 5000,
-        //     disableOnInteraction: false
-        // },
+        autoplay: {
+            delay: 8000,
+            disableOnInteraction: false
+        },
+    });
+
+    $('.intro .swiper-pagination .swiper-pagination-bullet:nth-child('+ (swiperIntro.activeIndex+2) +')').addClass('next');
+    swiperIntro.on('slideChange', function () {
+        $('.intro .swiper-pagination .swiper-pagination-bullet').removeClass('next');
+        if (swiperIntro.isEnd) {
+            $('.intro .swiper-pagination .swiper-pagination-bullet:nth-child(1)').addClass('next');
+        }else{
+            $('.intro .swiper-pagination .swiper-pagination-bullet:nth-child('+ (swiperIntro.activeIndex+2) +')').addClass('next');
+        };
     });
 
     var swiperRelatedPosts = new Swiper('.related-posts .swiper-container', {

@@ -125,10 +125,10 @@ b, strong{
 
 a{
     color: #000000;
-    -webkit-transition: all .3s ease-in-out;
-    -moz-transition: all .3s ease-in-out;
-    -o-transition: all .3s ease-in-out;
-    transition: all .3s ease-in-out;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+    -webkit-transition-timing-function: cubic-bezier(0.2,1,0.3,1);
+    transition-timing-function: cubic-bezier(0.2,1,0.3,1);
 }
 
 a:hover{
@@ -260,6 +260,7 @@ input, textarea{
     font-weight: bold;
     font-size: 72px;
     margin-bottom: 10px;
+    margin-top: 0;
 }
 
 .intro .swiper-slide .inner .post-title a{
@@ -282,56 +283,123 @@ input, textarea{
 }
 
 .intro .swiper-pagination .swiper-pagination-bullet{
-    font-size: 14px;
-    text-align: center;
-    color: #FFFFFF;
-    opacity: .5;
-    background: none;
-    margin: 10px 0;
+    position: relative;
     display: block;
-    width: auto;
-    height: auto;
-    font-weight: bold;
-    padding: 5px;
-    -webkit-transition: all .3s ease-in-out;
-    -moz-transition: all .3s ease-in-out;
-    -o-transition: all .3s ease-in-out;
-    transition: all .3s ease-in-out;
-    font-size: 24px;
-    transform: scale(.6);
+    width: 30px;
+    height: 48px;
+    margin: 5px 0;
+    background: transparent;
+    opacity: 1;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+    -webkit-transition-timing-function: cubic-bezier(0.2,1,0.3,1);
+    transition-timing-function: cubic-bezier(0.2,1,0.3,1);
+}
+
+.intro .swiper-pagination .swiper-pagination-bullet i{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    border-radius: 0;
+    overflow: hidden;
+}
+
+.intro .swiper-pagination .swiper-pagination-bullet b{
+    color: #fff;
+    position: absolute;
+    top: -3px;
+    right: 0;
+    opacity: .2;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+    -webkit-transition-timing-function: cubic-bezier(0.2,1,0.3,1);
+    transition-timing-function: cubic-bezier(0.2,1,0.3,1);
 }
 
 .intro .swiper-pagination .swiper-pagination-bullet:hover{
-    opacity: 1;
+    background: transparent;
+}
+
+.intro .swiper-pagination .swiper-pagination-bullet:hover b{
+    opacity: .4;
 }
 
 .intro .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active{
+    background: transparent;
+}
+
+.intro .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active b{
+    color: #dbc3fc;
     opacity: 1;
-    position: relative;
-    transform: scale(1);
 }
 
-.intro .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active:before{
-    transform: scale3d(1,1,1);
+.intro .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active i{
+    opacity: 1;
 }
 
-.intro .swiper-pagination .swiper-pagination-bullet:before{
+.intro .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active i:before{
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+}
+
+.intro .swiper-pagination .swiper-pagination-bullet i:before,
+.intro .swiper-pagination .swiper-pagination-bullet i:after{
     content: '';
     position: absolute;
-    bottom: 10px;
-    height: 6px;
-    width: 0;
-    overflow: hidden;
-    left: 3px;
-    background: #667EEA;
-    z-index: -1;
-    width: calc(100% - 6px);
-    transform-origin: 0% 50%;
-    transform: scale3d(0,1,1);
-    -webkit-transition: all .3s ease-in-out;
-    -moz-transition: all .3s ease-in-out;
-    -o-transition: all .3s ease-in-out;
-    transition: all .3s ease-in-out;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+    -webkit-transform: translate3d(0,100%,0);
+    transform: translate3d(0,100%,0);
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+    -webkit-transition-timing-function: cubic-bezier(0.2,1,0.3,1);
+    transition-timing-function: cubic-bezier(0.2,1,0.3,1);
+}
+
+.intro .swiper-pagination .swiper-pagination-bullet i:after{
+    background: #fff;
+    opacity: .2;
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+}
+
+.intro .swiper-pagination .swiper-pagination-bullet:hover i:after{
+    opacity: .4;
+}
+
+.intro .swiper-pagination .swiper-pagination-bullet.next i:before{
+    -webkit-animation: next 8.2s linear forwards;
+    -moz-animation:    next 8.2s linear infinite;
+    -o-animation:      next 8.2s linear infinite;
+    animation:         next 8.2s linear forwards;
+}
+
+@keyframes next {
+    0% { 
+        opacity: 0;
+        transform: translate3d(0,100%,0);
+    }
+    100% { 
+        opacity: 1;
+        transform: translate3d(0,0,0);
+    }
+}
+
+@keyframes slideTop {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .intro .excerpt{
@@ -383,7 +451,11 @@ input, textarea{
 }
 
 body.scroll header{
-    padding: 20px 0;
+    padding: 10px 0;
+    background: rgba(0,0,0,0.8);
+}
+
+body.scroll header:hover{
     background: #000;
 }
 
@@ -403,7 +475,17 @@ header{
 
 header .blog-logo img{
     max-width: 150px;
+    max-height: 50px;
     height: auto;
+    width: auto;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+
+body.scroll header .blog-logo img{
+    max-height: 30px;
 }
 
 header a{
@@ -466,6 +548,12 @@ header .inner{
 header .inner nav{
     border-right: 1px solid rgba(255, 255, 255, 0.25);
     margin-right: 30px;
+}
+
+header .col-9{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 
 .bs-popover-auto[x-placement^=bottom] .arrow::before, .bs-popover-bottom .arrow::before{
@@ -1159,9 +1247,9 @@ header .blog-logo span{
     font-size: 24px;
     opacity: .5;
     transform: translateY(0);
-    -webkit-animation: go 3s infinite;
-    -moz-animation:    go 1s infinite;
-    -o-animation:      go 1s infinite;
+    -webkit-animation: go 2s infinite;
+    -moz-animation:    go 2s infinite;
+    -o-animation:      go 2s infinite;
     animation:         go 2s infinite;
 }
 
