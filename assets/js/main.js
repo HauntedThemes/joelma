@@ -29,7 +29,7 @@ jQuery(document).ready(function($) {
         return false;
     });
 
-    $('.social-trigger, .bookmark, .search-trigger').on('click', function(event) {
+    $('.social-trigger, .bookmark, .search-trigger, .navigation-trigger').on('click', function(event) {
         event.preventDefault();
     });    
 
@@ -74,6 +74,15 @@ jQuery(document).ready(function($) {
             nextEl: '.related-posts .swiper-button-next',
             prevEl: '.related-posts .swiper-button-prev',
         },
+    });
+
+    $('.navigation-trigger').popover({
+        container: '.navigation',
+        html: true,
+        placement: 'bottom',
+        content: function() {
+            return $('.navigation-popover').html();
+        }
     });
 
     $('.search-trigger').popover({
@@ -498,5 +507,16 @@ jQuery(document).ready(function($) {
             $(".gh-signin").submit();              
         }
     });
+
+    // Initialize shareSelectedText
+    if (config['share-selected-text']) {
+        shareSelectedText('.post-template .post-content', {
+            sanitize: true,
+            buttons: [
+                'twitter',
+            ],
+            tooltipTimeout: 250
+        });
+    }; 
 
 });
