@@ -10,51 +10,44 @@
 </head>
 <body class="subscribe">
 
-    <header>
-        <div class="container">
-            <a href="{{@blog.url}}" class="back"></a>
-        </div>
-    </header>
+    {{> theme_header}}
 
-    <main id="content" class="container" role="main">
-        <article class="{{post_class}}">
-            <h1 class="post-title">
-                {{^if success}}
-                    Subscribe to {{@blog.title}}
-                {{else}}
-                    Subscribed!
-                {{/if}}
-            </h1>
-            <section class="post-content">
-                {{^if success}}
-                    {{subscribe_form
-                        form_class="gh-signin"
-                        input_class="gh-input"
-                        button_class="btn btn-blue btn-block"
-                        placeholder="Your email address"
-                        autofocus="true"
-                    }}
-                {{else}}
-                    <p>
-                        You've successfully subscribed to <em>{{@blog.title}}</em>
-                        with the email address <em>{{email}}</em>.
-                    </p>
-                {{/if}}
-            </section>
-        </article>
-    </main>
-    <footer>
-        <div class="social">
-            {{#if @blog.facebook}}
-                <a href="{{facebook_url}}" class="facebook" title="{{@blog.facebook}}" target="_blank"></a>
-            {{/if}}
-            {{#if @blog.twitter}}
-                <a href="{{twitter_url}}" class="twitter" title="{{@blog.twitter}}" target="_blank"></a>
-            {{/if}}
-        </div>
-        <div class="copyright">Copyright &copy; {{date format="YYYY"}}, <a href="{{@blog.url}}">{{@blog.title}}</a>. All Right Reserved.</div>
-    </footer>
+    <div class="main-container">
+        <main id="content" role="main">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 mr-auto ml-auto">
+                        <article class="{{post_class}}">
+                            <h1 class="post-title">
+                                {{^if success}}
+                                    Subscribe to {{@blog.title}}
+                                {{else}}
+                                    Subscribed!
+                                {{/if}}
+                            </h1>
+                            <section class="post-content">
+                                {{^if success}}
+                                    {{subscribe_form
+                                        form_class="gh-signin"
+                                        input_class="gh-input"
+                                        button_class="fas fa-angle-right"
+                                        placeholder="Your email address"
+                                    }}
+                                {{else}}
+                                    <p>
+                                        You've successfully subscribed to <em>{{@blog.title}}</em>
+                                        with the email address <em>{{email}}</em>.
+                                    </p>
+                                {{/if}}
+                            </section>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
 
+    {{> theme_footer}}
 
     {{!-- jQuery needs to come before `{{ghost_foot}}` so that jQuery can be used in code injection --}}
     <script type="text/javascript" src="{{asset "js/jquery-1.12.4.min.js"}}"></script>
@@ -65,7 +58,12 @@
     {{!-- Ghost outputs important scripts and data with this tag --}}
     {{ghost_foot}}
     
-    {{!-- The main JavaScript file for Zwei --}}
+    {{!-- The main JavaScript file for Tawau --}}
+    {{#if pagination.pages}}
+    <script>
+        var maxPages = parseInt('{{pagination.pages}}');
+    </script>
+    {{/if}}
     <script type="text/javascript" src="{{asset "js/main.js"}}"></script>
 
 </body>

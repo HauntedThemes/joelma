@@ -52,15 +52,17 @@ jQuery(document).ready(function($) {
         },
     });
 
-    $('.intro .swiper-pagination .swiper-pagination-bullet:nth-child('+ (swiperIntro.activeIndex+2) +')').addClass('next');
-    swiperIntro.on('slideChange', function () {
-        $('.intro .swiper-pagination .swiper-pagination-bullet').removeClass('next');
-        if (swiperIntro.isEnd) {
-            $('.intro .swiper-pagination .swiper-pagination-bullet:nth-child(1)').addClass('next');
-        }else{
-            $('.intro .swiper-pagination .swiper-pagination-bullet:nth-child('+ (swiperIntro.activeIndex+2) +')').addClass('next');
-        };
-    });
+    if ($('.intro').length) {
+        $('.intro .swiper-pagination .swiper-pagination-bullet:nth-child('+ (swiperIntro.activeIndex+2) +')').addClass('next');
+        swiperIntro.on('slideChange', function () {
+            $('.intro .swiper-pagination .swiper-pagination-bullet').removeClass('next');
+            if (swiperIntro.isEnd) {
+                $('.intro .swiper-pagination .swiper-pagination-bullet:nth-child(1)').addClass('next');
+            }else{
+                $('.intro .swiper-pagination .swiper-pagination-bullet:nth-child('+ (swiperIntro.activeIndex+2) +')').addClass('next');
+            };
+        });
+    };
 
     var swiperRelatedPosts = new Swiper('.related-posts .swiper-container', {
         slidesPerView: 'auto',
