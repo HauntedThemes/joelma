@@ -1,11 +1,11 @@
     <footer class="site-footer clearfix">
         <div class="container">
             <div class="row">
-                <div class="col">
+                <div class="col-sm-6 col-lg-3">
                     <h3>About</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed lacus id tortor iaculis iaculis dignissim eget justo. <br><br> Maecenas posuere eros nisl, ut pharetra turpis faucibus a. In imperdiet urna mattis lacus mollis, sit amet pulvinar purus vehicula.</p>
                 </div>
-                <div class="col">
+                <div class="col-sm-6 col-lg-3">
                     <h3>Tags</h3>
                     {{#get "tags" limit="all"}}
                         <ul class="tags">
@@ -17,7 +17,7 @@
                         </ul>
                     {{/get}}
                 </div>
-                <div class="col">
+                <div class="col-sm-6 col-lg-3">
                     <h3>Latest posts</h3>
                     <ul class="latest-posts">
                     {{#get "posts" include="tags, author" limit="3"}}
@@ -31,7 +31,7 @@
                     </ul>
                 </div>
                 {{#if @labs.subscribers}}
-                <div class="col">
+                <div class="col-sm-6 col-lg-3">
                     <h3>Newsletter</h3>
                     <div class="subscribe-container">
                         <p>Subscribe to our newsletter to receive our latest news.</p>

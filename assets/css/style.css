@@ -115,7 +115,7 @@ body{
 
 h1, h2, h3, h4, h5, h6{
     font-weight: bold;
-    line-height: 1.4;
+    line-height: 1.2;
     margin-bottom: 50px;
 }
 
@@ -214,8 +214,9 @@ input, textarea{
     background: grey;
     display: flex;
     position: relative;
-    padding: 150px 0;
+    padding: 200px 0 150px 0px;
     align-items: center;
+    height: auto;
 }
 
 .intro .swiper-slide .post{
@@ -260,7 +261,7 @@ input, textarea{
     font-weight: bold;
     font-size: 72px;
     margin-bottom: 10px;
-    margin-top: 0;
+    margin-top: 10px;
 }
 
 .intro .swiper-pagination{
@@ -1643,10 +1644,72 @@ footer a:hover{
     header .navigation ul li a{
         margin: 0;
         padding: 8px 13px;
+        font-family: "sofia-pro", sans-serif;
     }
     header .navigation .popover{
         display: block;
         width: 150px;
         margin-left: -102px;
+    }
+    .intro .swiper-pagination{
+        right: calc((100% - 960px)/2 + 15px);
+    }
+}
+
+@media (max-width: 991px) {
+    .intro .swiper-pagination {
+        right: calc((100% - 720px)/2 + 15px);
+    }
+    .intro .swiper-slide .inner .post-title{
+        font-size: 42px;
+    }
+    .intro .excerpt {
+        margin-bottom: 20px;
+    }
+    .intro .swiper-slide{
+        padding: 175px 0 125px 0px;
+    }
+    footer h1, footer h2, footer h3, footer h4, footer h5, footer h6{
+        margin-bottom: 30px;
+        margin-top: 30px;
+    }
+    footer{
+        padding-top: 20px;
+    }
+    .content-inner h1{
+        font-size: 42px;
+    }
+    .content-inner h2 {
+        font-size: 32px;
+    }
+    .content-inner h3 {
+        font-size: 24px;
+    }
+    .content-inner h4 {
+        font-size: 18px;
+    }
+    .content-inner h1 .chain{
+        top: 30px;
+    }
+    .content-inner h2 .chain{
+        top: 25px;
+    }
+    .content-inner h3 .chain{
+        top: 21px;
+    }
+    .content-inner h4 .chain{
+        top: 16px;
+    }
+    .content-inner .share{
+        margin-left: -70px;
+    }
+    .related-posts .loop .swiper-slide{
+        width: 570px;
+    }
+    .related-posts .swiper-button-next, .related-posts .swiper-button-prev{
+        width: calc((100% - 570px)/2 - 15px);
+    }
+    .related-posts .loop .post{
+        margin-bottom: 50px;
     }
 }
