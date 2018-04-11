@@ -29,7 +29,7 @@ jQuery(document).ready(function($) {
         return false;
     });
 
-    $('.social-trigger, .bookmark, .search-trigger, .navigation-trigger, .share a').on('click', function(event) {
+    $('.social-trigger, .bookmark, .search-trigger, .navigation-trigger, .trigger-share').on('click', function(event) {
         event.preventDefault();
     });    
 
