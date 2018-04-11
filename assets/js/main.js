@@ -76,6 +76,13 @@ jQuery(document).ready(function($) {
         },
     });
 
+    function closePopover(id){
+        $(id).find('.close').on('click', function(event) {
+            event.preventDefault();
+            $(id).popover('hide');
+        });
+    }
+
     $('.navigation-trigger').popover({
         container: '.navigation',
         html: true,
@@ -83,6 +90,12 @@ jQuery(document).ready(function($) {
         content: function() {
             return $('.navigation-popover').html();
         }
+    });
+
+    $('.navigation-trigger').on('shown.bs.popover', function () {
+        var id = $('.navigation-trigger').attr('aria-describedby');
+        new SimpleBar($('#' + id)[0]);
+        closePopover('#' + id);
     });
 
     $('.search-trigger').popover({
@@ -97,6 +110,7 @@ jQuery(document).ready(function($) {
     $('.search-trigger').on('shown.bs.popover', function () {
         var id = $('.search-trigger').attr('aria-describedby');
         searchInit('#' + id);
+        closePopover('#' + id);
     });
 
     $('.bookmark').popover({
@@ -112,6 +126,7 @@ jQuery(document).ready(function($) {
         var id = $('.bookmark').attr('aria-describedby');
         new SimpleBar($('#' + id)[0]);
         readLaterPosts = readLater($('#' + id + " #results"), readLaterPosts);
+        closePopover('#' + id);
     })
 
     $('.social-trigger').popover({
@@ -127,6 +142,7 @@ jQuery(document).ready(function($) {
         var id = $('.social-trigger').attr('aria-describedby');
         $('#' + id).find('.social-container').append('<a class="twitter-timeline" data-width="300" data-height="800" data-theme="dark" data-tweet-limit="5" data-chrome="noborders noheader transparent" href="https://twitter.com/HauntedThemes?ref_src=twsrc%5Etfw"></a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>');
         new SimpleBar($('#' + id)[0]);
+        closePopover('#' + id);
     });
 
     // Initialize Disqus comments
