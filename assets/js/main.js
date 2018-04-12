@@ -70,6 +70,7 @@ jQuery(document).ready(function($) {
         loop: true,
         loopedSlides: 6,
         roundLengths: true,
+        autoHeight: true,
         navigation: {
             nextEl: '.related-posts .swiper-button-next',
             prevEl: '.related-posts .swiper-button-prev',
@@ -140,7 +141,10 @@ jQuery(document).ready(function($) {
 
     $('.social-trigger').on('shown.bs.popover', function () {
         var id = $('.social-trigger').attr('aria-describedby');
-        $('#' + id).find('.social-container').append('<a class="twitter-timeline" data-width="300" data-height="800" data-theme="dark" data-tweet-limit="5" data-chrome="noborders noheader transparent" href="https://twitter.com/HauntedThemes?ref_src=twsrc%5Etfw"></a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>');
+        if ($('.social-popover').attr('data-twitter') != '') {
+            var twitter = $('.social-popover').attr('data-twitter').substr(1);
+            $('#' + id).find('.social-container').append('<a class="twitter-timeline" data-width="300" data-height="800" data-theme="dark" data-tweet-limit="5" data-chrome="noborders noheader transparent" href="https://twitter.com/'+ twitter +'?ref_src=twsrc%5Etfw"></a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>');
+        };
         new SimpleBar($('#' + id)[0]);
         closePopover('#' + id);
     });
@@ -436,9 +440,17 @@ jQuery(document).ready(function($) {
         hljs.highlightBlock(block);
     });
 
-    $('.content-inner .share').stick_in_parent({
-        offset_top: 100
-    });
+    function stickyShareButtons(w){
+        if (w < 576) {
+            $('.content-inner .share').trigger("sticky_kit:detach");
+        }else{
+            $('.content-inner .share').stick_in_parent({
+                offset_top: 100
+            });
+        }
+    }
+
+    stickyShareButtons(w);
 
     var shareHeight = $('.content-inner .share ul').height();
 
@@ -534,5 +546,10 @@ jQuery(document).ready(function($) {
             tooltipTimeout: 250
         });
     }; 
+
+    $(window).on('resize', function(event) {
+        w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+        stickyShareButtons(w);
+    });
 
 });

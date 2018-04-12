@@ -3,37 +3,39 @@
 
 {{!-- Everything inside the #author tags pulls data from the author --}}
 {{#author}}
-    <div class="intro">
-        <div class="swiper-container">
-            <div class="swiper-wrapper">
-                <li class="swiper-slide">
-                    <div class="bg" {{#if cover_image}}style="background-image: url({{img_url cover_image}});"{{/if}}></div>
-                    <div class="inner">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-9">
-                                    {{#if profile_image}}
-                                        <img src="{{img_url profile_image}}" alt="{{name}}" class="profile-image">
-                                    {{/if}}
-                                    <h1 class="post-title">{{name}}</h1>
-                                    {{#if bio}}
-                                        <p>{{bio}}</p>
-                                    {{/if}}
-                                    <ul class="post-meta">
-                                        {{#if location}}<li><i class="fa fa-map-marker" aria-hidden="true"></i> {{location}}</li>{{/if}}
-                                        {{#if website}}<li><a href="{{website}}" target="_blank" rel="noopener noreferrer" title="{{website}}"><i class="fa fa-link" aria-hidden="true"></i></a></li>{{/if}}
-                                        {{#if twitter}}<li><a href="{{twitter_url}}" class="twitter" title="{{twitter}}" target="_blank"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>{{/if}}
-                                        {{#if facebook}}<li><a href="{{facebook_url}}" class="facebook" title="{{facebook}}" target="_blank"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>{{/if}}
-                                    </ul>
+    {{^is "paged"}}
+        <div class="intro">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <li class="swiper-slide">
+                        <div class="bg" {{#if cover_image}}style="background-image: url({{img_url cover_image}});"{{/if}}></div>
+                        <div class="inner">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        {{#if profile_image}}
+                                            <img src="{{img_url profile_image}}" alt="{{name}}" class="profile-image">
+                                        {{/if}}
+                                        <h1 class="post-title">{{name}}</h1>
+                                        {{#if bio}}
+                                            <p>{{bio}}</p>
+                                        {{/if}}
+                                        <ul class="post-meta">
+                                            {{#if location}}<li><i class="fa fa-map-marker" aria-hidden="true"></i> {{location}}</li>{{/if}}
+                                            {{#if website}}<li><a href="{{website}}" target="_blank" rel="noopener noreferrer" title="{{website}}"><i class="fa fa-link" aria-hidden="true"></i></a></li>{{/if}}
+                                            {{#if twitter}}<li><a href="{{twitter_url}}" class="twitter" title="{{twitter}}" target="_blank"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>{{/if}}
+                                            {{#if facebook}}<li><a href="{{facebook_url}}" class="facebook" title="{{facebook}}" target="_blank"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>{{/if}}
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </li>
+                    </li>
+                </div>
+                <a href="#" class="go"><i class="fas fa-angle-down"></i></a>
             </div>
-            <a href="#" class="go"><i class="fas fa-angle-down"></i></a>
         </div>
-    </div>
+    {{/is}}
 {{/author}}
 
 {{!-- The main content area --}}
