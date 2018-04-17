@@ -8,7 +8,7 @@ jQuery(document).ready(function($) {
         'share-selected-text': true,
         'load-more': false,
         'infinite-scroll': false,
-        'infinite-scroll-step': 1,
+        'infinite-scroll-step': 3,
         'disqus-shortname': 'hauntedthemes-demo'
     };
 
