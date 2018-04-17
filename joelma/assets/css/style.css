@@ -319,6 +319,7 @@ header .search .search-popover{
 
 header .search svg{
     width: 16px;
+    height: 16px;
 }
 
 header .bookmark-content .bookmark-popover{
@@ -399,6 +400,10 @@ header .popover{
     max-height: calc(100vh - 150px);
     margin-left: -230px;
     padding-top: 15px;
+}
+
+header .search .popover{
+    padding-top: 17px;
 }
 
 header .popover .popover-body{
@@ -1563,6 +1568,10 @@ footer a:hover{
 
 .post-template footer .copyright p{
     padding-bottom: 30px;
+}
+
+.ie header .popover{
+    overflow: auto;
 }
 
 @-webkit-keyframes go {

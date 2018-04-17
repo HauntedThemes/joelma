@@ -8,13 +8,18 @@ jQuery(document).ready(function($) {
         'share-selected-text': true,
         'load-more': false,
         'infinite-scroll': false,
-        'infinite-scroll-step': 3,
+        'infinite-scroll-step': 1,
         'disqus-shortname': 'hauntedthemes-demo'
     };
 
     var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
         h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0),
         readLaterPosts = [];
+
+    // Detect IE
+    if (/MSIE 10/i.test(navigator.userAgent) || /MSIE 9/i.test(navigator.userAgent) || /rv:11.0/i.test(navigator.userAgent)) {
+        $('body').addClass('ie');
+    }
 
     // Featured Posts Slider
 
@@ -99,7 +104,9 @@ jQuery(document).ready(function($) {
 
     $('.navigation-trigger').on('shown.bs.popover', function () {
         var id = $('.navigation-trigger').attr('aria-describedby');
-        new SimpleBar($('#' + id)[0]);
+        if (!$('body').hasClass('ie')) {
+            new SimpleBar($('#' + id)[0]);
+        };
         closePopover('#' + id);
     });
 
@@ -133,7 +140,9 @@ jQuery(document).ready(function($) {
 
     $('.bookmark').on('shown.bs.popover', function () {
         var id = $('.bookmark').attr('aria-describedby');
-        new SimpleBar($('#' + id)[0]);
+        if (!$('body').hasClass('ie')) {
+            new SimpleBar($('#' + id)[0]);
+        };
         readLaterPosts = readLater($('#' + id + " #results"), readLaterPosts);
         closePopover('#' + id);
     })
@@ -155,7 +164,9 @@ jQuery(document).ready(function($) {
             var twitter = $('.social-popover').attr('data-twitter').substr(1);
             $('#' + id).find('.social-container').append('<a class="twitter-timeline" data-width="300" data-height="800" data-theme="dark" data-tweet-limit="5" data-chrome="noborders noheader transparent" href="https://twitter.com/'+ twitter +'?ref_src=twsrc%5Etfw"></a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>');
         };
-        new SimpleBar($('#' + id)[0]);
+        if (!$('body').hasClass('ie')) {
+            new SimpleBar($('#' + id)[0]);
+        };
         closePopover('#' + id);
     });
 
@@ -226,7 +237,9 @@ jQuery(document).ready(function($) {
             }
         });   
 
-        new SimpleBar($(id)[0]);
+        if (!$('body').hasClass('ie')) {
+            new SimpleBar($(id)[0]);
+        };
         $(id + " #search-field").focus();
 
     }
