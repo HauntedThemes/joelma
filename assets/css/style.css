@@ -634,7 +634,7 @@ header .popover-body ul.social-icons li a{
 
 .intro .swiper-slide .inner .post-title{
     font-weight: bold;
-    font-size: 72px;
+    font-size: 62px;
     margin-bottom: 10px;
     margin-top: 10px;
 }
@@ -651,100 +651,53 @@ header .popover-body ul.social-icons li a{
 }
 
 .intro .swiper-pagination .swiper-pagination-bullet{
-    position: relative;
-    display: block;
-    width: 30px;
-    height: 48px;
-    margin: 5px 0;
-    background: transparent;
-    opacity: 1;
-    -webkit-transition: all 0.5s;
-    transition: all 0.5s;
-    -webkit-transition-timing-function: cubic-bezier(0.2,1,0.3,1);
-    transition-timing-function: cubic-bezier(0.2,1,0.3,1);
-}
-
-.intro .swiper-pagination .swiper-pagination-bullet i{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 4px;
-    height: 100%;
-    border-radius: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(252, 252, 252, 0.25);
+    margin: 10px 0;
     overflow: hidden;
-}
-
-.intro .swiper-pagination .swiper-pagination-bullet b{
-    color: #fff;
-    position: absolute;
-    top: -3px;
-    right: 0;
-    opacity: .2;
-    -webkit-transition: all 0.5s;
-    transition: all 0.5s;
+    font-size: 0;
+    -webkit-transform: scale3d(0.5,0.5,1);
+    transform: scale3d(0.5,0.5,1);
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s;
     -webkit-transition-timing-function: cubic-bezier(0.2,1,0.3,1);
     transition-timing-function: cubic-bezier(0.2,1,0.3,1);
+    opacity: .8;
 }
 
-.intro .swiper-pagination .swiper-pagination-bullet:hover{
-    background: transparent;
-}
-
-.intro .swiper-pagination .swiper-pagination-bullet:hover b{
-    opacity: .4;
-}
-
-.intro .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active{
-    background: transparent;
-}
-
-.intro .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active b{
-    color: #667EEA;
-    opacity: 1;
-}
-
-.intro .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active i{
-    opacity: 1;
-}
-
-.intro .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active i:before{
-    -webkit-transform: translate3d(0,0,0);
-    transform: translate3d(0,0,0);
-}
-
-.intro .swiper-pagination .swiper-pagination-bullet i:before,
-.intro .swiper-pagination .swiper-pagination-bullet i:after{
+.intro .swiper-pagination .swiper-pagination-bullet:before{
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: #667EEA;
+    background: #fff;
     -webkit-transform: translate3d(0,100%,0);
     transform: translate3d(0,100%,0);
-    -webkit-transition: all 0.5s;
-    transition: all 0.5s;
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s;
     -webkit-transition-timing-function: cubic-bezier(0.2,1,0.3,1);
     transition-timing-function: cubic-bezier(0.2,1,0.3,1);
 }
 
-.intro .swiper-pagination .swiper-pagination-bullet i:after{
-    background: #fff;
-    opacity: .2;
+.intro .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active{
+    -webkit-transform: scale3d(1,1,1);
+    transform: scale3d(1,1,1);
+    opacity: 1;
+}
+
+.intro .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active:before{
     -webkit-transform: translate3d(0,0,0);
     transform: translate3d(0,0,0);
 }
-
-.intro .swiper-pagination .swiper-pagination-bullet:hover i:after{
-    opacity: .4;
-}
-
-.intro .swiper-pagination .swiper-pagination-bullet.next i:before{
-    -webkit-animation: next 8.2s linear forwards;
-    -moz-animation:    next 8.2s linear infinite;
-    -o-animation:      next 8.2s linear infinite;
-    animation:         next 8.2s linear forwards;
+.intro .swiper-pagination .swiper-pagination-bullet.next:before{
+    -webkit-animation: next 5.2s linear forwards;
+    -moz-animation:    next 5.2s linear forwards;
+    -o-animation:      next 5.2s linear forwards;
+    animation:         next 5.2s linear forwards;
 }
 
 .intro .excerpt{
@@ -1517,6 +1470,9 @@ header .popover-body ul.social-icons li a{
     background: #a0a8bd;
     border-radius: 0 3px 3px 0;
     color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .gh-signin button[type="submit"]:before{
@@ -1528,14 +1484,21 @@ header .popover-body ul.social-icons li a{
 }
 
 .subscribe header,
-body.scroll.subscribe header{
+body.scroll.subscribe header,
+.error header,
+body.scroll.error header{
     background: #000;
     padding: 50px 0;
     position: relative;
 }
 
-body.subscribe.scroll header .blog-logo img{
+body.subscribe.scroll header .blog-logo img,
+body.error.scroll header .blog-logo img{
     max-height: 50px;
+}
+
+.error-title{
+    margin: 100px 0;
 }
 
 /* ==========================================================================
@@ -1791,27 +1754,10 @@ footer a:hover{
         bottom: 50px;
         flex-direction: row;
     }
-    .intro .swiper-pagination .swiper-pagination-bullet i:before, 
-    .intro .swiper-pagination .swiper-pagination-bullet i:after,
-    .intro .swiper-pagination .swiper-pagination-bullet i{
-        display: none;
-    }
     .intro .swiper-pagination .swiper-pagination-bullet{
-        width: 10px;
-        height: 10px;
+        width: 18px;
+        height: 18px;
         margin: 5px 10px;
-        font-size: 0;
-        border-radius: 50%;
-        background: #fff;
-        opacity: .5;
-    }
-    .intro .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active{
-        background: #667EEA;
-        opacity: 1;
-    }
-    .intro .swiper-pagination .swiper-pagination-bullet b{
-        position: relative;
-        top: 0;
     }
     .tooltip{
         display: none;
@@ -1909,6 +1855,11 @@ footer a:hover{
     .loop .post .img-holder{
         width: calc(100% + 30px);
         margin-left: -15px;
+        margin-bottom: 30px;
+    }
+    .loop .post{
+        margin: 30px 0;
+        padding-bottom: 20px;
     }
     .post-meta li.share{
         position: absolute;
@@ -1979,5 +1930,8 @@ footer a:hover{
     }
     .related-posts .loop .swiper-slide {
         width: calc(100% - 30px);
+    }
+    .search .popover .close {
+        top: 11px;
     }
 }

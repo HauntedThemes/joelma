@@ -1,6 +1,6 @@
 {
     "name": "joelma",
-    "description": "",
+    "description": "Joelma is a feature-rich theme that is likely to impress you with its beautiful design. This theme has everything that a professional blog needs. Check it out!",
     "demo": "https://joelma.hauntedthemes.com/",
     "version": "1.0.0",
     "license": "GNU General Public License, Version 2",
@@ -23,6 +23,6 @@
         "theme"
     ],
     "config": {
-        "posts_per_page": 3
+        "posts_per_page": 5
     }
 }

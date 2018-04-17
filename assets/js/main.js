@@ -1,5 +1,5 @@
 /**
- * Main JS file for Tawau
+ * Main JS file for Joelma
  */
 
 jQuery(document).ready(function($) {
@@ -16,6 +16,52 @@ jQuery(document).ready(function($) {
         h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0),
         readLaterPosts = [];
 
+    // Featured Posts Slider
+
+    if ($('.intro .swiper-slide').length == 1) {
+        $('.intro .swiper-pagination').addClass('hidden');
+    };
+
+    var swiperIntro = new Swiper('.intro .swiper-container', {
+        pagination: {
+            el: '.intro .swiper-pagination',
+            clickable: true,
+        },
+        simulateTouch: false,
+        autoplay: {
+            delay: 5000,
+            disableOnInteraction: false
+        },
+    });
+
+    if ($('.intro').length) {
+        $('.intro .swiper-pagination .swiper-pagination-bullet:nth-child('+ (swiperIntro.activeIndex+2) +')').addClass('next');
+        swiperIntro.on('slideChange', function () {
+            $('.intro .swiper-pagination .swiper-pagination-bullet').removeClass('next');
+            if (swiperIntro.isEnd) {
+                $('.intro .swiper-pagination .swiper-pagination-bullet:nth-child(1)').addClass('next');
+            }else{
+                $('.intro .swiper-pagination .swiper-pagination-bullet:nth-child('+ (swiperIntro.activeIndex+2) +')').addClass('next');
+            };
+        });
+    };
+
+    // Related Posts Slider
+
+    var swiperRelatedPosts = new Swiper('.related-posts .swiper-container', {
+        slidesPerView: 'auto',
+        centeredSlides: true,
+        loop: true,
+        loopedSlides: 6,
+        roundLengths: true,
+        autoHeight: true,
+        navigation: {
+            nextEl: '.related-posts .swiper-button-next',
+            prevEl: '.related-posts .swiper-button-prev',
+        },
+    });
+
+    // Check 'read later' posts 
     if (typeof Cookies.get('joelma-read-later') !== "undefined") {
         readLaterPosts = JSON.parse(Cookies.get('joelma-read-later'));
     }
@@ -33,56 +79,14 @@ jQuery(document).ready(function($) {
         event.preventDefault();
     });    
 
-    if ($('.intro .swiper-slide').length == 1) {
-        $('.intro .swiper-pagination').addClass('hidden');
-    };
-
-    var swiperIntro = new Swiper('.intro .swiper-container', {
-        pagination: {
-            el: '.intro .swiper-pagination',
-            clickable: true,
-            renderBullet: function (index, className) {
-                return '<span class="' + className + '"><i></i><b>0' + (index + 1) + '</b></span>';
-            },
-        },
-        simulateTouch: false,
-        autoplay: {
-            delay: 8000,
-            disableOnInteraction: false
-        },
-    });
-
-    if ($('.intro').length) {
-        $('.intro .swiper-pagination .swiper-pagination-bullet:nth-child('+ (swiperIntro.activeIndex+2) +')').addClass('next');
-        swiperIntro.on('slideChange', function () {
-            $('.intro .swiper-pagination .swiper-pagination-bullet').removeClass('next');
-            if (swiperIntro.isEnd) {
-                $('.intro .swiper-pagination .swiper-pagination-bullet:nth-child(1)').addClass('next');
-            }else{
-                $('.intro .swiper-pagination .swiper-pagination-bullet:nth-child('+ (swiperIntro.activeIndex+2) +')').addClass('next');
-            };
-        });
-    };
-
-    var swiperRelatedPosts = new Swiper('.related-posts .swiper-container', {
-        slidesPerView: 'auto',
-        centeredSlides: true,
-        loop: true,
-        loopedSlides: 6,
-        roundLengths: true,
-        autoHeight: true,
-        navigation: {
-            nextEl: '.related-posts .swiper-button-next',
-            prevEl: '.related-posts .swiper-button-prev',
-        },
-    });
-
     function closePopover(id){
         $(id).find('.close').on('click', function(event) {
             event.preventDefault();
             $(id).popover('hide');
         });
     }
+
+    // Navigation Popover
 
     $('.navigation-trigger').popover({
         container: '.navigation',
@@ -99,6 +103,8 @@ jQuery(document).ready(function($) {
         closePopover('#' + id);
     });
 
+    // Search Popover
+
     $('.search-trigger').popover({
         container: '.search',
         html: true,
@@ -113,6 +119,8 @@ jQuery(document).ready(function($) {
         searchInit('#' + id);
         closePopover('#' + id);
     });
+
+    // Bookmark Popover
 
     $('.bookmark').popover({
         container: '.bookmark-content',
@@ -129,6 +137,8 @@ jQuery(document).ready(function($) {
         readLaterPosts = readLater($('#' + id + " #results"), readLaterPosts);
         closePopover('#' + id);
     })
+
+    // Social Popover
 
     $('.social-trigger').popover({
         container: '.social-content',
@@ -333,18 +343,17 @@ jQuery(document).ready(function($) {
         return arr;
     }
 
+    // On click outside popover, close it
+
     $(document).on('click', function (e) {
         $('[data-toggle="popover"],[data-original-title]').each(function () {
             if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {                
                 (($(this).popover('hide').data('bs.popover')||{}).inState||{}).click = false
             }
-
         });
     });
 
-    var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
-        h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0),
-        didScroll,
+    var didScroll,
         lastScrollTop = 0,
         delta = 5;
 
@@ -430,16 +439,29 @@ jQuery(document).ready(function($) {
 
     });
 
+    // Add 'Copy to clipboard' for headings
     $('.content-inner h1, .content-inner h2, .content-inner h3, .content-inner h4, .content-inner h5, .content-inner h6').each(function(index, el) {
         var id = $(this).attr('id');
         var url = window.location.href.split(/[?#]/)[0] + '#' + id;
         $(this).prepend('<a href="#'+ id +'" class="chain" data-clipboard-text="'+ url +'" data-toggle="tooltip" data-placement="bottom" title="Copy link to clipboard."><i class="fas fa-link"></i></a>');
     });
 
+    new ClipboardJS('.chain');
+
+    $('.chain').each(function(index, el) {
+        $(this).on('click', function(event) {
+            event.preventDefault();
+            $('#' + $(this).attr('aria-describedby')).find('.tooltip-inner').text('Copied!');
+            $(this).tooltip('update');
+        });
+    });
+
+    // Initialize Highlight.js
     $('pre code').each(function(i, block) {
         hljs.highlightBlock(block);
     });
 
+    // Make share buttons sticky
     function stickyShareButtons(w){
         if (w < 576) {
             $('.content-inner .share').trigger("sticky_kit:detach");
@@ -449,11 +471,13 @@ jQuery(document).ready(function($) {
             });
         }
     }
-
     stickyShareButtons(w);
 
+    // Execute on scroll
     var shareHeight = $('.content-inner .share ul').height();
-
+    if ($(this).scrollTop() > 0) {
+        $('body').addClass('scroll');
+    }
     $(window).on('scroll', function(event) {
         
         var checkShare = 0;
@@ -473,6 +497,12 @@ jQuery(document).ready(function($) {
             $('.content-inner .share').addClass('fade');
         }else{
             $('.content-inner .share').removeClass('fade');
+        };
+
+        if ($(this).scrollTop() > 0) {
+            $('body').addClass('scroll');
+        }else{
+            $('body').removeClass('scroll');
         };
 
     });
@@ -500,30 +530,10 @@ jQuery(document).ready(function($) {
         return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
     }
 
-    new ClipboardJS('.chain');
-
-    $('.chain').each(function(index, el) {
-        $(this).on('click', function(event) {
-            event.preventDefault();
-            $('#' + $(this).attr('aria-describedby')).find('.tooltip-inner').text('Copied!');
-            $(this).tooltip('update');
-        });
-    });
-
+    // Initialize bootstrap tootlip
     $('[data-toggle="tooltip"]').tooltip();
 
-    // On scroll check if header should be visible or not
-    if ($(this).scrollTop() > 0) {
-        $('body').addClass('scroll');
-    }
-    $(window).on('scroll', function(event) {
-        if ($(this).scrollTop() > 0) {
-            $('body').addClass('scroll');
-        }else{
-            $('body').removeClass('scroll');
-        };
-    });
-
+    // Validate subscribe form
     $(".gh-signin").validate({
         rules: {
             email: {
@@ -547,9 +557,14 @@ jQuery(document).ready(function($) {
         });
     }; 
 
+    // Execute on resize
     $(window).on('resize', function(event) {
         w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
         stickyShareButtons(w);
     });
+
+    if ($('.error-title').length) {
+        $('body').addClass('error');
+    };
 
 });
