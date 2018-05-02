@@ -1130,6 +1130,28 @@ header .popover-body ul.social-icons li a{
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+.content-inner .post-content .kg-card-markdown a{
+    text-decoration: underline;
+}
+
+.content-inner .post-content blockquote{
+    font-style: italic;
+    position: relative;
+}
+
+.content-inner .post-content blockquote:before{
+    content: "\f10e";
+    font-weight: 900;
+    font-style: normal;
+    font-family: Font Awesome\ 5 Free;
+    font-size: 34px;
+    position: absolute;
+    z-index: -1;
+    color: #e5e5e5;
+    top: -10px;
+    left: -10px;
+}
+
 .related-posts{
     margin: 0;
 }
