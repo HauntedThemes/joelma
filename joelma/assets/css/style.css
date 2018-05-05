@@ -1139,6 +1139,11 @@ header .popover-body ul.social-icons li a{
     position: relative;
 }
 
+.content-inner .post-content blockquote p{
+    font-size: 24px;
+    line-height: 1.6;
+}
+
 .content-inner .post-content blockquote:before{
     content: "\f10e";
     font-weight: 900;
@@ -1767,6 +1772,9 @@ footer a:hover{
 }
 
 @media (max-width: 767px) {
+    .content-inner .post-content blockquote p{
+        font-size: 18px;
+    }
     header .popover, header .popover{
         max-height: calc(100vh - 100px);
     }
