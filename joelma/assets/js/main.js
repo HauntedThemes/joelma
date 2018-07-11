@@ -104,9 +104,11 @@ jQuery(document).ready(function($) {
 
     $('.navigation-trigger').on('shown.bs.popover', function () {
         var id = $('.navigation-trigger').attr('aria-describedby');
-        if (!$('body').hasClass('ie')) {
-            new SimpleBar($('#' + id)[0]);
-        };
+        if (w > 575) {
+            if (!$('body').hasClass('ie')) {
+                new SimpleBar($('#' + id)[0]);
+            };
+        }
         closePopover('#' + id);
     });
 
@@ -140,8 +142,10 @@ jQuery(document).ready(function($) {
 
     $('.bookmark').on('shown.bs.popover', function () {
         var id = $('.bookmark').attr('aria-describedby');
-        if (!$('body').hasClass('ie')) {
-            new SimpleBar($('#' + id)[0]);
+        if (w > 575) {
+            if (!$('body').hasClass('ie')) {
+                new SimpleBar($('#' + id)[0]);
+            };
         };
         readLaterPosts = readLater($('#' + id + " #results"), readLaterPosts);
         closePopover('#' + id);
@@ -164,8 +168,10 @@ jQuery(document).ready(function($) {
             var twitter = $('.social-popover').attr('data-twitter').substr(1);
             $('#' + id).find('.social-container').append('<a class="twitter-timeline" data-width="300" data-height="800" data-theme="dark" data-tweet-limit="5" data-chrome="noborders noheader transparent" href="https://twitter.com/'+ twitter +'?ref_src=twsrc%5Etfw"></a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>');
         };
-        if (!$('body').hasClass('ie')) {
-            new SimpleBar($('#' + id)[0]);
+        if (w > 575) {
+            if (!$('body').hasClass('ie')) {
+                new SimpleBar($('#' + id)[0]);
+            };
         };
         closePopover('#' + id);
     });
@@ -220,7 +226,6 @@ jQuery(document).ready(function($) {
                 tags.sort();
 
                 $.each(tags, function(index, val) {
-                    console.log(val);
                     $(id + " #results").append('<h5>'+ val +'</h5><ul data-tag="'+ val +'" class="list-box"</ul>');
                 });
 
@@ -237,8 +242,10 @@ jQuery(document).ready(function($) {
             }
         });   
 
-        if (!$('body').hasClass('ie')) {
-            new SimpleBar($(id)[0]);
+        if (w > 575) {
+            if (!$('body').hasClass('ie')) {
+                new SimpleBar($(id)[0]);
+            };
         };
         $(id + " #search-field").focus();
 

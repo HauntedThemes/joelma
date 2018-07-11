@@ -181,7 +181,7 @@ label.error{
 input, textarea{
     width: 100%;
     padding: 6px 12px;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.42857143;
     color: #fff;
     background-color: #000;
@@ -298,11 +298,13 @@ header .navigation .popover{
 
 header .search{
     display: inline-block;
-    margin-right: 30px;
+    margin-right: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
+    width: 25px;
+    height: 25px;
 }
 
 header .search .search-trigger{
@@ -339,13 +341,27 @@ header .inner{
 
 header .navigation{
     border-right: 1px solid rgba(255, 255, 255, 0.25);
-    margin-right: 30px;
+    margin-right: 20px;
 }
 
 header .col-9{
     display: flex;
     align-items: center;
     justify-content: flex-end;
+}
+
+header .triggers{
+    display: flex;
+}
+
+header .triggers .search-trigger,
+header .triggers .bookmark,
+header .triggers .social-trigger{
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .paged header{
@@ -402,10 +418,6 @@ header .popover{
     padding-top: 15px;
 }
 
-header .search .popover{
-    padding-top: 17px;
-}
-
 header .popover .popover-body{
     padding: 0;
     background: #54575d;
@@ -428,7 +440,7 @@ header .popover input{
     top: 15px;
     left: 0;
     border-bottom: 1px solid #54575d;
-    z-index: 2;
+    z-index: 99;
 }
 
 header .popover h5{
@@ -527,11 +539,13 @@ header .blog-logo span{
 .social-content{
     display: flex;
     align-items: center;
+    width: 25px;
+    height: 25px;
+    margin-left: 20px;
 }
 
 .social-trigger{
     display: flex;
-    margin-left: 30px;
 }
 
 .social-trigger a{
@@ -549,6 +563,8 @@ header .blog-logo span{
 .bookmark-content{
     display: flex;
     align-items: center;
+    width: 25px;
+    height: 25px;
 }
 
 header .popover-body ul.social-icons{
@@ -1827,11 +1843,11 @@ footer a:hover{
 
 @media (max-width: 575px) {
     header .navigation{
-        margin-right: 20px;
+        margin-right: 10px;
         padding-right: 20px;
     }
     header .search{
-        margin-right: 20px;
+        margin-right: 10px;
     }
     header{
         padding: 10px 0;
@@ -1851,7 +1867,8 @@ footer a:hover{
         width: 100vw;
         max-width: 100vw;
         margin-left: 0;
-        transform: translate3d(0px, 0px, 0px) !important;
+        transform: initial !important;
+        will-change: initial !important;
         margin-top: 0;
         top: 46px !important;
         padding-top: 0;
@@ -1867,7 +1884,9 @@ footer a:hover{
         width: 100% !important;
     }
     header .popover input{
-        top: 0;
+        top: 45px;
+        height: 51px;
+        position: fixed;
     }
     header .navigation ul li a{
         padding: 17px 13px;
@@ -1875,8 +1894,8 @@ footer a:hover{
     .content-inner {
         padding: 50px 15px;
     }
-    .social-trigger {
-        margin-left: 20px;
+    .social-content {
+        margin-left: 10px;
     }
     .intro .swiper-slide {
         padding: 85px 0 75px 0px;
@@ -1975,7 +1994,21 @@ footer a:hover{
     .related-posts .loop .swiper-slide {
         width: calc(100% - 30px);
     }
-    .search .popover .close {
-        top: 11px;
+    .popover .close,
+    .search .popover .close{
+        top: 56px;
+        position: fixed;
+    }
+    header .popover-body h3{
+        position: fixed;
+        top: 46px;
+        background: #54575d;
+        width: 100%;
+        z-index: 2;
+    }
+    .bookmark-container,
+    .social-container,
+    header .search #results{
+        padding-top: 51px;
     }
 }
