@@ -1095,9 +1095,12 @@ header .popover-body ul.social-icons li a{
 .content-inner iframe{
     margin: 0 auto;
     display: block;
+    margin-bottom: 30px;
+}
+
+.content-inner iframe[src*="https://www.youtube.com/"] {
     height: calc(730px / 1.77777778) !important;
     width: 100% !important;
-    margin-bottom: 30px;
 }
 
 .content-inner img{
@@ -1721,7 +1724,7 @@ footer a:hover{
     .intro .swiper-pagination{
         right: calc((100% - 960px)/2 + 15px);
     }
-    .content-inner iframe{
+    .content-inner iframe[src*="https://www.youtube.com/"] {
         height: calc(610px / 1.77777778) !important;
     }
 }
@@ -1766,7 +1769,7 @@ footer a:hover{
     .content-inner .share{
         margin-left: -70px;
     }
-    .content-inner iframe{
+    .content-inner iframe[src*="https://www.youtube.com/"] {
         height: calc(570px / 1.77777778) !important;
     }
     .related-posts .loop .swiper-slide{
@@ -1797,7 +1800,7 @@ footer a:hover{
     .content-inner .share {
         margin-left: -60px;
     }
-    .content-inner iframe {
+    .content-inner iframe[src*="https://www.youtube.com/"] {
         height: calc(420px / 1.77777778) !important;
     }
     .loop {
