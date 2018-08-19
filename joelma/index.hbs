@@ -2,17 +2,17 @@
 {{!< default}}
 
 {{^is "paged"}}
-	{{#get "posts" include="tags, author" filter="featured:true" limit="5"}}
+	{{#get "posts" include="tags, authors" filter="featured:true" limit="5"}}
 		{{#if posts}}
 			<div class="intro">
 				<div class="swiper-container">
-					<div class="swiper-wrapper">
+					<ul class="swiper-wrapper">
 						{{#foreach posts}}
 							<li class="swiper-slide">
 								{{> "loop-featured"}}
 							</li>
 					    {{/foreach}}
-					</div>
+					</ul>
 					<div class="swiper-pagination"></div>
 					<a href="#" class="go"><i class="fas fa-angle-down"></i></a>
 				</div>

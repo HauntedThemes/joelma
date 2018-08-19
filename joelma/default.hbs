@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{lang}}">
 <head>
 
     {{> theme_head}}
@@ -8,7 +8,7 @@
     {{ghost_head}}
 
 </head>
-<body class="{{body_class}} nav-closed" {{#author}}data-author="{{slug}}"{{/author}} {{#tag}}data-tag="{{slug}}"{{/tag}}>
+<body class="{{body_class}} nav-closed">
 
     <div class="main-container">
     
@@ -21,11 +21,10 @@
     </div>
 
 
-    {{!-- jQuery needs to come before `{{ghost_foot}}` so that jQuery can be used in code injection --}}
-    <script type="text/javascript" src="{{asset "js/jquery-1.12.4.min.js"}}"></script>
-
     {{!-- 3rd party scripts --}}
     <script type="text/javascript" src="{{asset "js/libraries.js"}}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/locale/{{lang}}.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/localization/messages_{{lang}}.js"></script>
 
     {{!-- Ghost outputs important scripts and data with this tag --}}
     {{ghost_foot}}

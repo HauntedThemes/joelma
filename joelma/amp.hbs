@@ -85,16 +85,21 @@
         code, kbd, pre, samp {
             font-family: monospace, monospace;
             font-size: 1em;
-            color: #A0A8BD;
+            color: #444;
         }
 
         mark{
             background: rgba(160, 168, 189, 0.2);
         }
 
-        pre code,
-        .hljs{
+        figure{
+            margin: 30px 0;
+        }
+
+        pre{
+            color: #444;
             padding: 20px;
+            background: #F0F0F0;
         }
 
         label.error{
@@ -418,6 +423,16 @@
             color: #FFFFFF;
         }
 
+        .editor-content .kg-image-card{
+            margin: 50px 0;
+        }
+
+        .editor-content figcaption{
+            padding: 10px 15px;
+            font-size: 14px;
+            border-bottom: 1px solid #cccccc;
+        }
+
         /* ==========================================================================
            2. Header
            ========================================================================== */
@@ -537,11 +552,11 @@
                                         </ul>
                                     {{/if}}
                                     <h1 class="post-title">{{title}}</h1>
-                                    <p class="excerpt">{{excerpt words="28"}} ... <a class="read-more" href="{{url}}" title="{{title}}">read more</a></p>
+                                    <p class="excerpt">{{excerpt words="28"}} ... <a class="read-more" href="{{url}}" title="{{title}}">{{t "read more"}}</a></p>
                                     <ul class="post-meta">
                                         <li><time class="post-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="DD MMM YYYY"}}</time></li>
-                                        <li><div class="post-author">{{author}}</div></li>
-                                        <li><div class="post-reading-time">{{reading_time}}</div></li>
+                                        <li><div class="post-author">{{authors}}</div></li>
+                                        <li><div class="post-reading-time">{{reading_time minute=(t "1 min read") minutes=(t "% min read")}}</div></li>
                                     </ul>
                                 </div>
                             </div>
@@ -553,12 +568,12 @@
         </div>
     </div>
 
-    <main id="content" class="container content-inner" role="main" data-id={{comment_id}}>
+    <main id="content" class="container content-inner" role="main">
         <article class="{{post_class}} row">
             <section class="content-holder col-lg-8 col-sm-10 ml-auto mr-auto">
 
                 <div class="post-content">
-                    {{amp_content}}                    
+                    <div class="editor-content">{{amp_content}}</div>                    
                 </div>
 
             </section>
@@ -570,7 +585,7 @@
         <div class="container copyright">
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <p>&copy; {{date format="YYYY"}}, <a href="{{@blog.url}}">{{@blog.title}}</a>. All Right Reserved.</p>
+                    <p class="copyright">{{t "Copyright"}} &copy; {{date format="YYYY"}}, <a href="{{@blog.url}}">{{@blog.title}}</a>. {{t "All Right Reserved"}}.</p>
                 </div>
             </div>
         </div>

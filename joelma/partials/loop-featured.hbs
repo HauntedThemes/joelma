@@ -15,11 +15,11 @@
                         </ul>
                     {{/if}}
                     <h2 class="post-title" data-title-sep><a href="{{url}}" title="{{title}}">{{title}}</a></h2>
-                    <p class="excerpt">{{excerpt words="28"}} ... <a class="read-more" href="{{url}}" title="{{title}}">read more</a></p>
+                    <p class="excerpt">{{excerpt words="28"}} ... <a class="read-more" href="{{url}}" title="{{title}}">{{t "read more"}}</a></p>
                     <ul class="post-meta">
                         <li><time class="post-date" datetime="{{date format="YYYY-MM-DD"}}"><i class="fas fa-calendar-alt"></i> {{date format="DD MMM YYYY"}}</time></li>
-                        <li><div class="post-author"><i class="fas fa-user"></i> {{author}}</div></li>
-                        <li><div class="post-reading-time"><i class="fas fa-clock"></i> {{reading_time}}</div></li>
+                        <li><div class="post-author"><i class="fas fa-user"></i> {{authors}}</div></li>
+                        <li><div class="post-reading-time"><i class="fas fa-clock"></i> {{reading_time minute=(t "1 min read") minutes=(t "% min read")}}</div></li>
                     </ul>
                 </div>
             </div>

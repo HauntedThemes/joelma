@@ -14,7 +14,7 @@
                                     <h1 class="post-title">{{name}}</h1>
                                     <p class="excerpt">{{description}}</p>
                                     <ul class="post-meta">
-                                     	<li>A collection of {{plural ../pagination.total empty='posts' singular='% post' plural='% posts'}}</li>
+                                     	<li>{{plural ../pagination.total empty=(t "A collection of posts") singular=(t "A collection of 1 post") plural=(t "A collection of % posts")}}</li>
                                     </ul>
                                 </div>
                             </div>

@@ -14,7 +14,12 @@ jQuery(document).ready(function($) {
 
     var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
         h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0),
-        readLaterPosts = [];
+        readLaterPosts = [],
+        lang = $('html').attr('lang'),
+        noBookmarksMessage = $('.no-bookmarks').text(),
+        monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "Sepember", "October", "November", "December"];
+
+    moment.locale('ro');
 
     // Detect IE
     if (/MSIE 10/i.test(navigator.userAgent) || /MSIE 9/i.test(navigator.userAgent) || /rv:11.0/i.test(navigator.userAgent)) {
@@ -56,10 +61,7 @@ jQuery(document).ready(function($) {
     var swiperRelatedPosts = new Swiper('.related-posts .swiper-container', {
         slidesPerView: 'auto',
         centeredSlides: true,
-        loop: true,
-        loopedSlides: 6,
         roundLengths: true,
-        autoHeight: true,
         navigation: {
             nextEl: '.related-posts .swiper-button-next',
             prevEl: '.related-posts .swiper-button-prev',
@@ -226,14 +228,21 @@ jQuery(document).ready(function($) {
                 tags.sort();
 
                 $.each(tags, function(index, val) {
-                    $(id + " #results").append('<h5>'+ val +'</h5><ul data-tag="'+ val +'" class="list-box"</ul>');
+                    var tag = val;
+                    if (val == 'Other') {
+                        tag = $('#results').attr('data-other');
+                    };
+                    $(id + " #results").append('<h5>'+ tag +'</h5><ul data-tag="'+ val +'" class="list-box"</ul>');
                 });
 
                 $.each(results, function(index, val) {
+                    var dateSplit = val.pubDate.split(' ')
+                    var month = monthNames.indexOf(dateSplit[1])+1;
+                    var date = moment(dateSplit[0]+'-'+month+'-'+dateSplit[2], "DD-MM-YYYY").format('DD MMM YYYY');
                     if (val.tags.length) {
-                        $(id + ' #results ul[data-tag="'+ val.tags[0] +'"]').append('<li><a href="#" class="read-later" data-id="'+ val.ref +'"><i class="far fa-bookmark"></i><i class="fas fa-bookmark"></i></a><time>'+ val.pubDate +'</time><a href="'+ val.link +'">'+ val.title +'</a></li>');
+                        $(id + ' #results ul[data-tag="'+ val.tags[0] +'"]').append('<li><a href="#" class="read-later" data-id="'+ val.ref +'"><i class="far fa-bookmark"></i><i class="fas fa-bookmark"></i></a><time>'+ date +'</time><a href="'+ val.link +'">'+ val.title +'</a></li>');
                     }else{
-                        $(id + ' #results ul[data-tag="Other"]').append('<li><a href="#" class="read-later" data-id="'+ val.ref +'"><i class="far fa-bookmark"></i><i class="fas fa-bookmark"></i></a><time>'+ val.pubDate +'</time><a href="'+ val.link +'">'+ val.title +'</a></li>');
+                        $(id + ' #results ul[data-tag="Other"]').append('<li><a href="#" class="read-later" data-id="'+ val.ref +'"><i class="far fa-bookmark"></i><i class="fas fa-bookmark"></i></a><time>'+ date +'</time><a href="'+ val.link +'">'+ val.title +'</a></li>');
                     };
                 });
 
@@ -289,7 +298,7 @@ jQuery(document).ready(function($) {
 
         $('.bookmark-container').empty();
         if (readLaterPosts.length) {
-            $('header .counter').removeClass('hidden').text(readLaterPosts.length);
+
             var filter = readLaterPosts.toString();
             filter = "id:["+filter+"]";
 
@@ -310,14 +319,21 @@ jQuery(document).ready(function($) {
                 tags.sort();
 
                 $.each(tags, function(index, val) {
-                    $('.bookmark-container').append('<h5>'+ val +'</h5><ul data-tag="'+ val +'" class="list-box"</ul>');
+                    var tag = val;
+                    if (val == 'Other') {
+                        tag = $('#results').attr('data-other');
+                    };
+                    $('.bookmark-container').append('<h5>'+ tag +'</h5><ul data-tag="'+ val +'" class="list-box"</ul>');
                 });
 
                 $.each(data.posts, function(index, val) {
+                    var dateSplit = prettyDate(val.published_at).split(' ')
+                    var month = monthNames.indexOf(dateSplit[1])+1;
+                    var date = moment(dateSplit[0]+'-'+month+'-'+dateSplit[2], "DD-MM-YYYY").format('DD MMM YYYY');
                     if (val.tags.length) {
-                        $('.bookmark-container ul[data-tag="'+ val.tags[0].name +'"]').append('<li><time>'+ prettyDate(val.created_at) +'</time><a href="#" class="read-later active" data-id="'+ val.id +'"><i class="far fa-bookmark"></i><i class="fas fa-bookmark"></i></a><a href="/'+ val.slug +'">'+ val.title +'</a></li>');
+                        $('.bookmark-container ul[data-tag="'+ val.tags[0].name +'"]').append('<li><time>'+ date +'</time><a href="#" class="read-later active" data-id="'+ val.id +'"><i class="far fa-bookmark"></i><i class="fas fa-bookmark"></i></a><a href="/'+ val.slug +'">'+ val.title +'</a></li>');
                     }else{
-                        $('.bookmark-container ul[data-tag="Other"]').append('<li><a href="#" class="read-later active" data-id="'+ val.id +'"><i class="far fa-bookmark"></i><i class="fas fa-bookmark"></i></a><time>'+ prettyDate(val.created_at) +'</time><a href="/'+ val.slug +'">'+ val.title +'</a></li>');
+                        $('.bookmark-container ul[data-tag="Other"]').append('<li><a href="#" class="read-later active" data-id="'+ val.id +'"><i class="far fa-bookmark"></i><i class="fas fa-bookmark"></i></a><time>'+ date +'</time><a href="/'+ val.slug +'">'+ val.title +'</a></li>');
                     };
                 });
 
@@ -338,17 +354,24 @@ jQuery(document).ready(function($) {
                     });
                 });
 
+                if (data.posts.length) {
+                    $('header .counter').removeClass('hidden').text(data.posts.length);
+                }else{
+                    $('header .counter').addClass('hidden');
+                    $('.bookmark-container').append('<p class="no-bookmarks">'+ noBookmarksMessage +'</p>');
+                };
+
             });
         }else{
             $('header .counter').addClass('hidden');
-            $('.bookmark-container').append('<p class="no-bookmarks">You haven\'t yet saved any bookmarks. To bookmark a post, just click <i class="far fa-bookmark"></i>.</p>')
+            $('.bookmark-container').append('<p class="no-bookmarks">'+ noBookmarksMessage +'</p>')
         };
 
     }
 
     function prettyDate(date) {
         var d = new Date(date);
-        var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "Sepember", "October", "November", "December"];
             return d.getDate() + ' ' + monthNames[d.getMonth()] + ' ' + d.getFullYear();
     };
 
@@ -463,7 +486,7 @@ jQuery(document).ready(function($) {
     $('.content-inner h1, .content-inner h2, .content-inner h3, .content-inner h4, .content-inner h5, .content-inner h6').each(function(index, el) {
         var id = $(this).attr('id');
         var url = window.location.href.split(/[?#]/)[0] + '#' + id;
-        $(this).prepend('<a href="#'+ id +'" class="chain" data-clipboard-text="'+ url +'" data-toggle="tooltip" data-placement="bottom" title="Copy link to clipboard."><i class="fas fa-link"></i></a>');
+        $(this).prepend('<a href="#'+ id +'" class="chain" data-clipboard-text="'+ url +'" data-toggle="tooltip" data-placement="bottom" title="'+ $('.editor-content').attr('data-clipboard') +'"><i class="fas fa-link"></i></a>');
     });
 
     new ClipboardJS('.chain');
@@ -561,6 +584,7 @@ jQuery(document).ready(function($) {
                 email: true
             },
         },
+        lang: 'ro',
         submitHandler: function (form) {
             $(".gh-signin").submit();              
         }

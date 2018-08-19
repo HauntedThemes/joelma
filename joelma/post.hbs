@@ -24,8 +24,8 @@
                                     <h1 class="post-title">{{title}}</h1>
                                     <ul class="post-meta">
                                         <li><time class="post-date" datetime="{{date format="YYYY-MM-DD"}}"><i class="fas fa-calendar-alt"></i> {{date format="DD MMM YYYY"}}</time></li>
-                                        <li><div class="post-author"><i class="fas fa-user"></i> {{author}}</div></li>
-                                        <li><div class="post-reading-time"><i class="fas fa-clock"></i> {{reading_time}}</div></li>
+                                        <li><div class="post-author"><i class="fas fa-user"></i> {{authors}}</div></li>
+                                        <li><div class="post-reading-time"><i class="fas fa-clock"></i> {{reading_time minute=(t "1 min read") minutes=(t "% min read")}}</div></li>
                                     </ul>
                                 </div>
                             </div>
@@ -36,12 +36,12 @@
             <a href="#" class="go"><i class="fas fa-angle-down"></i></a>
         </div>
     </div>
-    <main id="content" class="container content-inner" role="main" data-id={{comment_id}}>
+    <main id="content" class="container content-inner" role="main" data-id="{{comment_id}}">
         <article class="{{post_class}} row">
             <section class="content-holder col-lg-8 col-sm-10 ml-auto mr-auto">
 
                 <div class="post-content">
-                    {{content}}
+                    <div class="editor-content" data-clipboard="{{t "Copy link to clipboard."}}">{{content}}</div>
                     
                     {{#if tags}}
                         <ul class="tags">
@@ -56,17 +56,15 @@
                     <div class="share">
                         <a href="#" class="trigger-share"><i class="fas fa-share-alt"></i></a>
                         <ul>
-                            <li><a href="https://twitter.com/share?text={{encode title}}&amp;url={{url absolute="true"}}" onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;" data-toggle="tooltip" data-placement="right" title="Share on Twitter"><i class="fab fa-twitter"></i></a></li>
-                            <li><a href="https://www.facebook.com/sharer/sharer.php?u={{url absolute="true"}}" onclick="window.open(this.href, 'share-facebook', 'width=580,height=296');return false;" data-toggle="tooltip" data-placement="right" title="Share on Facebook"><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a href="https://plus.google.com/share?url={{url absolute="true"}}" onclick="window.open(this.href, 'share-google-plus', 'width=400,height=466');return false;" data-toggle="tooltip" data-placement="right" title="Share on Google+"><i class="fab fa-google-plus-g"></i></a></li>
-                            <li><a href="https://www.reddit.com/submit?url={{url absolute="true"}}" target="_blank" data-toggle="tooltip" data-placement="right" title="Share on Reddit"><i class="fab fa-reddit-alien"></i></a></li>
-                            <li><a href="mailto:?subject={{@blog.title}} - {{title}}&amp;body={{excerpt words="28"}} ... %0D%0A%0D%0A Read more: {{url absolute="true"}}" data-toggle="tooltip" data-placement="right" title="Share by email"><i class="fas fa-envelope"></i></a></li>
+                            <li><a href="https://twitter.com/share?text={{encode title}}&amp;url={{url absolute="true"}}" onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;" data-toggle="tooltip" data-placement="right" title="{{t "Share on Twitter"}}"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="https://www.facebook.com/sharer/sharer.php?u={{url absolute="true"}}" onclick="window.open(this.href, 'share-facebook', 'width=580,height=296');return false;" data-toggle="tooltip" data-placement="right" title="{{t "Share on Facebook"}}"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="https://plus.google.com/share?url={{url absolute="true"}}" onclick="window.open(this.href, 'share-google-plus', 'width=400,height=466');return false;" data-toggle="tooltip" data-placement="right" title="{{t "Share on Google+"}}"><i class="fab fa-google-plus-g"></i></a></li>
+                            <li><a href="https://www.reddit.com/submit?url={{url absolute="true"}}" target="_blank" data-toggle="tooltip" data-placement="right" title="{{t "Share on Reddit"}}"><i class="fab fa-reddit-alien"></i></a></li>
+                            <li><a href="mailto:?subject={{encode @blog.title}}%20-%20{{title}}&amp;body={{url absolute="true"}}" data-toggle="tooltip" data-placement="right" title="{{t "Share by Email"}}"><i class="fas fa-envelope"></i></a></li>
                         </ul>
                     </div>
                     
                 </div>
-
-
             </section>
         </article>
     </main>
@@ -74,28 +72,28 @@
     <div class="comments container">
         <div class="row">
             <div class="col-lg-8 col-sm-10 mr-auto ml-auto">
-                <h3>Comments</h3>
+                <h3>{{t "Comments"}}</h3>
                 <a href="#" class="comments-trigger">
-                    <i class="fas fa-comments"></i> Write a comment ...
+                    <i class="fas fa-comments"></i> {{t "Write a comment ..."}}
                 </a>
                 <div class="comments-inner"></div>
             </div>
         </div>
     </div>
 
-    {{#get "posts" limit="6" include="tags, author" filter="id:-{{id}}+tag:{{primary_tag.slug}}"}}
+    {{#get "posts" limit="6" include="tags, authors" filter="id:-{{id}}+tag:{{primary_tag.slug}}"}}
         {{#if posts}}
             <div class="related-posts">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-8 col-sm-10 mr-auto ml-auto">
-                            <h3>Related posts</h3>
+                            <h3>{{t "Related posts"}}</h3>
                         </div>
                     </div>
                 </div>
                 <div class="swiper-container">
-                    <div class="swiper-button-prev" title="Previous post"></div>
-                    <div class="swiper-button-next" title="Next post"></div>
+                    <div class="swiper-button-prev" title="{{t "Previous post"}}"></div>
+                    <div class="swiper-button-next" title="{{t "Next post"}}"></div>
                     <div class="swiper-wrapper loop">
                         {{#foreach posts}}
                             <div class="swiper-slide">
@@ -113,11 +111,11 @@
             <div class="row">
                 <div class="col-lg-8 col-md-10 ml-auto mr-auto">
                     {{#prev_post}}
-                        <a href="{{url}}" class="prev"><i class="fas fa-angle-left"></i> Previous post</a>
+                        <a href="{{url}}" class="prev"><i class="fas fa-angle-left"></i> {{t "Previous post"}}</a>
                     {{/prev_post}}
-                    <a href="{{@blog.url}}">Back to homepage</a>
+                    <a href="{{@blog.url}}">{{t "Back to homepage"}}</a>
                     {{#next_post}}
-                        <a href="{{url}}" class="next">Next post <i class="fas fa-angle-right"></i></a>
+                        <a href="{{url}}" class="next">{{t "Next post"}} <i class="fas fa-angle-right"></i></a>
                     {{/next_post}}
                 </div>
             </div>

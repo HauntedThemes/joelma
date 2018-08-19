@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{lang}}">
 <head>
 
     {{> theme_head}}
@@ -20,9 +20,9 @@
                         <article class="{{post_class}}">
                             <h1 class="post-title">
                                 {{^if success}}
-                                    Subscribe to {{@blog.title}}
+                                    {{t "Subscribe to {blogtitle}" blogtitle=@blog.title}}
                                 {{else}}
-                                    Subscribed!
+                                    {{t "Subscribed!"}}
                                 {{/if}}
                             </h1>
                             <section class="post-content">
@@ -31,12 +31,12 @@
                                         form_class="gh-signin"
                                         input_class="gh-input"
                                         button_class="fas fa-angle-right"
-                                        placeholder="Your email address"
+                                        placeholder=(t "Your email address")
                                     }}
                                 {{else}}
                                     <p>
-                                        You've successfully subscribed to <em>{{@blog.title}}</em>
-                                        with the email address <em>{{email}}</em>.
+                                        {{t "You've successfully subscribed to"}} <em>{{@blog.title}}</em>
+                                        {{t "with the email address"}} <em>{{email}}</em>.
                                     </p>
                                 {{/if}}
                             </section>
@@ -49,11 +49,10 @@
 
     {{> theme_footer}}
 
-    {{!-- jQuery needs to come before `{{ghost_foot}}` so that jQuery can be used in code injection --}}
-    <script type="text/javascript" src="{{asset "js/jquery-1.12.4.min.js"}}"></script>
-
     {{!-- 3rd party scripts --}}
     <script type="text/javascript" src="{{asset "js/libraries.js"}}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/locale/{{lang}}.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/localization/messages_{{lang}}.js"></script>
 
     {{!-- Ghost outputs important scripts and data with this tag --}}
     {{ghost_foot}}
