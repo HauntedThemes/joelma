@@ -81,30 +81,32 @@
         </div>
     </div>
 
-    {{#get "posts" limit="6" include="tags, authors" filter="id:-{{id}}+tag:{{primary_tag.slug}}"}}
-        {{#if posts}}
-            <div class="related-posts">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8 col-sm-10 mr-auto ml-auto">
-                            <h3>{{t "Related posts"}}</h3>
+    {{#if @labs.publicAPI}}
+        {{#get "posts" limit="6" include="tags, authors" filter="id:-{{id}}+primary_tag:{{primary_tag.slug}}"}}
+            {{#if posts}}
+                <div class="related-posts">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-8 col-sm-10 mr-auto ml-auto">
+                                <h3>{{t "Related posts"}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-container">
+                        <div class="swiper-button-prev" title="{{t "Previous post"}}"></div>
+                        <div class="swiper-button-next" title="{{t "Next post"}}"></div>
+                        <div class="swiper-wrapper loop">
+                            {{#foreach posts}}
+                                <div class="swiper-slide">
+                                    {{> "loop"}}
+                                </div>
+                            {{/foreach}}
                         </div>
                     </div>
                 </div>
-                <div class="swiper-container">
-                    <div class="swiper-button-prev" title="{{t "Previous post"}}"></div>
-                    <div class="swiper-button-next" title="{{t "Next post"}}"></div>
-                    <div class="swiper-wrapper loop">
-                        {{#foreach posts}}
-                            <div class="swiper-slide">
-                                {{> "loop"}}
-                            </div>
-                        {{/foreach}}
-                    </div>
-                </div>
-            </div>
-        {{/if}}
-    {{/get}}
+            {{/if}}
+        {{/get}}
+    {{/if}}
 
     <div class="fixed-post-nav">
         <div class="container">

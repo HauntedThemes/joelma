@@ -5,22 +5,25 @@
                     <h3>{{t "About"}}</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed lacus id tortor iaculis iaculis dignissim eget justo. <br><br> Maecenas posuere eros nisl, ut pharetra turpis faucibus a. In imperdiet urna mattis lacus mollis, sit amet pulvinar purus vehicula.</p>
                 </div>
-                {{#get "tags" limit="all" include="count.posts"}}
-                    {{#if tags}}
-                        <div class="col-sm-6 col-lg-3">
-                            <h3>{{t "Tags"}}</h3>
-                            <ul class="tags">
-                                {{#foreach tags}}
-                                    {{#if count.posts}}
-                                        <li>
-                                            <a href="{{url}}">{{name}}</a>
-                                        </li>
-                                    {{/if}}
-                                {{/foreach}}
-                            </ul>
-                        </div>
-                    {{/if}}
-                {{/get}}
+                {{#if @labs.publicAPI}}
+                    {{#get "tags" limit="all" include="count.posts"}}
+                        {{#if tags}}
+                            <div class="col-sm-6 col-lg-3">
+                                <h3>{{t "Tags"}}</h3>
+                                <ul class="tags">
+                                    {{#foreach tags}}
+                                        {{#if count.posts}}
+                                            <li>
+                                                <a href="{{url}}">{{name}}</a>
+                                            </li>
+                                        {{/if}}
+                                    {{/foreach}}
+                                </ul>
+                            </div>
+                        {{/if}}
+                    {{/get}}
+                {{/if}}
+                {{#if @labs.publicAPI}}
                 <div class="col-sm-6 col-lg-3">
                     <h3>{{t "Latest posts"}}</h3>
                     <ul class="latest-posts">
@@ -34,6 +37,7 @@
                     {{/get}}
                     </ul>
                 </div>
+                {{/if}}
                 {{#if @labs.subscribers}}
                 <div class="col-sm-6 col-lg-3">
                     <h3>{{t "Newsletter"}}</h3>

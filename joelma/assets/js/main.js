@@ -15,11 +15,8 @@ jQuery(document).ready(function($) {
     var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
         h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0),
         readLaterPosts = [],
-        lang = $('html').attr('lang'),
         noBookmarksMessage = $('.no-bookmarks').text(),
         monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "Sepember", "October", "November", "December"];
-
-    moment.locale('ro');
 
     // Detect IE
     if (/MSIE 10/i.test(navigator.userAgent) || /MSIE 9/i.test(navigator.userAgent) || /rv:11.0/i.test(navigator.userAgent)) {
@@ -68,13 +65,15 @@ jQuery(document).ready(function($) {
         },
     });
 
-    // Check 'read later' posts 
-    if (typeof Cookies.get('joelma-read-later') !== "undefined") {
-        readLaterPosts = JSON.parse(Cookies.get('joelma-read-later'));
-    }
+    if (typeof ghost !== 'undefined') {
+        // Check 'read later' posts 
+        if (typeof Cookies.get('joelma-read-later') !== "undefined") {
+            readLaterPosts = JSON.parse(Cookies.get('joelma-read-later'));
+        }
 
-    readLaterPosts = readLater($('#content .loop'), readLaterPosts);
-    readLaterPosts = readLater($('.related-posts'), readLaterPosts);
+        readLaterPosts = readLater($('#content .loop'), readLaterPosts);
+        readLaterPosts = readLater($('.related-posts'), readLaterPosts);
+    };
 
     $('.go').on('click', function(event) {
         event.preventDefault();

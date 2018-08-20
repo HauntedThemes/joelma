@@ -32,6 +32,8 @@
                 </ul>
             </li>
         </ul>
+        {{#if @labs.publicAPI}}
         <a href="#" class="read-later" data-id="{{id}}"><i class="far fa-bookmark" data-toggle="tooltip" data-placement="right" title="{{t "Bookmark article"}}"></i><i class="fas fa-bookmark" data-toggle="tooltip" data-placement="right" title="{{t "Remove bookmark"}}"></i></a>
+        {{/if}}
     </div>
 </article>

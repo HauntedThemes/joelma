@@ -548,6 +548,10 @@ header .blog-logo span{
     margin-left: 20px;
 }
 
+.social-content:last-child:first-child{
+    margin-left: 0;
+}
+
 .social-trigger{
     display: flex;
 }
