@@ -1196,20 +1196,54 @@ header .popover-body ul.social-icons li a{
     margin: 50px 0;
 }
 
+.editor-content .kg-gallery-container {
+    display: flex;
+    flex-direction: column;
+    margin: 50px auto;
+    max-width: calc(100vw - (100vw - 730px)/2);
+    transform: translateX(-50%);
+    left: 50%;
+    position: relative;
+    z-index: 5;
+    width: 100vw;
+}
+
+.editor-content .kg-gallery-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.editor-content .kg-gallery-image img {
+    display: flex;
+    object-fit: cover;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.editor-content .kg-gallery-row:not(:first-of-type) {
+    margin: 10px 0 0 0;
+}
+
+.editor-content .kg-gallery-image:not(:first-of-type) {
+    margin: 0 0 0 10px;
+}
+
 .editor-content figcaption{
     padding: 10px 15px;
     font-size: 14px;
     border-bottom: 1px solid #cccccc;
 }
 
-.editor-content .kg-width-full amp-img{
+.editor-content .kg-width-full img{
     max-width: 100vw;
     transform: translateX(-50%);
     left: 50%;
     position: relative;
 }
 
-.editor-content .kg-width-wide amp-img{
+.editor-content .kg-width-wide img{
     max-width: calc(100vw - (100vw - 730px)/2);
     transform: translateX(-50%);
     left: 50%;
@@ -1774,7 +1808,8 @@ footer a:hover{
     .related-posts .loop .swiper-slide {
         width: 610px;
     }
-    .editor-content .kg-width-wide img {
+    .editor-content .kg-width-wide img,
+    .editor-content .kg-gallery-container{
         max-width: calc(100vw - (100vw - 610px)/2);
     }
 }
@@ -1844,7 +1879,8 @@ footer a:hover{
     .content-inner iframe[src*="https://www.youtube.com/"] {
         height: calc(570px / 1.77777778) !important;
     }
-    .editor-content .kg-width-wide img {
+    .editor-content .kg-width-wide img,
+    .editor-content .kg-gallery-container{
         max-width: calc(100vw - (100vw - 570px)/2);
     }
     .related-posts .loop .swiper-slide{
@@ -1908,7 +1944,8 @@ footer a:hover{
     .content-inner{
         padding-bottom: 50px;
     }
-    .editor-content .kg-width-wide img {
+    .editor-content .kg-width-wide img,
+    .editor-content .kg-gallery-container{
         max-width: calc(100vw - (100vw - 420px)/2);
     }
     .post-meta li.share{
@@ -2058,7 +2095,8 @@ footer a:hover{
         border-right: none;
     }
     .editor-content .kg-width-wide img,
-    .content-inner img{
+    .content-inner img,
+    .editor-content .kg-gallery-container{
         max-width: 100vw;
     }
     .content-inner iframe[src*="https://www.youtube.com/"] {
