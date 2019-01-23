@@ -2,7 +2,7 @@
 {{!< default}}
 
 {{^is "paged"}}
-	{{#get "posts" include="tags, authors" filter="featured:true" limit="5"}}
+	{{#get "posts" include="tags,authors" filter="featured:true" limit="5"}}
 		{{#if posts}}
 			<div class="intro">
 				<div class="swiper-container">
@@ -22,7 +22,27 @@
 				<div class="swiper-container">
 					<div class="swiper-wrapper">
 						<li class="swiper-slide">
-							<div class="bg" {{#if @site.cover_image}}style="background-image: url({{@site.cover_image}});"{{/if}}></div>
+							{{#if cover_image}}
+							<style type="text/css">
+								.responsive-header-img-{{slug}} {
+									background-image: url({{img_url cover_image size='l'}});
+								}
+								@media(max-width: 991px) {
+									.responsive-header-img-{{slug}} {
+										background-image: url({{img_url cover_image size='m'}});
+										background-image: -webkit-image-set(
+											url({{img_url cover_image size='m'}}) 1x,
+											url({{img_url cover_image size='l'}}) 2x
+										);
+										background-image: image-set(
+											url({{img_url cover_image size='m'}}) 1x,
+											url({{img_url cover_image size='l'}}) 2x
+										);
+									}
+								}
+							</style>
+							{{/if}}
+							<div class="bg responsive-header-img-{{slug}}"></div>
 							<div class="inner">
 								<div class="container">
 									<div class="row">

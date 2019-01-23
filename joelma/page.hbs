@@ -3,11 +3,31 @@
 
 {{!-- Everything inside the #post tags pulls data from the post --}}
 {{#post}}
+    {{#if feature_image}}
+    <style type="text/css">
+        .responsive-header-img-{{slug}} {
+            background-image: url({{img_url feature_image size='l'}});
+        }
+        @media(max-width: 991px) {
+            .responsive-header-img-{{slug}} {
+                background-image: url({{img_url feature_image size='m'}});
+                background-image: -webkit-image-set(
+                    url({{img_url feature_image size='m'}}) 1x,
+                    url({{img_url feature_image size='l'}}) 2x
+                );
+                background-image: image-set(
+                    url({{img_url feature_image size='m'}}) 1x,
+                    url({{img_url feature_image size='l'}}) 2x
+                );
+            }
+        }
+    </style>
+    {{/if}}
     <div class="intro">
         <div class="swiper-container">
             <div class="swiper-wrapper">
                 <li class="swiper-slide">
-                    <div class="bg" {{#if feature_image}}style="background-image: url({{img_url feature_image}});"{{/if}}></div>
+                    <div class="bg responsive-header-img-{{slug}}"></div>
                     <div class="inner">
                         <div class="container">
                             <div class="row">
@@ -29,11 +49,9 @@
     <main id="content" class="container content-inner" role="main">
         <article class="{{post_class}} row">
             <section class="content-holder col-lg-8 col-sm-10 ml-auto mr-auto">
-
                 <div class="post-content">
                     <div class="editor-content">{{content}}</div>
                 </div>
-
             </section>
         </article>
     </main>

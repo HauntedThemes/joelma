@@ -1,7 +1,7 @@
 Joelma by Haunted Themes
 ============================
 
-> Copyright (C) 2018, HauntedThemes SRL
+> Copyright (C) 2019, HauntedThemes SRL
 
 This theme is available as part of the HauntedThemes.com membership. The membership provides
 access to important theme updates and tech support, as well as the rest of 

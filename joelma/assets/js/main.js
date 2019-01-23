@@ -10,8 +10,8 @@ jQuery(document).ready(function($) {
         'infinite-scroll': false,
         'infinite-scroll-step': 1,
         'disqus-shortname': 'hauntedthemes-demo',
-        'content-api-host': 'http://localhost:2368',
-        'content-api-key': '8a13e02a8917186f02014db742',
+        'content-api-host': '',
+        'content-api-key': '',
     };
 
     var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
@@ -377,8 +377,8 @@ jQuery(document).ready(function($) {
                             bookmarks(readLaterPosts);
                         });
                     });
-
-                    if (results) {
+                    
+                    if (results.length) {
                         $('header .counter').removeClass('hidden').text(results.length);
                     }else{
                         $('header .counter').addClass('hidden');
@@ -391,67 +391,6 @@ jQuery(document).ready(function($) {
                     console.error(err);
                 });
 
-            // $.get(ghost.url.api('posts', {filter:filter, include:"tags"})).done(function (data){
-            //     $('.bookmark-container').empty();
-            //     var tags = [];
-            //     $.each(data.posts, function(index, val) {
-            //         if (val.tags.length) {
-            //             if ($.inArray(val.tags[0].name, tags) === -1) {
-            //                 tags.push(val.tags[0].name);
-            //             };
-            //         }else{
-            //             if ($.inArray('Other', tags) === -1) {
-            //                 tags.push('Other');
-            //             };
-            //         };
-            //     });
-            //     tags.sort();
-
-            //     $.each(tags, function(index, val) {
-            //         var tag = val;
-            //         if (val == 'Other') {
-            //             tag = $('#results').attr('data-other');
-            //         };
-            //         $('.bookmark-container').append('<h5>'+ tag +'</h5><ul data-tag="'+ val +'" class="list-box"</ul>');
-            //     });
-
-            //     $.each(data.posts, function(index, val) {
-            //         var dateSplit = prettyDate(val.published_at).split(' ')
-            //         var month = monthNames.indexOf(dateSplit[1])+1;
-            //         var date = moment(dateSplit[0]+'-'+month+'-'+dateSplit[2], "DD-MM-YYYY").format('DD MMM YYYY');
-            //         if (val.tags.length) {
-            //             $('.bookmark-container ul[data-tag="'+ val.tags[0].name +'"]').append('<li><time>'+ date +'</time><a href="#" class="read-later active" data-id="'+ val.id +'"><i class="far fa-bookmark"></i><i class="fas fa-bookmark"></i></a><a href="/'+ val.slug +'">'+ val.title +'</a></li>');
-            //         }else{
-            //             $('.bookmark-container ul[data-tag="Other"]').append('<li><a href="#" class="read-later active" data-id="'+ val.id +'"><i class="far fa-bookmark"></i><i class="fas fa-bookmark"></i></a><time>'+ date +'</time><a href="/'+ val.slug +'">'+ val.title +'</a></li>');
-            //         };
-            //     });
-
-            //     $('.bookmark-container').find('.read-later').each(function(index, el) {
-            //         $(this).on('click', function(event) {
-            //             event.preventDefault();
-            //             var id = $(this).attr('data-id');
-            //             if ($(this).hasClass('active')) {
-            //                 removeValue(readLaterPosts, id);
-            //             }else{
-            //                 readLaterPosts.push(id);
-            //             };
-            //             $('.read-later[data-id="'+ id +'"]').each(function(index, el) {
-            //                 $(this).toggleClass('active');
-            //             });
-            //             Cookies.set('joelma-read-later', readLaterPosts, { expires: 365 });
-            //             bookmarks(readLaterPosts);
-            //         });
-            //     });
-
-            //     if (data.posts.length) {
-            //         $('header .counter').removeClass('hidden').text(data.posts.length);
-            //     }else{
-            //         $('header .counter').addClass('hidden');
-            //         $('.bookmark-container').append('<p class="no-bookmarks"></p>');
-            //         $('.no-bookmarks').html(noBookmarksMessage)
-            //     };
-
-            // });
         }else{
             $('header .counter').addClass('hidden');
             $('.bookmark-container').append('<p class="no-bookmarks"></p>');
@@ -459,12 +398,6 @@ jQuery(document).ready(function($) {
         };
 
     }
-
-    function prettyDate(date) {
-        var d = new Date(date);
-        var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "Sepember", "October", "November", "December"];
-            return d.getDate() + ' ' + monthNames[d.getMonth()] + ' ' + d.getFullYear();
-    };
 
     function removeValue(arr) {
         var what, a = arguments, L = a.length, ax;

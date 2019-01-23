@@ -1,6 +1,26 @@
 {{!-- This is the post loop - each post will be output using this markup --}}
 <article class="{{post_class}}">
-    <div class="bg" {{#if feature_image}}style="background-image: url({{img_url feature_image}});"{{/if}}></div>
+    {{#if feature_image}}
+    <style type="text/css">
+        .responsive-header-img-{{slug}} {
+            background-image: url({{img_url feature_image size='l'}});
+        }
+        @media(max-width: 991px) {
+            .responsive-header-img-{{slug}} {
+                background-image: url({{img_url feature_image size='m'}});
+                background-image: -webkit-image-set(
+                    url({{img_url feature_image size='m'}}) 1x,
+                    url({{img_url feature_image size='l'}}) 2x
+                );
+                background-image: image-set(
+                    url({{img_url feature_image size='m'}}) 1x,
+                    url({{img_url feature_image size='l'}}) 2x
+                );
+            }
+        }
+    </style>
+    {{/if}}
+    <div class="bg responsive-header-img-{{slug}}"></div>
     <div class="inner">
         <div class="container">
             <div class="row">
@@ -14,7 +34,7 @@
                         {{/foreach}}
                         </ul>
                     {{/if}}
-                    <h2 class="post-title" data-title-sep><a href="{{url}}" title="{{title}}">{{title}}</a></h2>
+                    <h2 class="post-title"><a href="{{url}}" title="{{title}}">{{title}}</a></h2>
                     <p class="excerpt">{{excerpt words="28"}} ... <a class="read-more" href="{{url}}" title="{{title}}">{{t "read more"}}</a></p>
                     <ul class="post-meta">
                         <li><time class="post-date" datetime="{{date format="YYYY-MM-DD"}}"><i class="fas fa-calendar-alt"></i> {{date format="DD MMM YYYY"}}</time></li>

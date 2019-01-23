@@ -32,8 +32,8 @@
         <a href="#support" class="item"><b>Support</b></a>
         <div class="ui divider full-divider sidebar-divider"></div>
         <div class="ui  item">
-            <p>v1.1.2 <br>
-            Last update: 18 Sep 2018</p>
+            <p>v2.0.0 <br>
+            Last update: 23 Jan 2019</p>
         </div>
         <a href="https://twitter.com/HauntedThemes" class="item" target="_blank"><b><i class="twitter icon"></i> @HauntedThemes</b></a>
         <a href="https://www.facebook.com/HauntedThemes/" class="item" target="_blank"><b><i class="facebook icon"></i> HauntedThemes</b></a>
@@ -73,11 +73,18 @@
                     </ol>
                     <h2>After activation</h2>
                     <ol class="ui list">
-                        <li>Navigate to the <code><b>Settings > Labs</b></code>.</li>
-                        <li>In <code><b>Enable Beta Features</b></code> section, make sure that Public API and Subscribers are checked.</li>
+                        <li>Navigate to the <code><b>Integrations > Custom integrations</b></code>.</li>
+                        <li>Set name: Haunted Themes</li>
+                        <li>
+                            You will need to do 2 more simple steps to authenticate to Ghost Content API.
+                            <ol>
+                                <li>Copy <b>Content API Key</b> from the integration that you set and put it in: <code><b>/assets/js/main.js</b></code> at line 18.</li>
+                                <li>Get the <b>host</b> of your current Ghost instalation. This should be your admin domain. Your admin domain can be different to your main domain. Using the correct domain and protocol are critical to getting consistent behaviour, particularly when dealing with CORS in the browser. All Ghost(Pro) blogs have a *.ghost.io domain as their admin domain and require https. Make sure you remove the last / from the url.</li>
+                            </ol>
+                        </li>
                     </ol>
                     <div class="ui ignored negative message message-inline">
-                        <p><code><b>Public API</b></code> is mandatory in order to use the theme properly!</p>
+                        <p><code><b>Content API Authentication</b></code> is mandatory in order to use the theme properly!</p>
                     </div>
                 </div>
                 <div class="ui divider full-divider"></div>
@@ -93,7 +100,9 @@
     'load-more': <b>false</b>,
     'infinite-scroll': <b>false</b>,
     'infinite-scroll-step': <b>3</b>,
-    'disqus-shortname': <b>'hauntedthemes-demo'</b>
+    'disqus-shortname': <b>'hauntedthemes-demo'</b>,
+    'content-api-host': <b>''</b>,
+    'content-api-key': <b>''</b>
 };</pre>
                     </div>
                     <h3>'share-selected-text'</h3>
@@ -109,6 +118,10 @@
                     <p>Set the number of iteration before the <code><b>Load more posts</b></code> button shows. This way the footer doesn't become useless.</p>
                     <h3>'disqus-shortname'</h3>
                     <p>Enter your Disqus account shortname here to enable comments for blog posts.</p>
+                    <h3>'content-api-host'</h3>
+                    <p>Your admin domain can be different to your main domain. Using the correct domain and protocol are critical to getting consistent behaviour, particularly when dealing with CORS in the browser. All Ghost(Pro) blogs have a *.ghost.io domain as their admin domain and require https.</p>
+                    <h3>'content-api-key'</h3>
+                    <p>The Content API only ever returns public data. Content API keys can be obtained from the Integrations screen in Ghost Admin. The key is provided to the API as a query parameter.</p>
                     <h3>Posts per page</h3>
                     <p>You can define <code><b><a href="https://themes.ghost.org/docs/packagejson#section--config-posts_per_page-" target="_blank">posts_per_page</a></b></code> inside <code><b>package.json</b></code>. This will set the number of posts that will load each iteration.</p>
                 </div>
