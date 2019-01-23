@@ -1,69 +1,46 @@
 {{!-- The tag below means - insert everything in this file into the {body} of the default.hbs template --}}
 {{!< default}}
 
-{{#if @labs.publicAPI}}
-	{{^is "paged"}}
-		{{#get "posts" include="tags, authors" filter="featured:true" limit="5"}}
-			{{#if posts}}
-				<div class="intro">
-					<div class="swiper-container">
-						<ul class="swiper-wrapper">
-							{{#foreach posts}}
-								<li class="swiper-slide">
-									{{> "loop-featured"}}
-								</li>
-						    {{/foreach}}
-						</ul>
-						<div class="swiper-pagination"></div>
-						<a href="#" class="go"><i class="fas fa-angle-down"></i></a>
-					</div>
+{{^is "paged"}}
+	{{#get "posts" include="tags, authors" filter="featured:true" limit="5"}}
+		{{#if posts}}
+			<div class="intro">
+				<div class="swiper-container">
+					<ul class="swiper-wrapper">
+						{{#foreach posts}}
+							<li class="swiper-slide">
+								{{> "loop-featured"}}
+							</li>
+						{{/foreach}}
+					</ul>
+					<div class="swiper-pagination"></div>
+					<a href="#" class="go"><i class="fas fa-angle-down"></i></a>
 				</div>
-			{{else}}
-			    <div class="intro">
-			        <div class="swiper-container">
-			            <div class="swiper-wrapper">
-			                <li class="swiper-slide">
-			                    <div class="bg" {{#if @blog.cover_image}}style="background-image: url({{@blog.cover_image}});"{{/if}}></div>
-			                    <div class="inner">
-			                        <div class="container">
-			                            <div class="row">
-			                                <div class="col-md-9">
-			                                    <h1 class="post-title">{{@blog.title}}</h1>
-			                                    <p class="excerpt">{{@blog.description}}</p>
-			                                </div>
-			                            </div>
-			                        </div>
-			                    </div>
-			                </li>
-			            </div>
-			            <a href="#" class="go"><i class="fas fa-angle-down"></i></a>
-			        </div>
-			    </div>
-			{{/if}}
-		{{/get}}
-	{{/is}}
-{{else}}
-    <div class="intro">
-        <div class="swiper-container">
-            <div class="swiper-wrapper">
-                <li class="swiper-slide">
-                    <div class="bg" {{#if @blog.cover_image}}style="background-image: url({{@blog.cover_image}});"{{/if}}></div>
-                    <div class="inner">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-9">
-                                    <h1 class="post-title">{{@blog.title}}</h1>
-                                    <p class="excerpt">{{@blog.description}}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </div>
-            <a href="#" class="go"><i class="fas fa-angle-down"></i></a>
-        </div>
-    </div>
-{{/if}}
+			</div>
+		{{else}}
+			<div class="intro">
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<li class="swiper-slide">
+							<div class="bg" {{#if @site.cover_image}}style="background-image: url({{@site.cover_image}});"{{/if}}></div>
+							<div class="inner">
+								<div class="container">
+									<div class="row">
+										<div class="col-md-9">
+											<h1 class="post-title">{{@site.title}}</h1>
+											<p class="excerpt">{{@site.description}}</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+					</div>
+					<a href="#" class="go"><i class="fas fa-angle-down"></i></a>
+				</div>
+			</div>
+		{{/if}}
+	{{/get}}
+{{/is}}
 
 {{!-- The main content area --}}
 <main id="content" class="container" role="main">

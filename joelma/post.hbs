@@ -60,7 +60,7 @@
                             <li><a href="https://www.facebook.com/sharer/sharer.php?u={{url absolute="true"}}" onclick="window.open(this.href, 'share-facebook', 'width=580,height=296');return false;" data-toggle="tooltip" data-placement="right" title="{{t "Share on Facebook"}}"><i class="fab fa-facebook-f"></i></a></li>
                             <li><a href="https://plus.google.com/share?url={{url absolute="true"}}" onclick="window.open(this.href, 'share-google-plus', 'width=400,height=466');return false;" data-toggle="tooltip" data-placement="right" title="{{t "Share on Google+"}}"><i class="fab fa-google-plus-g"></i></a></li>
                             <li><a href="https://www.reddit.com/submit?url={{url absolute="true"}}" target="_blank" data-toggle="tooltip" data-placement="right" title="{{t "Share on Reddit"}}"><i class="fab fa-reddit-alien"></i></a></li>
-                            <li><a href="mailto:?subject={{encode @blog.title}}%20-%20{{title}}&amp;body={{url absolute="true"}}" data-toggle="tooltip" data-placement="right" title="{{t "Share by Email"}}"><i class="fas fa-envelope"></i></a></li>
+                            <li><a href="mailto:?subject={{encode @site.title}}%20-%20{{title}}&amp;body={{url absolute="true"}}" data-toggle="tooltip" data-placement="right" title="{{t "Share by Email"}}"><i class="fas fa-envelope"></i></a></li>
                         </ul>
                     </div>
                     
@@ -81,32 +81,30 @@
         </div>
     </div>
 
-    {{#if @labs.publicAPI}}
-        {{#get "posts" limit="6" include="tags, authors" filter="id:-{{id}}+primary_tag:{{primary_tag.slug}}"}}
-            {{#if posts}}
-                <div class="related-posts">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-8 col-sm-10 mr-auto ml-auto">
-                                <h3>{{t "Related posts"}}</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-container">
-                        <div class="swiper-button-prev" title="{{t "Previous post"}}"></div>
-                        <div class="swiper-button-next" title="{{t "Next post"}}"></div>
-                        <div class="swiper-wrapper loop">
-                            {{#foreach posts}}
-                                <div class="swiper-slide">
-                                    {{> "loop"}}
-                                </div>
-                            {{/foreach}}
+    {{#get "posts" limit="6" include="tags, authors" filter="id:-{{id}}+primary_tag:{{primary_tag.slug}}"}}
+        {{#if posts}}
+            <div class="related-posts">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-sm-10 mr-auto ml-auto">
+                            <h3>{{t "Related posts"}}</h3>
                         </div>
                     </div>
                 </div>
-            {{/if}}
-        {{/get}}
-    {{/if}}
+                <div class="swiper-container">
+                    <div class="swiper-button-prev" title="{{t "Previous post"}}"></div>
+                    <div class="swiper-button-next" title="{{t "Next post"}}"></div>
+                    <div class="swiper-wrapper loop">
+                        {{#foreach posts}}
+                            <div class="swiper-slide">
+                                {{> "loop"}}
+                            </div>
+                        {{/foreach}}
+                    </div>
+                </div>
+            </div>
+        {{/if}}
+    {{/get}}
 
     <div class="fixed-post-nav">
         <div class="container">
@@ -115,7 +113,7 @@
                     {{#prev_post}}
                         <a href="{{url}}" class="prev"><i class="fas fa-angle-left"></i> {{t "Previous post"}}</a>
                     {{/prev_post}}
-                    <a href="{{@blog.url}}">{{t "Back to homepage"}}</a>
+                    <a href="{{@site.url}}">{{t "Back to homepage"}}</a>
                     {{#next_post}}
                         <a href="{{url}}" class="next">{{t "Next post"}} <i class="fas fa-angle-right"></i></a>
                     {{/next_post}}

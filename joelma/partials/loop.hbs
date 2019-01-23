@@ -28,12 +28,10 @@
                     <li><a href="https://www.facebook.com/sharer/sharer.php?u={{url absolute="true"}}" onclick="window.open(this.href, 'share-facebook', 'width=580,height=296');return false;" data-toggle="tooltip" data-placement="right" title="{{t "Share on Facebook"}}"><i class="fab fa-facebook-f"></i></a></li>
                     <li><a href="https://plus.google.com/share?url={{url absolute="true"}}" onclick="window.open(this.href, 'share-google-plus', 'width=400,height=466');return false;" data-toggle="tooltip" data-placement="right" title="{{t "Share on Google+"}}"><i class="fab fa-google-plus-g"></i></a></li>
                     <li><a href="https://www.reddit.com/submit?url={{url absolute="true"}}" target="_blank" data-toggle="tooltip" data-placement="right" title="{{t "Share on Reddit"}}"><i class="fab fa-reddit-alien"></i></a></li>
-                    <li><a href="mailto:?subject={{encode @blog.title}}%20-%20{{encode title}}&amp;body={{url absolute="true"}}" data-toggle="tooltip" data-placement="right" title="{{t "Share by Email"}}"><i class="fas fa-envelope"></i></a></li>
+                    <li><a href="mailto:?subject={{encode @site.title}}%20-%20{{encode title}}&amp;body={{url absolute="true"}}" data-toggle="tooltip" data-placement="right" title="{{t "Share by Email"}}"><i class="fas fa-envelope"></i></a></li>
                 </ul>
             </li>
         </ul>
-        {{#if @labs.publicAPI}}
         <a href="#" class="read-later" data-id="{{id}}"><i class="far fa-bookmark" data-toggle="tooltip" data-placement="right" title="{{t "Bookmark article"}}"></i><i class="fas fa-bookmark" data-toggle="tooltip" data-placement="right" title="{{t "Remove bookmark"}}"></i></a>
-        {{/if}}
     </div>
 </article>

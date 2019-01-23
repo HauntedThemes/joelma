@@ -20,7 +20,7 @@
                         <article class="{{post_class}}">
                             <h1 class="post-title">
                                 {{^if success}}
-                                    {{t "Subscribe to {blogtitle}" blogtitle=@blog.title}}
+                                    {{t "Subscribe to {blogtitle}" blogtitle=@site.title}}
                                 {{else}}
                                     {{t "Subscribed!"}}
                                 {{/if}}
@@ -35,7 +35,7 @@
                                     }}
                                 {{else}}
                                     <p>
-                                        {{t "You've successfully subscribed to"}} <em>{{@blog.title}}</em>
+                                        {{t "You've successfully subscribed to"}} <em>{{@site.title}}</em>
                                         {{t "with the email address"}} <em>{{email}}</em>.
                                     </p>
                                 {{/if}}
@@ -49,6 +49,9 @@
 
     {{> theme_footer}}
 
+    {{!-- Ghost Content API --}}
+    <script type="text/javascript" src="https://unpkg.com/@tryghost/content-api@1.0.0/umd/content-api.min.js"></script>
+
     {{!-- 3rd party scripts --}}
     <script type="text/javascript" src="{{asset "js/libraries.js"}}"></script>
     
@@ -57,9 +60,6 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/localization/messages_{{lang}}.js"></script>
     --}}
 
-    {{!-- Ghost outputs important scripts and data with this tag --}}
-    {{ghost_foot}}
-    
     {{!-- The main JavaScript file for Joelma --}}
     {{#if pagination.pages}}
     <script>
@@ -68,5 +68,7 @@
     {{/if}}
     <script type="text/javascript" src="{{asset "js/main.js"}}"></script>
 
+    {{!-- Ghost outputs important scripts and data with this tag --}}
+    {{ghost_foot}}
 </body>
 </html>

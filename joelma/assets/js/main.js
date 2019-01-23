@@ -9,7 +9,9 @@ jQuery(document).ready(function($) {
         'load-more': false,
         'infinite-scroll': false,
         'infinite-scroll-step': 1,
-        'disqus-shortname': 'hauntedthemes-demo'
+        'disqus-shortname': 'hauntedthemes-demo',
+        'content-api-host': 'http://localhost:2368',
+        'content-api-key': '8a13e02a8917186f02014db742',
     };
 
     var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
@@ -17,6 +19,12 @@ jQuery(document).ready(function($) {
         readLaterPosts = [],
         noBookmarksMessage = $('.no-bookmarks').html(),
         monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "Sepember", "October", "November", "December"];
+
+    var ghostAPI = new GhostContentAPI({
+        host: config['content-api-host'],
+        key: config['content-api-key'],
+        version: 'v2'
+    });
 
     // Detect IE
     if (/MSIE 10/i.test(navigator.userAgent) || /MSIE 9/i.test(navigator.userAgent) || /rv:11.0/i.test(navigator.userAgent)) {
@@ -67,15 +75,13 @@ jQuery(document).ready(function($) {
         },
     });
 
-    if (typeof ghost !== 'undefined') {
-        // Check 'read later' posts 
-        if (typeof Cookies.get('joelma-read-later') !== "undefined") {
-            readLaterPosts = JSON.parse(Cookies.get('joelma-read-later'));
-        }
+    // Check 'read later' posts 
+    if (typeof Cookies.get('joelma-read-later') !== "undefined") {
+        readLaterPosts = JSON.parse(Cookies.get('joelma-read-later'));
+    }
 
-        readLaterPosts = readLater($('#content .loop'), readLaterPosts);
-        readLaterPosts = readLater($('.related-posts'), readLaterPosts);
-    };
+    readLaterPosts = readLater($('#content .loop'), readLaterPosts);
+    readLaterPosts = readLater($('.related-posts'), readLaterPosts);
 
     $('.go').on('click', function(event) {
         event.preventDefault();
@@ -205,52 +211,63 @@ jQuery(document).ready(function($) {
 
     // Initialize ghostHunter - A Ghost blog search engine
     function searchInit(id){
-        var searchField = $(id + " #search-field").ghostHunter({
-            results             : id + " #results",
-            onKeyUp             : true,
-            zeroResultsInfo     : true,
-            displaySearchInfo   : false,
-            onComplete      : function( results ){
 
-                $(id + " #results").empty();
+        var ghostSearch = new GhostSearch({
+            host: config['content-api-host'],
+            key: config['content-api-key'],
+            input: id + " #search-field",
+            results: id + " #results",
+            api: {
+                parameters: { 
+                    fields: ['title', 'slug', 'published_at', 'primary_tag', 'id'],
+                    include: 'tags',
+                },
+            },
+            on: {
+                afterDisplay: function(results){
 
-                var tags = [];
-                $.each(results, function(index, val) {
-                    if (val.tags.length) {
-                        if ($.inArray(val.tags[0], tags) === -1) {
-                            tags.push(val.tags[0]);
+                    $(id + " #results").empty();
+                    
+                    var tags = [];
+                    $.each(results, function(index, val) {
+                        if (val.obj.primary_tag) {
+                            if ($.inArray(val.obj.primary_tag.name, tags) === -1) {
+                                tags.push(val.obj.primary_tag.name);
+                            };
+                        }else{
+                            if ($.inArray('Other', tags) === -1) {
+                                tags.push('Other');
+                            };
                         };
-                    }else{
-                        if ($.inArray('Other', tags) === -1) {
-                            tags.push('Other');
+                    });
+    
+                    tags.sort();
+    
+                    $.each(tags, function(index, val) {
+                        var tag = val;
+                        if (val == 'Other') {
+                            tag = $(id + ' #results').attr('data-other');
                         };
-                    };
-                });
-                tags.sort();
-
-                $.each(tags, function(index, val) {
-                    var tag = val;
-                    if (val == 'Other') {
-                        tag = $('#results').attr('data-other');
-                    };
-                    $(id + " #results").append('<h5>'+ tag +'</h5><ul data-tag="'+ val +'" class="list-box"</ul>');
-                });
-
-                $.each(results, function(index, val) {
-                    var dateSplit = val.pubDate.split(' ')
-                    var month = monthNames.indexOf(dateSplit[1])+1;
-                    var date = moment(dateSplit[0]+'-'+month+'-'+dateSplit[2], "DD-MM-YYYY").format('DD MMM YYYY');
-                    if (val.tags.length) {
-                        $(id + ' #results ul[data-tag="'+ val.tags[0] +'"]').append('<li><a href="#" class="read-later" data-id="'+ val.ref +'"><i class="far fa-bookmark"></i><i class="fas fa-bookmark"></i></a><time>'+ date +'</time><a href="'+ val.link +'">'+ val.title +'</a></li>');
-                    }else{
-                        $(id + ' #results ul[data-tag="Other"]').append('<li><a href="#" class="read-later" data-id="'+ val.ref +'"><i class="far fa-bookmark"></i><i class="fas fa-bookmark"></i></a><time>'+ date +'</time><a href="'+ val.link +'">'+ val.title +'</a></li>');
-                    };
-                });
-
-                readLaterPosts = readLater($(id + " #results"), readLaterPosts);
-
+                        $(id + ' #results').append('<h5>'+ tag +'</h5><ul data-tag="'+ val +'" class="list-box"></ul>');
+                    });
+    
+                    $.each(results, function(index, val) {
+                        var dateSplit = val.obj.published_at.split('T');
+                        dateSplit = dateSplit[0].split('-');
+                        var month = monthNames[dateSplit[1]-1];
+                        var date = moment(dateSplit[2]+'-'+month+'-'+dateSplit[1], "DD-MM-YYYY").format('DD MMM YYYY');
+                        if (val.obj.primary_tag) {
+                            $(id + ' #results ul[data-tag="'+ val.obj.primary_tag.name +'"]').append('<li><a href="#" class="read-later" data-id="'+ val.obj.id +'"><i class="far fa-bookmark"></i><i class="fas fa-bookmark"></i></a><time>'+ date +'</time><a href="'+ val.obj.slug +'">'+ val.obj.title +'</a></li>');
+                        }else{
+                            $(id + ' #results ul[data-tag="Other"]').append('<li><a href="#" class="read-later" data-id="'+ val.obj.id +'"><i class="far fa-bookmark"></i><i class="fas fa-bookmark"></i></a><time>'+ date +'</time><a href="'+ val.obj.slug +'">'+ val.obj.title +'</a></li>');
+                        };
+                    });
+    
+                    readLaterPosts = readLater($(id + ' #results'), readLaterPosts);
+    
+                },
             }
-        });   
+        })
 
         if (w > 575) {
             if (!$('body').hasClass('ie')) {
@@ -303,67 +320,138 @@ jQuery(document).ready(function($) {
             var filter = readLaterPosts.toString();
             filter = "id:["+filter+"]";
 
-            $.get(ghost.url.api('posts', {filter:filter, include:"tags"})).done(function (data){
-                $('.bookmark-container').empty();
-                var tags = [];
-                $.each(data.posts, function(index, val) {
-                    if (val.tags.length) {
-                        if ($.inArray(val.tags[0].name, tags) === -1) {
-                            tags.push(val.tags[0].name);
-                        };
-                    }else{
-                        if ($.inArray('Other', tags) === -1) {
-                            tags.push('Other');
-                        };
-                    };
-                });
-                tags.sort();
+            ghostAPI.posts
+                .browse({limit: 'all', filter: filter, include: 'tags'})
+                .then((results) => {
 
-                $.each(tags, function(index, val) {
-                    var tag = val;
-                    if (val == 'Other') {
-                        tag = $('#results').attr('data-other');
-                    };
-                    $('.bookmark-container').append('<h5>'+ tag +'</h5><ul data-tag="'+ val +'" class="list-box"</ul>');
-                });
+                    $('.bookmark-container').empty();
 
-                $.each(data.posts, function(index, val) {
-                    var dateSplit = prettyDate(val.published_at).split(' ')
-                    var month = monthNames.indexOf(dateSplit[1])+1;
-                    var date = moment(dateSplit[0]+'-'+month+'-'+dateSplit[2], "DD-MM-YYYY").format('DD MMM YYYY');
-                    if (val.tags.length) {
-                        $('.bookmark-container ul[data-tag="'+ val.tags[0].name +'"]').append('<li><time>'+ date +'</time><a href="#" class="read-later active" data-id="'+ val.id +'"><i class="far fa-bookmark"></i><i class="fas fa-bookmark"></i></a><a href="/'+ val.slug +'">'+ val.title +'</a></li>');
-                    }else{
-                        $('.bookmark-container ul[data-tag="Other"]').append('<li><a href="#" class="read-later active" data-id="'+ val.id +'"><i class="far fa-bookmark"></i><i class="fas fa-bookmark"></i></a><time>'+ date +'</time><a href="/'+ val.slug +'">'+ val.title +'</a></li>');
-                    };
-                });
-
-                $('.bookmark-container').find('.read-later').each(function(index, el) {
-                    $(this).on('click', function(event) {
-                        event.preventDefault();
-                        var id = $(this).attr('data-id');
-                        if ($(this).hasClass('active')) {
-                            removeValue(readLaterPosts, id);
+                    var tags = [];
+                    $.each(results, function(index, val) {
+                        if (val.primary_tag) {
+                            if ($.inArray(val.primary_tag.name, tags) === -1) {
+                                tags.push(val.primary_tag.name);
+                            };
                         }else{
-                            readLaterPosts.push(id);
+                            if ($.inArray('Other', tags) === -1) {
+                                tags.push('Other');
+                            };
                         };
-                        $('.read-later[data-id="'+ id +'"]').each(function(index, el) {
-                            $(this).toggleClass('active');
-                        });
-                        Cookies.set('joelma-read-later', readLaterPosts, { expires: 365 });
-                        bookmarks(readLaterPosts);
                     });
+    
+                    tags.sort();
+
+                    $.each(tags, function(index, val) {
+                        var tag = val;
+                        if (val == 'Other') {
+                            tag = $('.bookmark-container').attr('data-other');
+                        };
+                        $('.bookmark-container').append('<h5>'+ tag +'</h5><ul data-tag="'+ val +'" class="list-box"></ul>');
+                    });
+    
+                    $.each(results, function(index, val) {
+                        var dateSplit = val.published_at.split('T');
+                        dateSplit = dateSplit[0].split('-');
+                        var month = monthNames[dateSplit[1]-1];
+                        var date = moment(dateSplit[2]+'-'+month+'-'+dateSplit[1], "DD-MM-YYYY").format('DD MMM YYYY');
+                        if (val.primary_tag) {
+                            $('.bookmark-container ul[data-tag="'+ val.primary_tag.name +'"]').append('<li><a href="#" class="read-later active" data-id="'+ val.id +'"><i class="far fa-bookmark"></i><i class="fas fa-bookmark"></i></a><time>'+ date +'</time><a href="'+ val.slug +'">'+ val.title +'</a></li>');
+                        }else{
+                            $('.bookmark-container ul[data-tag="Other"]').append('<li><a href="#" class="read-later active" data-id="'+ val.id +'"><i class="far fa-bookmark"></i><i class="fas fa-bookmark"></i></a><time>'+ date +'</time><a href="'+ val.slug +'">'+ val.title +'</a></li>');
+                        };
+                    });
+
+                    $('.bookmark-container').find('.read-later').each(function(index, el) {
+                        $(this).on('click', function(event) {
+                            event.preventDefault();
+                            var id = $(this).attr('data-id');
+                            if ($(this).hasClass('active')) {
+                                removeValue(readLaterPosts, id);
+                            }else{
+                                readLaterPosts.push(id);
+                            };
+                            $('.read-later[data-id="'+ id +'"]').each(function(index, el) {
+                                $(this).toggleClass('active');
+                            });
+                            Cookies.set('joelma-read-later', readLaterPosts, { expires: 365 });
+                            bookmarks(readLaterPosts);
+                        });
+                    });
+
+                    if (results) {
+                        $('header .counter').removeClass('hidden').text(results.length);
+                    }else{
+                        $('header .counter').addClass('hidden');
+                        $('.bookmark-container').append('<p class="no-bookmarks"></p>');
+                        $('.no-bookmarks').html(noBookmarksMessage)
+                    };
+
+                })
+                .catch((err) => {
+                    console.error(err);
                 });
 
-                if (data.posts.length) {
-                    $('header .counter').removeClass('hidden').text(data.posts.length);
-                }else{
-                    $('header .counter').addClass('hidden');
-                    $('.bookmark-container').append('<p class="no-bookmarks"></p>');
-                    $('.no-bookmarks').html(noBookmarksMessage)
-                };
+            // $.get(ghost.url.api('posts', {filter:filter, include:"tags"})).done(function (data){
+            //     $('.bookmark-container').empty();
+            //     var tags = [];
+            //     $.each(data.posts, function(index, val) {
+            //         if (val.tags.length) {
+            //             if ($.inArray(val.tags[0].name, tags) === -1) {
+            //                 tags.push(val.tags[0].name);
+            //             };
+            //         }else{
+            //             if ($.inArray('Other', tags) === -1) {
+            //                 tags.push('Other');
+            //             };
+            //         };
+            //     });
+            //     tags.sort();
 
-            });
+            //     $.each(tags, function(index, val) {
+            //         var tag = val;
+            //         if (val == 'Other') {
+            //             tag = $('#results').attr('data-other');
+            //         };
+            //         $('.bookmark-container').append('<h5>'+ tag +'</h5><ul data-tag="'+ val +'" class="list-box"</ul>');
+            //     });
+
+            //     $.each(data.posts, function(index, val) {
+            //         var dateSplit = prettyDate(val.published_at).split(' ')
+            //         var month = monthNames.indexOf(dateSplit[1])+1;
+            //         var date = moment(dateSplit[0]+'-'+month+'-'+dateSplit[2], "DD-MM-YYYY").format('DD MMM YYYY');
+            //         if (val.tags.length) {
+            //             $('.bookmark-container ul[data-tag="'+ val.tags[0].name +'"]').append('<li><time>'+ date +'</time><a href="#" class="read-later active" data-id="'+ val.id +'"><i class="far fa-bookmark"></i><i class="fas fa-bookmark"></i></a><a href="/'+ val.slug +'">'+ val.title +'</a></li>');
+            //         }else{
+            //             $('.bookmark-container ul[data-tag="Other"]').append('<li><a href="#" class="read-later active" data-id="'+ val.id +'"><i class="far fa-bookmark"></i><i class="fas fa-bookmark"></i></a><time>'+ date +'</time><a href="/'+ val.slug +'">'+ val.title +'</a></li>');
+            //         };
+            //     });
+
+            //     $('.bookmark-container').find('.read-later').each(function(index, el) {
+            //         $(this).on('click', function(event) {
+            //             event.preventDefault();
+            //             var id = $(this).attr('data-id');
+            //             if ($(this).hasClass('active')) {
+            //                 removeValue(readLaterPosts, id);
+            //             }else{
+            //                 readLaterPosts.push(id);
+            //             };
+            //             $('.read-later[data-id="'+ id +'"]').each(function(index, el) {
+            //                 $(this).toggleClass('active');
+            //             });
+            //             Cookies.set('joelma-read-later', readLaterPosts, { expires: 365 });
+            //             bookmarks(readLaterPosts);
+            //         });
+            //     });
+
+            //     if (data.posts.length) {
+            //         $('header .counter').removeClass('hidden').text(data.posts.length);
+            //     }else{
+            //         $('header .counter').addClass('hidden');
+            //         $('.bookmark-container').append('<p class="no-bookmarks"></p>');
+            //         $('.no-bookmarks').html(noBookmarksMessage)
+            //     };
+
+            // });
         }else{
             $('header .counter').addClass('hidden');
             $('.bookmark-container').append('<p class="no-bookmarks"></p>');
