@@ -257,9 +257,9 @@ jQuery(document).ready(function($) {
                         var month = monthNames[dateSplit[1]-1];
                         var date = moment(dateSplit[2]+'-'+month+'-'+dateSplit[1], "DD-MM-YYYY").format('DD MMM YYYY');
                         if (val.obj.primary_tag) {
-                            $(id + ' #results ul[data-tag="'+ val.obj.primary_tag.name +'"]').append('<li><a href="#" class="read-later" data-id="'+ val.obj.id +'"><i class="far fa-bookmark"></i><i class="fas fa-bookmark"></i></a><time>'+ date +'</time><a href="'+ val.obj.slug +'">'+ val.obj.title +'</a></li>');
+                            $(id + ' #results ul[data-tag="'+ val.obj.primary_tag.name +'"]').append('<li><a href="#" class="read-later" data-id="'+ val.obj.id +'"><i class="far fa-bookmark"></i><i class="fas fa-bookmark"></i></a><time>'+ date +'</time><a href="/'+ val.obj.slug +'/">'+ val.obj.title +'</a></li>');
                         }else{
-                            $(id + ' #results ul[data-tag="Other"]').append('<li><a href="#" class="read-later" data-id="'+ val.obj.id +'"><i class="far fa-bookmark"></i><i class="fas fa-bookmark"></i></a><time>'+ date +'</time><a href="'+ val.obj.slug +'">'+ val.obj.title +'</a></li>');
+                            $(id + ' #results ul[data-tag="Other"]').append('<li><a href="#" class="read-later" data-id="'+ val.obj.id +'"><i class="far fa-bookmark"></i><i class="fas fa-bookmark"></i></a><time>'+ date +'</time><a href="/'+ val.obj.slug +'/">'+ val.obj.title +'</a></li>');
                         };
                     });
     
@@ -355,9 +355,9 @@ jQuery(document).ready(function($) {
                         var month = monthNames[dateSplit[1]-1];
                         var date = moment(dateSplit[2]+'-'+month+'-'+dateSplit[1], "DD-MM-YYYY").format('DD MMM YYYY');
                         if (val.primary_tag) {
-                            $('.bookmark-container ul[data-tag="'+ val.primary_tag.name +'"]').append('<li><a href="#" class="read-later active" data-id="'+ val.id +'"><i class="far fa-bookmark"></i><i class="fas fa-bookmark"></i></a><time>'+ date +'</time><a href="'+ val.slug +'">'+ val.title +'</a></li>');
+                            $('.bookmark-container ul[data-tag="'+ val.primary_tag.name +'"]').append('<li><a href="#" class="read-later active" data-id="'+ val.id +'"><i class="far fa-bookmark"></i><i class="fas fa-bookmark"></i></a><time>'+ date +'</time><a href="/'+ val.slug +'/">'+ val.title +'</a></li>');
                         }else{
-                            $('.bookmark-container ul[data-tag="Other"]').append('<li><a href="#" class="read-later active" data-id="'+ val.id +'"><i class="far fa-bookmark"></i><i class="fas fa-bookmark"></i></a><time>'+ date +'</time><a href="'+ val.slug +'">'+ val.title +'</a></li>');
+                            $('.bookmark-container ul[data-tag="Other"]').append('<li><a href="#" class="read-later active" data-id="'+ val.id +'"><i class="far fa-bookmark"></i><i class="fas fa-bookmark"></i></a><time>'+ date +'</time><a href="/'+ val.slug +'/">'+ val.title +'</a></li>');
                         };
                     });
 
