@@ -2,7 +2,7 @@
     "name": "joelma",
     "description": "Joelma is a feature-rich theme that is likely to impress you with its beautiful design. This theme has everything that a professional blog needs. Check it out!",
     "demo": "https://joelma.hauntedthemes.com/",
-    "version": "2.0.2",
+    "version": "2.1.0",
     "license": "GNU General Public License, Version 2",
     "engines": {
         "ghost": ">=2.0.0",
