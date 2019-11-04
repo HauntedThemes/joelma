@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="{{@site.lang}}">
+<head>
+
+    {{> theme_head}}
+
+    {{!-- Ghost outputs important style and meta data with this tag --}}
+    {{ghost_head}}
+
+</head>
+<body class="{{body_class}} nav-closed">
+
+    <div class="main-container">
+    
+        {{> theme_header}}
+        
+        {{{body}}}
+
+        {{> theme_footer}}
+
+    </div>
+
+    {{#if pagination.pages}}
+    <script>
+        var maxPages = parseInt('{{pagination.pages}}');
+    </script>
+    {{/if}}
+
+    {{!-- The main JavaScript file --}}
+    <script type="text/javascript" src="{{asset "built/main.js"}}"></script>
+
+    {{!-- Ghost outputs important scripts and data with this tag --}} 
+    {{ghost_foot}}
+</body>
+</html>

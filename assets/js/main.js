@@ -4,16 +4,6 @@
 
 jQuery(document).ready(function($) {
 
-    var config = {
-        'share-selected-text': true,
-        'load-more': false,
-        'infinite-scroll': false,
-        'infinite-scroll-step': 1,
-        'disqus-shortname': 'hauntedthemes-demo',
-        'content-api-host': '',
-        'content-api-key': '',
-    };
-
     var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
         h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0),
         readLaterPosts = [],
@@ -23,7 +13,7 @@ jQuery(document).ready(function($) {
     var ghostAPI = new GhostContentAPI({
         host: config['content-api-host'],
         key: config['content-api-key'],
-        version: 'v2'
+        version: 'v3'
     });
 
     // Detect IE
@@ -322,7 +312,7 @@ jQuery(document).ready(function($) {
 
             ghostAPI.posts
                 .browse({limit: 'all', filter: filter, include: 'tags'})
-                .then((results) => {
+                .then(function(results){
 
                     $('.bookmark-container').empty();
 
@@ -387,7 +377,7 @@ jQuery(document).ready(function($) {
                     };
 
                 })
-                .catch((err) => {
+                .catch(function(err){
                     console.error(err);
                 });
 
