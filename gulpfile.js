@@ -63,6 +63,7 @@ function js(done) {
             'node_modules/simplebar/dist/simplebar.min.js',
             'node_modules/swiper/js/swiper.min.js',
             'node_modules/clipboard/dist/clipboard.min.js',
+            'node_modules/sticky-kit/dist/sticky-kit.min.js',
             // 'node_modules/moment/locale/[COUNTRY-CODE].js', // Replace [COUNTRY-CODE] with value from Ghost Dashboard -> General -> Publication Language if different than 'en'. Example: fr.js
             'node_modules/moment/min/moment.min.js',
             // 'node_modules/jquery-validation/dist/localization/messages_[COUNTRY-CODE].min.js', // Replace [COUNTRY-CODE] with value from Ghost Dashboard -> General -> Publication Language if different than 'en'. Example: messages_fr.min.js

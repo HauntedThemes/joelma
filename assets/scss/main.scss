@@ -1,4 +1,6 @@
 @import '_vendors';
+@import '_variables';
+@import '_header';
 
 /* ==========================================================================
    Table of Contents
@@ -6,7 +8,6 @@
 
 /*
 
-    0.  Normalize
     1.  General
     2.  Header
     3.  Inner Content
@@ -19,110 +20,34 @@
 */
 
 /* ==========================================================================
-   0. Normalize
-   ========================================================================== */
-
-html {
-    font-family: sans-serif;
-    -ms-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%
-}
-body { margin: 0; }
-article, aside, details,
-figcaption, figure,
-footer, header,
-main, menu, nav,
-section, summary { display:block; }
-audio, canvas, progress, video {
-    display: inline-block;
-    vertical-align: baseline;
-}
-audio:not([controls]) { display: none; height: 0; }
-[hidden], template { display: none; }
-a { background-color: transparent;}
-a:active, a:hover { outline: 0; }
-abbr[title] { border-bottom: 1px dotted; }
-b, strong { font-weight: bold; }
-dfn { font-style: italic; }
-h1 { font-size: 2em; margin: 0.67em 0; }
-mark { background: #ff0; color: #000; }
-small { font-size: 80%; }
-sub, sup {
-    font-size: 75%;
-    line-height: 0;
-    position: relative;
-    vertical-align: baseline;
-}
-sup { top: -0.5em; }
-sub { bottom: -0.25em; }
-img { border: 0; }
-svg:not(:root) { overflow: hidden; }
-figure { margin: 1em 40px; }
-hr { box-sizing: content-box; height: 0; }
-pre { overflow: auto; }
-code, kbd, pre, samp { font-family: monospace, monospace; font-size: 1em; }
-button, input, optgroup, select, textarea {
-    color: inherit;
-    font: inherit;
-    margin: 0;
-}
-button { overflow: visible; }
-button, select { text-transform: none; }
-button, html input[type="button"],
-input[type="reset"], input[type="submit"] {
-    -webkit-appearance: button;
-    cursor: pointer;
-}
-button[disabled], html input[disabled] { cursor: default; }
-button::-moz-focus-inner, input::-moz-focus-inner { border: 0; padding: 0; }
-input { line-height: normal; }
-input[type="checkbox"],
-input[type="radio"] { box-sizing: border-box; padding: 0; }
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button { height: auto; }
-input[type="search"] { -webkit-appearance: textfield; }
-input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; }
-fieldset {
-    border: 1px solid #c0c0c0;
-    margin: 0 2px;
-    padding: 0.35em 0.625em 0.75em;
-}
-legend { border: 0; padding: 0; }
-textarea { overflow: auto; }
-optgroup { font-weight: bold; }
-table{ border-collapse: collapse; border-spacing: 0; }
-td, th{ padding: 0; }
-
-/* ==========================================================================
    1. General
    ========================================================================== */
 
 ::selection {
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba($black, 0.2);
 }
 ::-moz-selection {
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba($black, 0.2);
 }
 
 ::-webkit-input-placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba($white, 0.5);
 }
 ::-moz-placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba($white, 0.5);
 }
 :-ms-input-placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba($white, 0.5);
 }
 :-moz-placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba($white, 0.5);
 }
 
 body{
-    font-family: "sofia-pro", "Ubuntu", sans-serif;
+    font-family: $main_font;
     font-weight: 300;
-    color: #000000;
-    background: #fff;
+    color: $black;
+    background: $white;
     font-size: 16px;
 }
 
@@ -137,7 +62,7 @@ b, strong{
 }
 
 a{
-    color: #000000;
+    color: $black;
     -webkit-transition: all 0.5s;
     transition: all 0.5s;
     -webkit-transition-timing-function: cubic-bezier(0.2,1,0.3,1);
@@ -146,7 +71,7 @@ a{
 
 a:hover{
     text-decoration: none;
-    color: #667EEA;
+    color: $purple;
 }
 
 p{
@@ -158,11 +83,11 @@ p{
 code, kbd, pre, samp {
     font-family: monospace, monospace;
     font-size: 1em;
-    color: #A0A8BD;
+    color: $grey-1;
 }
 
 mark{
-    background: rgba(160, 168, 189, 0.2);
+    background: rgba($grey-1, 0.2);
 }
 
 figure{
@@ -181,7 +106,7 @@ pre code,
 label.error{
     font-size: 12px;
     margin-top: 5px;
-    color: #ea6666;
+    color: $red;
 }
 
 input, textarea{
@@ -189,11 +114,11 @@ input, textarea{
     padding: 6px 12px;
     font-size: 16px;
     line-height: 1.42857143;
-    color: #fff;
-    background-color: #000;
+    color: $white;
+    background-color: $black;
     background-image: none;
     background: #202226;
-    border: 1px solid #a0a8bd;
+    border: 1px solid $grey-1;
     box-sizing: border-box;
     border-radius: 3px;
     height: 40px;
@@ -207,13 +132,13 @@ input, textarea{
     outline: 0;
     line-height: normal;
     font-size: 14px;
-    color: #fff;
+    color: $white;
     text-transform: uppercase;
     font-weight: bold;
     position: relative;
     background: transparent;
-    border: 1px solid #a0a8be;
-    color: #a0a8bd;
+    border: 1px solid $grey-1;
+    color: $grey-1;
     outline: 0;
 }
 
@@ -231,7 +156,7 @@ body.scroll header{
 }
 
 body.scroll header:hover{
-    background: #000;
+    background: $black;
 }
 
 header{
@@ -264,11 +189,11 @@ body.scroll header .blog-logo img{
 }
 
 header a{
-    color: #fff;
+    color: $white;
 }
 
 header a svg path{
-    fill: #fff;
+    fill: $white;
     -webkit-transition: all .3s cubic-bezier(0.2,1,0.3,1);
     -moz-transition: all .3s cubic-bezier(0.2,1,0.3,1);
     -o-transition: all .3s cubic-bezier(0.2,1,0.3,1);
@@ -276,7 +201,7 @@ header a svg path{
 }
 
 header a:hover svg path{
-    fill: #667EEA;
+    fill: $purple;
 }
 
 header nav ul{
@@ -346,7 +271,7 @@ header .inner{
 }
 
 header .navigation{
-    border-right: 1px solid rgba(255, 255, 255, 0.25);
+    border-right: 1px solid rgba($white, 0.25);
     margin-right: 20px;
 }
 
@@ -414,7 +339,7 @@ header .popover .arrow {
 header .popover,
 header .popover{
     background: transparent;
-    box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 10px 40px rgba($black, 0.1);
     border-radius: 3px;
     margin-top: 0;
     width: 300px;
@@ -438,7 +363,7 @@ header .popover input{
     background: #54575d;
     border: none;
     outline: 0;
-    color: #fff;
+    color: $white;
     padding: 10px 15px;
     width: 100%;
     border-radius: 3px 3px 0 0;
@@ -453,8 +378,8 @@ header .popover h5{
     padding: 10px 15px;
     line-height: 20px;
     font-size: 12px;
-    color: #A0A8BD;
-    background: rgba(160, 168, 189, 0.2);
+    color: $grey-1;
+    background: rgba($grey-1, 0.2);
     margin: 0;
     font-weight: bold;
 }
@@ -471,7 +396,7 @@ header .popover-body ul{
 
 header .popover-body ul li{
     padding: 10px 35px 10px 15px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba($black, 0.2);
     position: relative;
 }
 
@@ -490,7 +415,7 @@ header .popover-body a{
 }
 
 header .popover-body time{
-    color: #fff;
+    color: $white;
     font-size: 12px;
     margin-bottom: 5px;
     display: block;
@@ -499,7 +424,7 @@ header .popover-body time{
 header .popover-body h3{
     font-size: 18px;
     padding: 15px;
-    color: #fff;
+    color: $white;
     margin: 0;
 }
 
@@ -516,7 +441,7 @@ header .bookmark .counter{
     width: 20px;
     height: 20px;
     position: absolute;
-    background: #A0A8BD;
+    background: $grey-1;
     z-index: 2;
     border-radius: 50%;
     text-align: center;
@@ -526,7 +451,7 @@ header .bookmark .counter{
 }
 
 header .no-bookmarks{
-    color: #fff;
+    color: $white;
     font-size: 14px;
     margin: 0;
     padding: 0 15px 15px 15px;
@@ -579,15 +504,15 @@ header .blog-logo span{
 
 header .popover-body ul.social-icons{
     display: flex;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba($black, 0.2);
+    border-top: 1px solid rgba($black, 0.2);
 }
 
 header .popover-body ul.social-icons li{
     flex: 1;
     padding: 0;
     border: none;
-    border-right: 1px solid rgba(0, 0, 0, 0.2);
+    border-right: 1px solid rgba($black, 0.2);
 }
 
 header .popover-body ul.social-icons li:last-child{
@@ -607,7 +532,7 @@ header .popover-body ul.social-icons li a{
     overflow: hidden;
     position: relative;
     z-index: 2;
-    background: #fff;
+    background: $white;
 }
 
 .intro{
@@ -655,13 +580,13 @@ header .popover-body ul.social-icons li a{
     width: 100%;
     height: 100%;
     z-index: 1;
-    background: linear-gradient(180deg, #000000 0%, rgba(51, 51, 51, 0.5) 100%);
+    background: linear-gradient(180deg, $black 0%, rgba(51, 51, 51, 0.5) 100%);
 }
 
 .intro .swiper-slide .inner{
     position: relative;
     z-index: 2;
-    color: #fff;
+    color: $white;
     display: flex;
     height: 100%;
     width: 100%;
@@ -710,7 +635,7 @@ header .popover-body ul.social-icons li a{
     left: 0;
     width: 100%;
     height: 100%;
-    background: #fff;
+    background: $white;
     -webkit-transform: translate3d(0,100%,0);
     transform: translate3d(0,100%,0);
     -webkit-transition: -webkit-transform 0.5s;
@@ -741,11 +666,11 @@ header .popover-body ul.social-icons li a{
 }
 
 .intro a{
-    color: #fff;
+    color: $white;
 }
 
 .intro a:hover{
-    color: #667EEA;
+    color: $purple;
 }
 
 .intro .tags{
@@ -753,7 +678,7 @@ header .popover-body ul.social-icons li a{
 }
 
 .intro .post-meta{
-    color: #FFFFFF;
+    color: $white;
 }
 
 .intro .post-meta a{
@@ -771,7 +696,7 @@ header .popover-body ul.social-icons li a{
     align-items: center;
     justify-content: center;
     margin-left: -25px;
-    color: #fff;
+    color: $white;
     font-size: 24px;
     opacity: .5;
     transform: translateY(0);
@@ -783,7 +708,7 @@ header .popover-body ul.social-icons li a{
 
 .go:hover{
     opacity: 1;
-    color: #fff;
+    color: $white;
 }
 
 .excerpt{
@@ -807,9 +732,9 @@ header .popover-body ul.social-icons li a{
     margin-bottom: 10px;
     line-height: 20px;
     font-size: 12px;
-    color: #A0A8BD;
+    color: $grey-1;
     border: 1px solid transparent;
-    background: rgba(160, 168, 189, 0.2);
+    background: rgba($grey-1, 0.2);
     border-radius: 15px;
     padding: 3px 15px;
     font-weight: normal;
@@ -818,8 +743,8 @@ header .popover-body ul.social-icons li a{
 
 .tags li a:hover{
     background: transparent;
-    border: 1px solid #667EEA;
-    color: #667EEA;
+    border: 1px solid $purple;
+    color: $purple;
 }
 
 .read-later{
@@ -883,7 +808,7 @@ header .popover-body ul.social-icons li a{
 }
 
 .share a:hover{
-    color: #000000;
+    color: $black;
 }
 
 .share:hover ul{
@@ -909,7 +834,7 @@ header .popover-body ul.social-icons li a{
     padding: 0;
     bottom: 40px;
     background: #2b2b2b;
-    box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 10px 40px rgba($black, 0.1);
     border-radius: 3px;
     right: -4px;
     list-style-type: none;
@@ -925,7 +850,7 @@ header .popover-body ul.social-icons li a{
 }
 
 .share ul li a{
-    color: #fff;
+    color: $white;
     width: 100%;
     text-align: center;
     padding: 3px 10px;
@@ -936,8 +861,8 @@ header .popover-body ul.social-icons li a{
 }
 
 .share ul li a:hover{
-    color: #fff;
-    background: rgba(160, 168, 189, 0.2);
+    color: $white;
+    background: rgba($grey-1, 0.2);
 }
 
 .share ul li a i{
@@ -965,7 +890,7 @@ header .popover-body ul.social-icons li a{
 .loop .post{
     margin: 50px 0;
     padding-bottom: 50px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba($black, 0.1);
 }
 
 .loop .post .img-holder{
@@ -1164,7 +1089,7 @@ header .popover-body ul.social-icons li a{
 
 .content-inner .post-content{
     padding-bottom: 10px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba($black, 0.1);
 }
 
 .content-inner .post-content .editor-content a{
@@ -1185,7 +1110,7 @@ header .popover-body ul.social-icons li a{
     content: "\f10e";
     font-weight: 900;
     font-style: normal;
-    font-family: Font Awesome\ 5 Free;
+    font-family: $icons_font;
     font-size: 34px;
     position: absolute;
     z-index: -1;
@@ -1195,7 +1120,7 @@ header .popover-body ul.social-icons li a{
 }
 
 .content-inner .kg-bookmark-card {
-    background: #ffffff;
+    background: $white;
     width: 100%;
 }
 
@@ -1402,8 +1327,8 @@ header .popover-body ul.social-icons li a{
     bottom: 0;
     width: 100%;
     height: 30px;
-    background: #fff;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    background: $white;
+    border-top: 1px solid rgba($black, 0.1);
     font-size: 14px;
     font-weight: bold;
     text-transform: uppercase;
@@ -1469,13 +1394,13 @@ header .popover-body ul.social-icons li a{
 
 .tooltip{
     font-weight: 300;
-    font-family: "sofia-pro", "Ubuntu", sans-serif;
+    font-family: $main_font;
     margin-left: 5px;
     border-radius: 3px;
 }
 
 .tooltip .tooltip-inner{
-    box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 10px 40px rgba($black, 0.1);
     background-color: #2b2b2b;
 }
 
@@ -1593,7 +1518,7 @@ header .popover-body ul.social-icons li a{
     -ms-flex-align: center;
     align-items: center;
     border-radius: 50%;
-    background: #000;
+    background: $black;
     height: 100%;
     pointer-events: none;
     position: relative;
@@ -1614,7 +1539,7 @@ header .popover-body ul.social-icons li a{
     height: 0;
     border-style: solid;
     border-width: 7px 7.5px 0;
-    border-color: #000 transparent transparent;
+    border-color: $black transparent transparent;
     -webkit-transition: all 0.5s;
     transition: all 0.5s;
     -webkit-transition-timing-function: cubic-bezier(0.2,1,0.3,1);
@@ -1637,7 +1562,7 @@ header .popover-body ul.social-icons li a{
     align-items: center;
     text-transform: uppercase;
     font-weight: 700;
-    color: #fff;
+    color: $white;
     height: 100%;
     margin: 0;
     padding: 0 20px;
@@ -1672,7 +1597,7 @@ header .popover-body ul.social-icons li a{
     right: 0;
     height: 40px;
     width: 40px;
-    background: #a0a8bd;
+    background: $grey-1;
     border-radius: 0 3px 3px 0;
     color: black;
     display: flex;
@@ -1692,7 +1617,7 @@ header .popover-body ul.social-icons li a{
 body.scroll.subscribe header,
 .error header,
 body.scroll.error header{
-    background: #000;
+    background: $black;
     padding: 50px 0;
     position: relative;
 }
@@ -1711,9 +1636,9 @@ body.error.scroll header .blog-logo img{
    ========================================================================== */
 
 footer{
-    color: #fff;
-    background: #000;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    color: $white;
+    background: $black;
+    border-top: 1px solid rgba($black, 0.1);
     padding-top: 50px;
 }
 
@@ -1736,11 +1661,11 @@ footer .copyright p{
 }
 
 footer a{
-    color: #fff;
+    color: $white;
 }
 
 footer a:hover{
-    color: #667EEA;
+    color: $purple;
 }
 
 .latest-posts{
@@ -1767,7 +1692,7 @@ footer a:hover{
 .latest-posts li:not(:last-child){
     padding-bottom: 15px;
     margin-bottom: 15px;
-    border-bottom: 1px solid rgba(160, 168, 189, 0.25);
+    border-bottom: 1px solid rgba($grey-1, 0.25);
 }   
 
 .post-template footer .copyright p{
@@ -1871,7 +1796,7 @@ footer a:hover{
     header .navigation ul li a{
         margin: 0;
         padding: 8px 13px;
-        font-family: "sofia-pro", "Ubuntu", sans-serif;
+        font-family: $main_font;
     }
     header .navigation .popover{
         display: block;
@@ -1916,9 +1841,9 @@ footer a:hover{
     }
     .fixed-post-nav .prev,
     .fixed-post-nav .next{
-        color: #A0A8BD;
+        color: $grey-1;
         border: 1px solid transparent;
-        background: rgba(160, 168, 189, 0.2);
+        background: rgba($grey-1, 0.2);
         border-radius: 15px;
         padding: 3px 15px;
         font-weight: normal;

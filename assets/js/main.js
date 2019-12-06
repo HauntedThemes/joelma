@@ -4,6 +4,10 @@
 
 jQuery(document).ready(function($) {
 
+    if(typeof changeConfig !== "undefined"){
+        config = Object.assign(config, changeConfig);
+    }
+
     var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
         h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0),
         readLaterPosts = [],
