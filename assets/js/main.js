@@ -597,17 +597,18 @@ jQuery(document).ready(function($) {
     $('[data-toggle="tooltip"]').tooltip();
 
     // Validate subscribe form
-    $(".gh-signin").validate({
-        rules: {
-            email: {
-                required: true,
-                email: true
+    $(".gh-signin").each(function(index, el) {
+        $(this).validate({
+            rules: {
+                email: {
+                    required: true,
+                    email: true
+                },
             },
-        },
-        lang: 'ro',
-        submitHandler: function (form) {
-            $(".gh-signin").submit();              
-        }
+            submitHandler: function (form) {
+                $(form).submit();              
+            }
+        });
     });
 
     // Initialize shareSelectedText
@@ -641,5 +642,63 @@ jQuery(document).ready(function($) {
             container.attr('style', 'flex: ' + ratio + ' 1 0%');
         });
     }
+
+    // Parse the URL parameter
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+    // Give the parameter a variable name
+    var action = getParameterByName('action');
+    var stripe = getParameterByName('stripe');
+
+    if (action == 'subscribe') {
+        $('body').addClass("subscribe-success");
+    }
+    if (action == 'signup') {
+        window.location = '/signup/?action=checkout';
+    }
+    if (action == 'checkout') {
+        $('body').addClass("signup-success");
+    }
+    if (action == 'signin') {
+        $('body').addClass("signin-success");
+    }
+    if (stripe == 'success') {
+        $('body').addClass("checkout-success");
+    }
+    $('.notification-close').click(function () {
+        $(this).parent().addClass('closed');
+        var uri = window.location.toString();
+        if (uri.indexOf("?") > 0) {
+            var clean_uri = uri.substring(0, uri.indexOf("?"));
+            window.history.replaceState({}, document.title, clean_uri);
+        }
+    });
+
+    // Validate signup form
+    $(".signup-form").validate({
+        rules: {
+            email: {
+                required: true,
+                email: true
+            },
+        },
+    });
+
+    // Validate signin form
+    $(".signin-form").validate({
+        rules: {
+            email: {
+                required: true,
+                email: true
+            },
+        },
+    });
 
 });

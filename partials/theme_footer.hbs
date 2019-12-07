@@ -1,13 +1,13 @@
     <footer class="site-footer clearfix">
         <div class="container">
             <div class="row">
-                <div class="col-sm-6 col-lg-3">
+                <div class="col-sm-6 col-lg-4">
                     <h3>{{t "About"}}</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed lacus id tortor iaculis iaculis dignissim eget justo. <br><br> Maecenas posuere eros nisl, ut pharetra turpis faucibus a. In imperdiet urna mattis lacus mollis, sit amet pulvinar purus vehicula.</p>
                 </div>
                 {{#get "tags" limit="all" include="count.posts"}}
                     {{#if tags}}
-                        <div class="col-sm-6 col-lg-3">
+                        <div class="col-sm-6 col-lg-4">
                             <h3>{{t "Tags"}}</h3>
                             <ul class="tags">
                                 {{#foreach tags}}
@@ -21,7 +21,7 @@
                         </div>
                     {{/if}}
                 {{/get}}
-                <div class="col-sm-6 col-lg-3">
+                <div class="col-sm-6 col-lg-4">
                     <h3>{{t "Latest posts"}}</h3>
                     <ul class="latest-posts">
                     {{#get "posts" limit="3"}}
@@ -34,20 +34,6 @@
                     {{/get}}
                     </ul>
                 </div>
-                {{#if @labs.subscribers}}
-                <div class="col-sm-6 col-lg-3">
-                    <h3>{{t "Newsletter"}}</h3>
-                    <div class="subscribe-container">
-                        <p>{{t "Subscribe to our newsletter to receive our latest news."}}</p>
-                        {{subscribe_form
-                            form_class="gh-signin"
-                            input_class="gh-input"
-                            button_class="fas fa-angle-right"
-                            placeholder=(t "Your email address")
-                        }}
-                    </div>
-                </div>
-                {{/if}}
             </div>
         </div>
         <div class="container-fluid copyright">

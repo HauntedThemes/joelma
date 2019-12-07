@@ -1,0 +1,58 @@
+.loop {
+    margin: 50px 0 0 0;
+    .inner {
+        position: relative;
+    }
+    .post {
+        margin: 50px 0;
+        padding-bottom: 50px;
+        border-bottom: 1px solid rgba($black, 0.1);
+        .img-holder {
+            overflow: hidden;
+            display: block;
+            width: calc(100% + 140px);
+            margin-left: -70px;
+            margin-bottom: 50px;
+            &:hover {
+                img {
+                    filter: brightness(1.1);
+                    transform: scale(1.1, 1.1);
+                }
+            }
+            img {
+                width: 100%;
+                -webkit-transition: all 0.3s ease-in-out;
+                -moz-transition: all 0.3s ease-in-out;
+                -o-transition: all 0.3s ease-in-out;
+                transition: all 0.3s ease-in-out;
+            }
+        }
+    }
+    h2 {
+        max-width: 80%;
+        margin-bottom: 10px;
+    }
+    .post-meta {
+        font-size: 0.875rem;
+    }
+}
+
+@media (max-width: $small) {
+    .loop {
+        margin: 0;
+    }
+}
+
+@media (max-width: $extra_small) {
+    .loop {
+        .post {
+            .img-holder {
+                width: calc(100% + 30px);
+                margin-left: -15px;
+                margin-bottom: 30px;
+            }
+            margin: 30px 0;
+            padding-bottom: 20px;
+        }
+    }
+}
