@@ -4,5 +4,9 @@
         {{#foreach navigation}}
             <li class="nav-{{slug}}{{#if current}} nav-current{{/if}}"><a href="{{url absolute="true"}}" title="{{label}}">{{label}}</a></li>
         {{/foreach}}
+        {{#if @labs.members}}
+            <li><a href="/signin/" title="{{t "Sign in"}}">{{t "Sign in"}}</a></li>
+            <li><a href="/signup/" title="{{t "Subscribe"}}">{{t "Subscribe"}}</a></li>
+        {{/if}}
     </ul>
 </nav>
