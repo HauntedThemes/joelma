@@ -15,7 +15,7 @@ jQuery(document).ready(function($) {
         monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "Sepember", "October", "November", "December"];
 
     var ghostAPI = new GhostContentAPI({
-        host: config['content-api-host'],
+        url: config['content-api-url'],
         key: config['content-api-key'],
         version: 'v3'
     });
@@ -121,6 +121,7 @@ jQuery(document).ready(function($) {
         container: '.search',
         html: true,
         placement: 'bottom',
+        sanitize: false,
         content: function() {
             return $('.search-popover').html();
         }
@@ -207,10 +208,11 @@ jQuery(document).ready(function($) {
     function searchInit(id){
 
         var ghostSearch = new GhostSearch({
-            host: config['content-api-host'],
+            url: config['content-api-url'],
             key: config['content-api-key'],
             input: id + " #search-field",
             results: id + " #results",
+            version: 'v3',
             api: {
                 parameters: { 
                     fields: ['title', 'slug', 'published_at', 'primary_tag', 'id'],

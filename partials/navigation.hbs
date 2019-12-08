@@ -4,7 +4,12 @@
         {{#foreach navigation}}
             <li class="nav-{{slug}}{{#if current}} nav-current{{/if}}"><a href="{{url absolute="true"}}" title="{{label}}">{{label}}</a></li>
         {{/foreach}}
-        {{#if @labs.members}}
+        {{#if @member.paid}}
+        	<li><a href="/account/" title="{{t "Account"}}">{{t "Account"}}</a></li>
+        {{else if @member}}
+            <li><a href="/account/" title="{{t "Account"}}">{{t "Account"}}</a></li>
+            <li><a href="/signup/" title="{{t "Subscribe"}}">{{t "Subscribe"}}</a></li>
+        {{else}}
             <li><a href="/signin/" title="{{t "Sign in"}}">{{t "Sign in"}}</a></li>
             <li><a href="/signup/" title="{{t "Subscribe"}}">{{t "Subscribe"}}</a></li>
         {{/if}}
