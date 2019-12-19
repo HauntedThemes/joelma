@@ -100,6 +100,7 @@ jQuery(document).ready(function($) {
         container: '.navigation',
         html: true,
         placement: 'bottom',
+        sanitize: false,
         content: function() {
             return $('.navigation-popover').html();
         }
